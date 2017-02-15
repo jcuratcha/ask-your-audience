@@ -1,0 +1,44 @@
+Prerequisites:
+
+Install Node.js version 7.5 (should include npm during installation)
+Install MongoDB
+
+How to use MongoDB:
+    Start the mongod service:
+        Open a cmd window inside the bin folder for MongoDB (e.g. "C:\Program Files\MongoDB\Server\3.4\bin")
+        Type: mongod.exe
+            Optional: By default, the service will look at \data\db\ on the root folder for database files, so to change it
+                      add --dbpath to the command (e.g mongod.exe --dbpath "Drive:\your\choosen\location")
+        This cmd window must stay running to use the database
+    
+    Playing around with the database:
+        In the same bin folder, but in a different cmd window:
+        Type: mongo.exe
+
+        Basic commands:
+            show dbs - shows databases in database system
+            use <database name> - create/switch to database
+            db - show current database
+            show collections - shows the collections/tables of the database
+            db.<collection name>.find() - shows all the entries in the collection/table
+
+How to set up our application (so far):
+    To gather application dependencies:
+        Open a new cmd window in the same directory as the "package.json" file
+        Type: npm install
+            This should install all dependencies listed in the "package.json" file
+
+    To start server:
+        In a cmd window at the same directory as above
+        Type: node server.js
+            Alternatively: type npm start
+                This will execute  the start script defined in the "package.json" file
+        This cmd window must stay running to use web server
+
+    To run sample (client.js):
+        Open a new cmd window in the same directory
+        Type: node client.js
+
+    USEFUL INFO:
+        The application should automatically create a database called aya
+        The poll infomation should then be found in the polls collection of the aya database (i.e. db.polls.find())
