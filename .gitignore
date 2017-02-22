@@ -1,3 +1,9 @@
+// Server
+
+// Web Client
+
+// Mobile Client
+
 //plaform and node_modules are generated/fetched during build, don't include them in source control
 platforms
 node_modules
