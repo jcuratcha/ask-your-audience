@@ -8,3 +8,8 @@ TextField {
   padding: 10;
   font-size: 15;
 }
+
+.sub-description {
+	font-size: 10;
+	text-align: center;
+}
