@@ -3,6 +3,10 @@
 //
 
 var mongoose = require('mongoose');
+
+// use bluebird Promises
+mongoose.Promise = require('bluebird');
+
 mongoose.connect('mongodb://localhost/aya');
 
 var Schema = mongoose.Schema;
