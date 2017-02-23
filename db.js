@@ -35,7 +35,10 @@ exports.insert = function(id, q, o, ip) {
 //
 // Generic function for retrieving poll data from database
 //
-// options : JSON 
+// options : JavaScript object
+//      criteria : conditions to narrow search
+//          sort : sort the search results
+//         limit : limit number of results received
 //
 exports.getPolls = function(options) {
     var query = Poll.find();

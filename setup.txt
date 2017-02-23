@@ -21,6 +21,7 @@ How to use MongoDB:
             db - show current database
             show collections - shows the collections/tables of the database
             db.<collection name>.find() - shows all the entries in the collection/table
+            db.<collection.name>.drop() - deletes the collection and all its entries
 
 How to set up our application (so far):
     To gather application dependencies:
