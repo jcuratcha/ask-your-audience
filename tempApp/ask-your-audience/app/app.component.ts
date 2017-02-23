@@ -1,19 +1,11 @@
 import { Component } from "@angular/core";
-import { User } from "./shared/person/person";
+import { Person } from "./shared/person/person";
+import { PersonService } from "./shared/person/person.service";
 
 @Component({
   selector: "my-app",
-  template: `
-  	<StackLayout>
-	    <TextField hint="Email Address" keyboardType="email" [(ngModel)]="email"
-  			autocorrect="false" autocapitalizationType="none"></TextField>
-	    <TextField hint="Password" secure="true"></TextField>
-	    <Label text="Leave blank to go anonymous" class="sub-description"></Label>
-
-	    <Button [text]="isLoggingIn ? 'Sign in' : 'Sign up'" class="submit-button" (tap)="submit()"></Button>
-		<Button [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>
-	</StackLayout>
-  `,
+  providers: [PersonService],
+  templateUrl: "pages/login/login.html",
   styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
 })
 
@@ -21,13 +13,30 @@ export class AppComponent {
   person: Person;
   isLoggingIn = true;
 
-  constructor() {
-    this.person = new Person();
-  }
-  submit() {
-    alert("You’re using: " + this.person.email);
-  }
-  toggleDisplay() {
-    this.isLoggingIn = !this.isLoggingIn;
-  }
+	constructor(private personService: PersonService) {
+		this.person = new Person();
+	}
+	submit() {
+		if (this.isLoggingIn) {
+		this.login();
+		} else {
+			this.signUp();
+		}
+	}
+	login() {
+		// TODO: Define
+	}
+	signUp() {
+		this.personService.register(this.person)
+		.subscribe(
+		() => {
+			alert("Your account was successfully created.");
+			this.toggleDisplay();
+		},
+		() => alert("Unfortunately we were unable to create your account.")
+		);
+	}
+	toggleDisplay() {
+		this.isLoggingIn = !this.isLoggingIn;
+	}
 }
