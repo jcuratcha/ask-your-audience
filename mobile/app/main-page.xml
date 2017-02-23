@@ -1,6 +1,0 @@
-<Page loaded="pageLoaded">
-  <ActionBar title="Ask Your Audience" class="action-bar"></ActionBar>
-  <!-- Your UI components go here -->
-  <ListView>
-  </ListView>
-</Page>
