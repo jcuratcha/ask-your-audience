@@ -1,7 +1,7 @@
 Prerequisites:
 
 Install Node.js version 7.5 (should include npm during installation)
-Install MongoDB
+Install MongoDB version 3.4.2
 
 How to use MongoDB:
     Start the mongod service:
