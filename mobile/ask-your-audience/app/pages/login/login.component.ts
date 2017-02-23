@@ -1,7 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Person } from "../../shared/person/person";
 import { PersonService } from "../../shared/person/person.service";
 import { Router } from "@angular/router";
+
+import { Page } from "ui/page";
 
 @Component({
 	selector: "my-app",
@@ -10,13 +12,18 @@ import { Router } from "@angular/router";
 	styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   person: Person;
   isLoggingIn = true;
 
-	constructor(private router: Router, private personService: PersonService) {
+	constructor(private router: Router, private personService: PersonService, private page: Page) {
 		this.person = new Person();
 	}
+
+	ngOnInit() {
+		this.page.actionBarHidden = true;
+	}
+
 	submit() {
 		if (this.isLoggingIn) {
 		this.login();
@@ -26,13 +33,18 @@ export class LoginComponent {
 	}
 
 	login() {
-		this.personService.login(this.person)
-		.subscribe(
-			() => this.router.navigate(["/list"]),
-			(error) => alert("Unfortunately we could not find your account.")
-		);
+		this.router.navigate(["/list"]);
+		/*
+		Change this back to the actual login method,
+		when we have login information
+		*/
+		// this.personService.login(this.person)
+		// .subscribe(
+		// 	() => this.router.navigate(["/list"]),
+		// 	(error) => alert("Unfortunately we could not find your account.")
+		// );
 	}
-	
+
 	signUp() {
 		this.personService.register(this.person)
 		.subscribe(
