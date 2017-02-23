@@ -27,8 +27,32 @@ export class PersonService {
 		.catch(this.handleErrors);	
 	}
 
+	login(person: Person) {
+		let headers = new Headers();
+		headers.append("Content-Type", "application/json");
+
+		return this.http.post(
+			Config.apiUrl + "oauth/token",
+			JSON.stringify({
+				"username": person.email,
+				"password": person.password,
+				"grant_type": "password"
+			}),
+			{ headers: headers }
+		)
+		.map(response => response.json())
+		.do(data => {
+			Config.token = data.Result.access_token;
+		})
+		.catch(this.handleErrors);
+	}
+
 	handleErrors(error: Response) {
-		console.log(JSON.stringify(error.json()));
+		console.log("Error: " + JSON.stringify(error.json()));
 		return Observable.throw(error);
+	}
+
+	forceLogin(error: Response) {
+
 	}
 }
