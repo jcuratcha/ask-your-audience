@@ -14,26 +14,26 @@ describe('Service', function() {
             db.getPolls.restore();
         });
 
-        it('returns pollID 1 on first poll created', function() {
+        it('returns poll ID 1 on first poll created', function() {
             var getPollsResult = [];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
-            var q = 'question', o = 'options', ip = '123.456.789.123', expectedValue = 1;
+            var q = 'question', o = ['a', 'b', 'c'], ip = '123.456.789.123', expectedValue = 1;
 
             return service.newPoll(q, o, ip).then(pollID => expect(pollID).to.equal(expectedValue));
         });
 
-        it('returns pollID 2 on second poll created', function() {
+        it('returns poll ID 2 on second poll created', function() {
             var getPollsResult = [{pollID : 1}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
-            var q = 'question', o = 'options', ip = '123.456.789.123', expectedValue = 2;
+            var q = 'question', o = ['a', 'b', 'c'], ip = '123.456.789.123', expectedValue = 2;
 
             return service.newPoll(q, o, ip).then(pollID => expect(pollID).to.equal(expectedValue));
         });
 
-        it('increments pollID on additional polls', function() {
+        it('increments poll ID on additional polls', function() {
             var getPollsResult = [{pollID : 10}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
-            var q = 'question', o = 'options', ip = '123.456.789.123', expectedValue = 11;
+            var q = 'question', o = ['a', 'b', 'c'], ip = '123.456.789.123', expectedValue = 11;
 
             return service.newPoll(q, o, ip).then(pollID => expect(pollID).to.equal(expectedValue));
         });
