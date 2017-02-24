@@ -5,6 +5,8 @@ var expect = require('chai').expect;
 
 describe('Service', function() {
     describe('newPoll', function() {
+        var q = 'question', o = ['a', 'b', 'c'], ip = '123.456.789.123';
+
         afterEach(function() {
             db.insert.restore();
             db.getPolls.restore();
@@ -13,7 +15,6 @@ describe('Service', function() {
         it('returns poll ID 1 on first poll created', function() {
             var getPollsResult = [];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
-            var q = 'question', o = ['a', 'b', 'c'], ip = '123.456.789.123';
             var insertResults = {pollID : 1, question: q, options : o, votes : [0, 0, 0], owner : ip}, expectedValue = 1;
             sinon.stub(db, 'insert').returns(Promise.resolve(insertResults));
 
@@ -23,7 +24,6 @@ describe('Service', function() {
         it('returns poll ID 2 on second poll created', function() {
             var getPollsResult = [{pollID : 1}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
-            var q = 'question', o = ['a', 'b', 'c'], ip = '123.456.789.123';
             var insertResults = {pollID : 2, question: q, options : o, votes : [0, 0, 0], owner : ip}, expectedValue = 2;
             sinon.stub(db, 'insert').returns(Promise.resolve(insertResults));
 
@@ -34,7 +34,6 @@ describe('Service', function() {
         it('increments poll ID on additional polls', function() {
             var getPollsResult = [{pollID : 10}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
-            var q = 'question', o = ['a', 'b', 'c'], ip = '123.456.789.123';
             var insertResults = {pollID : 11, question: q, options : o, votes : [0, 0, 0], owner : ip}, expectedValue = 11;
             sinon.stub(db, 'insert').returns(Promise.resolve(insertResults));
 
