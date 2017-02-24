@@ -9,20 +9,7 @@ mongoose.Promise = require('bluebird');
 
 mongoose.connect('mongodb://localhost/aya');
 
-var Schema = mongoose.Schema;
-
-//
-// Structure of poll object / schema used inside database
-//
-var pollSchema = new Schema({
-    pollID : Number,
-    question : String,
-    options : [String],
-    votes : [Number],
-    owner : String
-});
-
-var Poll = mongoose.model('Poll', pollSchema);
+var Poll = require('./poll.js');
 
 //
 // Inserts poll object into the database
