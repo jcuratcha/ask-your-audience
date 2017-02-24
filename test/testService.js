@@ -30,7 +30,7 @@ describe('Service', function() {
             return service.newPoll(q, o, ip).then(pollID => expect(pollID).to.equal(expectedValue));
         });
 
-        it('increments on additonal polls', function() {
+        it('increments pollID on additional polls', function() {
             var getPollsResult = [{pollID : 10}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var q = 'question', o = 'options', ip = '123.456.789.123', expectedValue = 11;
