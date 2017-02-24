@@ -3,7 +3,7 @@ var db = require('../db.js');
 var sinon = require('sinon');
 var expect = require('chai').expect;
 
-describe('db', function() {
+describe('DB', function() {
     describe('insert', function() {
         afterEach(function() {
             Poll.prototype.save.restore();
@@ -40,7 +40,7 @@ describe('db', function() {
         it('calls find() only once when no options are given', function() {
             db.getPolls();
 
-            sinon.assert.called(Poll.find);
+            sinon.assert.calledOnce(Poll.find);
             sinon.assert.notCalled(query.sort);
             sinon.assert.notCalled(query.limit);
         });
@@ -56,17 +56,17 @@ describe('db', function() {
         it('calls sort() once when only sort is given', function() {
             db.getPolls({sort : "ascending"});
 
-            sinon.assert.called(Poll.find);
-            sinon.assert.called(query.sort);
+            sinon.assert.calledOnce(Poll.find);
+            sinon.assert.calledOnce(query.sort);
             sinon.assert.notCalled(query.limit);
         });
 
         it('calls limit() once when only limit is given', function() {
             db.getPolls({limit : 1});
 
-            sinon.assert.called(Poll.find);
+            sinon.assert.calledOnce(Poll.find);
             sinon.assert.notCalled(query.sort);
-            sinon.assert.called(query.limit);
+            sinon.assert.calledOnce(query.limit);
         }); 
     });
 });
