@@ -17,8 +17,8 @@ function results(polls) {
 //
 exports.newPoll = function(q, o, ip) {
     return db.getPolls({sort : {pollID : "descending"}, limit : 1})
-        .then(result => (result.length == 0) ? 1 : result[0].pollID+1)
-        .then(id => db.insert(id, q, o, ip).then(success => id));
+        .then(queryResults => (queryResults.length == 0) ? 1 : queryResults[0].pollID+1)
+        .then(id => db.insert(id, q, o, ip).then(poll => poll.pollID));
 }
 
 //
