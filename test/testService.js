@@ -81,7 +81,7 @@ describe('Service', function() {
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var expectedNumPolls = 1;
 
-            return service.getPoll().then(result => expect(result.polls.length).to.equal(expectedNumPolls));
+            return service.getPolls().then(result => expect(result.polls.length).to.equal(expectedNumPolls));
         });
 
         it('returns multiple polls', function() {
@@ -90,7 +90,7 @@ describe('Service', function() {
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var expectedNumPolls = 2;
 
-            return service.getPoll().then(result => expect(result.polls.length).to.equal(expectedNumPolls));
+            return service.getPolls().then(result => expect(result.polls.length).to.equal(expectedNumPolls));
         });
     });
 });
