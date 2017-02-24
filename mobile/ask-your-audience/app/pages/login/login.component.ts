@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   isLoggingIn = true;
 
 	constructor(private router: Router, private personService: PersonService, private page: Page) {
+		console.log("Current page: LoginComponent");
 		this.person = new Person();
 	}
 
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		this.router.navigate(["/list"]);
+		this.router.navigate(["/home"]);
 		/*
 		Change this back to the actual login method,
 		when we have login information
