@@ -1,0 +1,10 @@
+<div (click)="toggle()">
+    {{poll.question}}
+</div>
+<div *ngIf="active">
+    <ul *ngFor="let options of poll.options; let i=index">
+        <li (click)="addVote(i)">
+            {{options}}: votes {{poll.votes[i]}}
+        </li>
+    </ul>
+</div>

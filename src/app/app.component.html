@@ -1,0 +1,8 @@
+<side-nav>
+</side-nav>
+<div style="margin-left: 16%">
+    <div *ngFor="let poll of polls; let i=index">
+        <single-poll [poll]="poll">
+        </single-poll>
+    </div>
+</div>
