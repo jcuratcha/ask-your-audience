@@ -10,16 +10,12 @@ import { PollListService } from "../../shared/poll/poll-list.service";
 })
 
 export class myActivityComponent implements OnInit {
-	pollList: Array<Poll> = [];
+	groceryList: Array<Object> = [];
 
-	constructor(private pollListService: PollListService) {}
+  ngOnInit() {
+    this.groceryList.push({ name: "Question1" });
+    this.groceryList.push({ name: "Question2" });
+    this.groceryList.push({ name: "Question3" });
+  }
 
-	ngOnInit() {
-		this.pollListService.load()
-		.subscribe(loadedPolls => {
-			loadedPolls.forEach((pollObject) => {
-				this.pollList.unshift(pollObject);
-				});
-		});
-	}	
 }

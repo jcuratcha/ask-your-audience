@@ -1,15 +1,22 @@
- <StackLayout>
-	<label text="Activity and Results"></label>
-	
-    <label text="View"></label>
 
-	<ListView [items]="pollList" class="small-spacing">
-		<template let-item="item">
-			<Label [text]="item.name" class="medium-spacing"></Label>
-		</template>
-	</ListView>
+<AbsoluteLayout width="350" height="550" style.backgroundColor="lightgray">
+   <Label text="Activity and Results" top="10" width="360" height="75" backgroundColor="red"></Label>
+
+	<AbsoluteLayout top="85" width="360" height="75" backgroundColor="yellow">
+	<RadioButton>test</RadioButton>
+		</AbsoluteLayout>
+
+	<GridLayout width="350" height="250" top="160" style.backgroundColor="green">
+	<ListView [items]="groceryList" class="small-spacing">
+  <template let-item="item">
+    <Label [text]="item.name" class="medium-spacing"></Label>
+  </template>
+</ListView>
+	</GridLayout>
+	
+	
+ </AbsoluteLayout>
 
 	
-    </StackLayout>
 
 

@@ -1,7 +1,10 @@
 StackLayout {
+  top :10;
+  width:600; 
+  height:600;
   margin-left: 5;
   margin-right: 3;
-  background-color: white;
+  background-color: lightgray;
 }
 
 TextField {
