@@ -1,0 +1,15 @@
+ <StackLayout>
+	<label text="Activity and Results"></label>
+	
+    <label text="View"></label>
+
+	<ListView [items]="pollList" class="small-spacing">
+		<template let-item="item">
+			<Label [text]="item.name" class="medium-spacing"></Label>
+		</template>
+	</ListView>
+
+	
+    </StackLayout>
+
+

@@ -24,5 +24,6 @@ export class HomeComponent {
 
 	goToPersonActivity() {
 		console.log("Going to current user's Activity page");
+		this.router.navigate(["/myActivity"]);
 	}
 }
