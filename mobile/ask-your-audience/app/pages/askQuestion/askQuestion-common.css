@@ -1,0 +1,15 @@
+StackLayout {
+  margin-left: 5;
+  margin-right: 3;
+  background-color: white;
+}
+
+TextField {
+  color: black;
+}
+
+label{
+  height: 60px;
+  left: 0;
+  right: 0;
+}

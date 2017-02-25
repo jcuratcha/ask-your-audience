@@ -14,6 +14,7 @@ export class HomeComponent {
 
 	goToQuestionCreation() {
 		console.log("Going to Question Creation page");
+		this.router.navigate(["/askQuestion"]);
 	}
 
 	goToQuestionList() {
