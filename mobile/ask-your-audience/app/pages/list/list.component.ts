@@ -15,11 +15,29 @@ export class ListComponent implements OnInit {
 	constructor(private pollListService: PollListService) {}
 
 	ngOnInit() {
-		this.pollListService.load()
-		.subscribe(loadedPolls => {
-			loadedPolls.forEach((pollObject) => {
-				this.pollList.unshift(pollObject);
-				});
-		});
+		// this.pollListService.load()
+		// .subscribe(loadedPolls => {
+		// 	loadedPolls.forEach((pollObject) => {
+		// 		this.pollList.unshift(pollObject);
+		// 		});
+		// });
+		this.pollList = this.createMockPollList();
 	}	
+
+	public onItemTap(args) {
+		var tappedPoll = args.view;
+		var currentPoll = tappedPoll.bindingContext;
+		console.log("Question with pollID = " + currentPoll.id + " tapped.");
+		// console.log("Question with pollID = " + args.index + " tapped.");
+	}
+
+	createMockPollList() {
+		var polls = [];
+
+		for (var i = 0; i < 5; ++i) {
+			polls.unshift(new Poll(i, "Question " + i, ["a1", "a2", "a3"], [i,i+1,i+2], "me"));
+		}
+
+		return polls;
+	}
 }

@@ -20,7 +20,6 @@ export class PollListService {
 			headers: headers
 		})
 		.map(res =>
-			
 			res.json()
 		)
 		.map(data => {
