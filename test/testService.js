@@ -22,7 +22,7 @@ describe('Service', function() {
         });
 
         it('returns poll ID 2 on second poll created', function() {
-            var getPollsResult = [{pollID : 1}];
+            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var insertResults = {pollID : 2, question: q, options : o, votes : [0, 0, 0], owner : ip}, expectedValue = 2;
             sinon.stub(db, 'insert').returns(Promise.resolve(insertResults));
@@ -32,7 +32,7 @@ describe('Service', function() {
         });
 
         it('increments poll ID on additional polls', function() {
-            var getPollsResult = [{pollID : 10}];
+            var getPollsResult = [{pollID : 10, question: "question 10", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var insertResults = {pollID : 11, question: q, options : o, votes : [0, 0, 0], owner : ip}, expectedValue = 11;
             sinon.stub(db, 'insert').returns(Promise.resolve(insertResults));
