@@ -1,6 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Poll } from "../../shared/poll/poll";
 import { PollListService } from "../../shared/poll/poll-list.service";
+import { Router, NavigationExtras } from "@angular/router";
+import { Page } from "ui/page";
+import { PageRoute } from "nativescript-angular/router";
+import "rxjs/add/operator/switchMap"
 
 @Component({
 	selector: "list",
@@ -12,7 +16,7 @@ import { PollListService } from "../../shared/poll/poll-list.service";
 export class ListComponent implements OnInit {
 	pollList: Array<Poll> = [];
 
-	constructor(private pollListService: PollListService) {}
+	constructor(private pollListService: PollListService, private router: Router, private page: Page) {}
 
 	ngOnInit() {
 		// this.pollListService.load()
@@ -25,9 +29,11 @@ export class ListComponent implements OnInit {
 	}	
 
 	public onItemTap(args) {
-		var tappedPoll = args.view;
-		var currentPoll = tappedPoll.bindingContext;
-		console.log("Question with pollID = " + currentPoll.id + " tapped.");
+		var tappedItem = args.view;
+		var poll = tappedItem.bindingContext;
+		console.log("Question with pollID = " + poll.id + " tapped.");
+
+		this.router.navigate(["/answer"]);
 		// console.log("Question with pollID = " + args.index + " tapped.");
 	}
 
