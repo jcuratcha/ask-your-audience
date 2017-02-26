@@ -1,3 +1,9 @@
 // ignore generated files
 
-src/app/**/*.js
+src/**/*.js
+!src/system.config.extras.js
+!src/system.config.js
+
+src/**/*.map
+
+npm-debug.log
