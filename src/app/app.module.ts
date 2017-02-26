@@ -4,17 +4,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppComponent }  from './app.component';
 import { SinglePollComponent } from './polls/single-poll.component'
 import { SideNavigationComponent } from './navigation-panel/navigation-panel.component'
+import { PopupComponent } from './pop-up/pop-up.component'
+
+import { InputTextModule } from 'primeng/primeng';
+
 
 @NgModule({
   imports: [ 
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InputTextModule
   ],
   declarations: [ 
     AppComponent,
     SinglePollComponent,
-    SideNavigationComponent
+    SideNavigationComponent,
+    PopupComponent
   ],
   bootstrap:    [ AppComponent ]
 })
