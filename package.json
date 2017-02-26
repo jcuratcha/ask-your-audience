@@ -1,0 +1,29 @@
+{
+  "name": "ask-your-audience",
+  "version": "1.0.0",
+  "description": "Ask Your Audience",
+  "main": "server.js",
+  "dependencies": {
+    "express": "4.14.1",
+    "body-parser": "1.16.1",
+    "mongoose": "4.8.2",
+    "bluebird": "3.4.7",
+    "mocha": "3.2.0",
+    "sinon": "1.17.7",
+    "chai": "3.5.0",
+    "supertest" : "3.0.0"
+   },
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcuratcha/ask-your-audience.git"
+  },
+  "keywords": [
+    "polling, social"
+  ],
+  "author": "COMP 4350",
+  "license": "ISC"
+}
