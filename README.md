@@ -49,11 +49,6 @@ In the same bin folder, but in a different cmd window:
 		- This will execute  the start script defined in the "package.json" file
 -This cmd window must stay running to use web server
 
-#### To run sample (client.js):
-
-- Open a new cmd window in the same directory
-- Type: node client.js
-
 USEFUL INFO:
 - The application should automatically create a database called aya
 - The poll infomation should then be found in the polls collection of the aya database (i.e. db.polls.find())
