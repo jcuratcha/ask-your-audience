@@ -18,10 +18,10 @@ export class PollService {
 		return this.http.get(Config.apiUrl + "/aya/api/get-polls/" + id, {
 			headers: headers
 		})
-		.map(res => res.json())
+		.map(res => res.json()['polls'])
 		.map(data => {
-			var result = data.Result;
-			return new Poll(result.pollID, result.question, result.options, result.votes, result.owner);
+			console.log(JSON.stringify(data));
+			return new Poll(data.pollID, data.question, data.options, data.votes, data.owner);
 		})
 		.catch(this.handleErrors);
 	}

@@ -15,17 +15,19 @@ import "rxjs/add/operator/switchMap"
 
 export class ListComponent implements OnInit {
 	pollList: Array<Poll> = [];
+	pollListJson : string;
 
 	constructor(private pollListService: PollListService, private router: Router, private page: Page) {}
 
 	ngOnInit() {
-		// this.pollListService.load()
-		// .subscribe(loadedPolls => {
-		// 	loadedPolls.forEach((pollObject) => {
-		// 		this.pollList.unshift(pollObject);
-		// 		});
-		// });
-		this.pollList = this.createMockPollList();
+		this.pollListService.load()
+		.subscribe(loadedPolls => {
+			loadedPolls.forEach((pollObject) => {
+				this.pollList.unshift(pollObject);
+				});
+		});
+
+		// this.pollList = this.createMockPollList();
 	}	
 
 	public onItemTap(args) {
