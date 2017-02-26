@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http';
 import { AppComponent }  from './app.component';
 import { SinglePollComponent } from './polls/single-poll.component'
 import { SideNavigationComponent } from './navigation-panel/navigation-panel.component'
@@ -15,7 +16,8 @@ import { InputTextModule, DialogModule } from 'primeng/primeng';
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-    DialogModule
+    DialogModule,
+    HttpModule
   ],
   declarations: [ 
     AppComponent,
