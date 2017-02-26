@@ -31,15 +31,9 @@ export class AppComponent implements OnInit {
   polls: Array<Poll> = [];
   name = 'test'; 
 
-  constructor (private pollListService: PollListService) {}
-
-  ngOnInit() {
-    this.pollListService.getAllPolls()
-      .subscribe(loadedPolls => {
-          loadedPolls.forEach((poll: Poll) => {
-          this.polls.unshift(poll);
-        });
-    });
+  onNotify($event: Poll){
+    let newPoll: Poll = Object.assign({}, $event);
+    this.polls.unshift(newPoll);
   }
   constructor (private pollListService: PollListService) {}
 
