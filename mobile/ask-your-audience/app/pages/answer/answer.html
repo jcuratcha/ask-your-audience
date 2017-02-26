@@ -1,0 +1,8 @@
+<StackLayout>
+	<Label [text]="poll.question" class="question-text"></Label>
+	<ListView [items]="optionList" class="item-list">
+		<template let-item='item'>
+			<Label [text]="item.name" class="medium-spacing"></Label>
+		</template>
+	</ListView>
+</StackLayout>

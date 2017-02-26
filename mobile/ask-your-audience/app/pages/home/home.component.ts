@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Page } from "ui/page";
 
 @Component({
-	selector: "list",
+	selector: "home",
 	templateUrl: "pages/home/home.html",
 	styleUrls: ["pages/home/home-common.css", "pages/home/home.css"]
 })

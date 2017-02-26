@@ -7,31 +7,21 @@ import { Config } from "../config";
 import { Poll } from "./poll";
 
 @Injectable()
-export class PollListService {
+export class PollService {
 	constructor(private http: Http) {}
 
-	load() {
+	load(id: number) {
 		let headers = new Headers();
-		// headers.append("Authorization", "Bearer " + Config.token);
 
-		console.log("Fetching polls.");
+		console.log("Fetching poll id = " + id);
 
-		return this.http.get(Config.apiUrl + "/aya/api/get-polls", {
+		return this.http.get(Config.apiUrl + "/aya/api/get-polls/" + id, {
 			headers: headers
 		})
 		.map(res => res.json())
 		.map(data => {
-			let pollList = [];
-			data.Result.forEach((poll) => {
-				pollList.push(new Poll(
-					poll.pollID,
-					poll.question,
-					poll.options,
-					poll.votes,
-					poll.owner
-				));
-			});
-			return pollList;
+			var result = data.Result;
+			return new Poll(result.pollID, result.question, result.options, result.votes, result.owner);
 		})
 		.catch(this.handleErrors);
 	}
