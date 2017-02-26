@@ -19,12 +19,6 @@ export class ListComponent implements OnInit {
 	constructor(private pollListService: PollListService, private router: Router, private page: Page) {}
 
 	ngOnInit() {
-		// this.pollListService.load()
-		// .subscribe(loadedPolls => {
-		// 	loadedPolls.forEach((pollObject) => {
-		// 		this.pollList.unshift(pollObject);
-		// 		});
-		// });
 		this.pollList = this.createMockPollList();
 	}	
 

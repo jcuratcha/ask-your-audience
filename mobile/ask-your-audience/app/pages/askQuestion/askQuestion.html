@@ -1,14 +1,34 @@
- <StackLayout>
-	<label text="New Question"></label>
-    <TextView hint="tests textView"style="border-color:white;"></TextView>
 
-	<label text="Add options" style="margin-left: 135px;"></label>
+<StackLayout>
+   <Label text="What would you like to ask?" top="10" width="360" height="15" ></Label>
+   <TextView hint="Question" [(ngModel)]="question" width="350" height="125" style.backgroundColor="lightgray"></TextView>
+	
+	 <Label text="options"></Label>
+	
+	<GridLayout width="350" height="250" top="180" style.backgroundColor="green">
+		
+		
+	<ListView [items]="pollList" class="small-spacing" (itemTap)="onItemTap($event)" width="400" height="600">
+		<template let-item="item">
+			<StackLayout>
 
-    <button text="+ Add New Option" style="margin-bottom: 20px;"></button>
-    <button text="create"></button>
-   
-	<TextView hint="123" text="{{ someProperty }}"></TextView>
+<CheckBox #CB1 text="CheckBox Label" checked="false"></CheckBox>
+    <Button (tap)="toggleCheck()" text="Toggle it!"></Button>
+    <Button (tap)="getCheckProp()" text="Check Property"></Button>
 
-    </StackLayout>
+
+					
+			</StackLayout>
+		</template>
+	</ListView>
+</GridLayout>
+
+	<Button text="edit" class="submit-button" ></Button>
+	<Button text="delete" class="submit-button"></Button>
+	<Button text="create question" class="submit-button" (tap)="submit()"></Button>
+	</StackLayout>
+
+
+
 
 

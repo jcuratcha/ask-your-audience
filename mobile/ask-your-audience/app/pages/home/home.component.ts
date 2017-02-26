@@ -9,8 +9,10 @@ import { Page } from "ui/page";
 })
 
 export class HomeComponent {
+email="test";
 
 	constructor(private router: Router, private page: Page) {}
+
 
 	goToQuestionCreation() {
 		console.log("Going to Question Creation page");
@@ -19,7 +21,7 @@ export class HomeComponent {
 
 	goToQuestionList() {
 		console.log("Going to Question List page");
-		this.router.navigate(["/answeredQuestions"]);
+		this.router.navigate(["/answer"]);
 	}
 
 	goToPersonActivity() {
