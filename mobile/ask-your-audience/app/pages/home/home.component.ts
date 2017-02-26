@@ -10,7 +10,9 @@ import { Page } from "ui/page";
 
 export class HomeComponent {
 
-	constructor(private router: Router, private page: Page) {}
+	constructor(private router: Router, private page: Page) {
+		console.log("Current page: HomeComponent");
+	}
 
 	goToQuestionCreation() {
 		console.log("Going to Question Creation page");

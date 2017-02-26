@@ -17,7 +17,9 @@ export class ListComponent implements OnInit {
 	pollList: Array<Poll> = [];
 	pollListJson : string;
 
-	constructor(private pollListService: PollListService, private router: Router, private page: Page) {}
+	constructor(private pollListService: PollListService, private router: Router, private page: Page) {
+		console.log("Current page: ListComponent");
+	}
 
 	ngOnInit() {
 		this.pollListService.load()

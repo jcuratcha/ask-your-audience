@@ -15,7 +15,9 @@ import { PollService } from "../../shared/poll/poll.service";
 export class AnswerComponent implements OnInit {
 	poll: Poll;
 
-	constructor(private pollService: PollService, private router: ActivatedRoute, private page: Page) {}
+	constructor(private pollService: PollService, private router: ActivatedRoute, private page: Page) {
+		console.log("Current page: AnswerComponent");
+	}
 
 	ngOnInit() {
 		let id = this.router.snapshot.params['id'];
