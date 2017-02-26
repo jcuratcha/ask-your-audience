@@ -14,6 +14,8 @@ import { PollService } from "../../shared/poll/poll.service";
 
 export class AnswerComponent implements OnInit {
 	poll: Poll;
+	question: string;
+	options: Array<string>;
 
 	constructor(private pollService: PollService, private router: ActivatedRoute, private page: Page) {
 		console.log("Current page: AnswerComponent");
@@ -21,7 +23,11 @@ export class AnswerComponent implements OnInit {
 
 	ngOnInit() {
 		let id = this.router.snapshot.params['id'];
-		this.pollService.load(id)
-			.subscribe(poll => this.poll = poll);
+		this.pollService.getPoll(id)
+			.subscribe(newPoll => {
+				this.poll = newPoll;
+				this.question = newPoll.question;
+				this.options = newPoll.options;
+			});
 	}
 }

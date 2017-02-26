@@ -12,7 +12,7 @@ export class PollListService {
 
 	private getAllPointsUrl = "/aya/api/get-polls";
 
-	load() {
+	getAllPolls() {
 		let headers = this.createRequestHeaders();
 
 		console.log("Fetching all polls.");
@@ -22,8 +22,6 @@ export class PollListService {
 		})
 		.map(res => res.json()['polls'])
 		.map(data => {
-			// var str = JSON.stringify(data);
-			// console.log(str);
 			let pollList = [];
 			data.forEach((poll) => {
 				pollList.push(new Poll(

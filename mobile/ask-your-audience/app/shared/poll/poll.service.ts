@@ -10,8 +10,8 @@ import { Poll } from "./poll";
 export class PollService {
 	constructor(private http: Http) {}
 
-	load(id: number) {
-		let headers = new Headers();
+	getPoll(id: number) {
+		let headers = this.createRequestHeaders();
 
 		console.log("Fetching poll id = " + id);
 
@@ -24,6 +24,14 @@ export class PollService {
 			return new Poll(data.pollID, data.question, data.options, data.votes, data.owner);
 		})
 		.catch(this.handleErrors);
+	}
+
+	private createRequestHeaders() {
+		let headers	= new Headers();
+
+		headers.append("Authorization", "Bearer " + Config.token);
+
+		return headers;
 	}
 
 	handleErrors(error: Response) {

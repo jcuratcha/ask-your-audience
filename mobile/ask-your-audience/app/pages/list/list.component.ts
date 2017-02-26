@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.pollListService.load()
+		this.pollListService.getAllPolls()
 		.subscribe(loadedPolls => {
 			loadedPolls.forEach((pollObject) => {
 				this.pollList.unshift(pollObject);
