@@ -1,0 +1,20 @@
+@import url("~/platform.css");
+
+Page {
+  background-color: white;
+  font-size: 15;
+}
+TextField {
+  padding: 10;
+  font-size: 15;
+}
+.sub-description {
+	font-size: 10;
+	text-align: center;
+}
+.small-spacing {
+  margin: 5;
+}
+.medium-spacing {
+  margin: 10;
+}

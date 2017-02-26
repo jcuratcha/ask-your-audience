@@ -1,0 +1,10 @@
+// Server
+
+// Web Client
+
+// Mobile Client
+
+// generated/fetched during build, don't include them in source control
+*.js
+platforms
+node_modules
