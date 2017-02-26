@@ -32,8 +32,7 @@ export class ListComponent implements OnInit {
 		var tappedItem = args.view;
 		var poll = tappedItem.bindingContext;
 		console.log("Question with pollID = " + poll.id + " tapped.");
-
-		this.router.navigate(["/answer"]);
+		this.router.navigate(["/answer", poll.id]);
 		// console.log("Question with pollID = " + args.index + " tapped.");
 	}
 

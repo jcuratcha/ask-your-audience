@@ -7,7 +7,7 @@ export const routes = [
 	{ path: "", component: LoginComponent },
 	{ path: "home", component: HomeComponent },
 	{ path: "list", component: ListComponent },
-	{ path: "answer", component: ListComponent }
+	{ path: "answer/:id", component: AnswerComponent }
 ];
 
 export const navigatableComponents = [

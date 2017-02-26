@@ -14,16 +14,10 @@ import { PollService } from "../../shared/poll/poll.service";
 
 export class AnswerComponent implements OnInit {
 	poll: Poll;
-	optionList = [];
 
 	constructor(private pollService: PollService, private router: ActivatedRoute, private page: Page) {}
 
 	ngOnInit() {
-		console.log("Opening Answer page for poll with id=" + this.poll.id);
-
-		this.poll = new Poll(0, "What is the question?", ["To be", "Not to be"], [0, 0], "you");
-		this.optionList = this.poll.options;
-
 		let id = this.router.snapshot.params['id'];
 		this.pollService.load(id)
 			.subscribe(poll => this.poll = poll);
