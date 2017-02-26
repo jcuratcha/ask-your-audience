@@ -19,7 +19,6 @@ export class HomeComponent {
 	}
 
 	goToQuestionList() {
-		console.log("Going to Question List page");
 		this.router.navigate(["/list"]);
 	}
 

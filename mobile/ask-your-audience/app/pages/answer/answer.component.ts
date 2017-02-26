@@ -30,4 +30,10 @@ export class AnswerComponent implements OnInit {
 				this.options = newPoll.options;
 			});
 	}
+
+	onVoteButtonTapped(eventData) {
+		var button = eventData.object;
+		var index = eventData.index;
+		console.log(index);
+	}
 }
