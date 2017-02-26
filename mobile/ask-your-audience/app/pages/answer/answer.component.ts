@@ -33,7 +33,11 @@ export class AnswerComponent implements OnInit {
 
 	onVoteButtonTapped(eventData) {
 		var button = eventData.object;
-		var index = eventData.index;
+		var votedOption = button.bindingContext;
+
+		var index = this.options.indexOf(votedOption);
 		console.log(index);
+
+		// make request to vote for this item on this poll
 	}
-}
+}	
