@@ -1,0 +1,3 @@
+// Global .gitignore file
+
+// each of our components (web, server, mobile) will have their own gitignore files

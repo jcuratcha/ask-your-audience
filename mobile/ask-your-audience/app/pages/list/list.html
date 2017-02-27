@@ -1,0 +1,10 @@
+<GridLayout>
+	<Label [text]="pollList.length == 0 ? 'No questions to answer :(' : ''"></Label>
+	<ListView [items]="pollList" class="small-spacing" (itemTap)="onItemTap($event)">
+		<template let-item="item">
+			<StackLayout>
+				<Label [text]="item.question" class="medium-spacing"></Label>
+			</StackLayout>
+		</template>
+	</ListView>
+</GridLayout>

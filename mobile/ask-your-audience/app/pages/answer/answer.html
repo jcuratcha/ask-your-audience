@@ -1,0 +1,12 @@
+<StackLayout>
+	<Label [text]="poll == null ? 'This poll doesn\'t seem to be available :(' : ''"></Label>
+	<Label [text]="question" class="question-text"></Label>
+	<ListView [items]="options" class="item-list">
+		<template let-item='item' let-i='index'>
+			<GridLayout columns="*, auto">
+				<Label [text]="item" class="medium-spacing" col="0"></Label>
+				<Button text="Vote!" class="vote-button" col="1" (tap)="onVoteButtonTapped($event)"></Button>
+			</GridLayout>
+		</template>
+	</ListView>
+</StackLayout>
