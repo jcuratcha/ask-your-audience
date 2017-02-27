@@ -66,7 +66,7 @@ describe("Server", function() {
             service.getPoll.restore();
         });
 
-        it('returns null when poll ID does not exist', function() {
+        it('returns null when poll id does not exist', function() {
             var getPollResult = null;
             sinon.stub(service, 'getPoll').returns(Promise.resolve(getPollResult));
             var id = 0, expectedServiceResult = null;
@@ -121,6 +121,32 @@ describe("Server", function() {
             return request(server)
                 .get('/aya/api/get-polls')
                 .then(res => expect(res.body.length).to.equal(expectedNumPolls));
+        });
+    });
+
+    describe('GET /aya/api/vote/:id/:index', function() {
+        afterEach(function() {
+            service.findAndModify.restore();
+        });
+
+        it('returns null when poll ID does not exist', function() {
+            var findAndModifyResult = null;
+            sinon.stub(service, 'findAndModify').returns(Promise.resolve(findAndModifyResult));
+            var id = 0, expectedServiceResult = null;
+
+            return request(server)
+                .get(`/aya/api/vote/${id}/${index}`)
+                .then(res => expect(res.body).to.equal(expectedServiceResult));
+        });
+
+        it('increments votes with given poll ID and index', function() {
+            var findAndModifyResult = [{pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}];
+            sinon.stub(service, 'findAndModify').returns(Promise.resolve(findAndModifyResult));
+            var id = 1, index = 1, expectedNumVotes = 1;
+
+            return request(server)
+                .get(`/aya/api/vote/${id}/${index}`)
+                .then(res => expect(res[0].votes[1]).to.equal(expectedNumVotes));
         });
     });
 });
