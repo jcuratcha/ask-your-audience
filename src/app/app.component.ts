@@ -28,4 +28,8 @@ export class AppComponent  {
   //polls is an array of poll
   polls = MOCKDB;
 
+  onNotify($event: Poll){
+    let newPoll: Poll = Object.assign({}, $event);
+    this.polls.unshift(newPoll);
+  }
 }

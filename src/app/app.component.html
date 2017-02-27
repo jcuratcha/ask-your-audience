@@ -1,4 +1,4 @@
-<side-nav>
+<side-nav (poll)='onNotify($event)'>
 </side-nav>
 <div style="margin-left: 16%">
     <span *ngFor="let poll of polls; let i=index">
