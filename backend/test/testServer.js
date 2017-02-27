@@ -77,13 +77,13 @@ describe("Server", function() {
         });
 
         it('returns poll with asked poll ID', function() {
-            var getPollResult = [{pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollResult = { "polls" : [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}]};
             sinon.stub(service, 'getPoll').returns(Promise.resolve(getPollResult));
             var id = 1, expectedPollID = 1;
 
             return request(server)
                 .get(`/aya/api/get-polls/${id}`)
-                .then(res => expect(res.body[0].pollID).to.equal(expectedPollID));
+                .then(res => expect(res.body.polls[0].pollID).to.equal(expectedPollID));
         });
     });
 
@@ -103,24 +103,24 @@ describe("Server", function() {
         });
 
         it('sends a single poll', function() {
-            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollsResult = { "polls" : [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}]};
             sinon.stub(service, 'getPolls').returns(Promise.resolve(getPollsResult));
             var expectedNumPolls = 1;
 
             return request(server)
                 .get('/aya/api/get-polls')
-                .then(res => expect(res.body.length).to.equal(expectedNumPolls));
+                .then(res => expect(res.body.polls.length).to.equal(expectedNumPolls));
         });
 
         it('sends multiple polls', function() {
-            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"},
-                                  {pollID : 2, question: "question 2", options : ["d", "e", "f"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollsResult = { "polls" : [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"},
+                                              {pollID : 2, question: "question 2", options : ["d", "e", "f"], votes : [0, 0, 0], owner : "123.456.789.123"}]};
             sinon.stub(service, 'getPolls').returns(Promise.resolve(getPollsResult));
             var expectedNumPolls = 2;
 
             return request(server)
                 .get('/aya/api/get-polls')
-                .then(res => expect(res.body.length).to.equal(expectedNumPolls));
+                .then(res => expect(res.body.polls.length).to.equal(expectedNumPolls));
         });
     });
 
