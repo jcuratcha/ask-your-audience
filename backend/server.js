@@ -43,6 +43,16 @@ app.get('/aya/api/get-polls', function(req, res) {
     service.getPolls().then(polls => res.json(polls));
 });
 
+//
+// Calls the service that finds and modifies the votes of a poll via pollID
+//
+app.get('/aya/api/vote/:id/:index', function(req, res) {
+    if (process.env.NODE_ENV !==  'test') {
+        console.log('/aya/api/vote/%d/%d called', req.params.id, req.params.index);
+    }
+    service.findAndModify(req.params.id, req.params.index).then(polls => res.json(polls));
+});
+
 var port = 8080;
 
 //

@@ -50,3 +50,18 @@ exports.getPolls = function(options) {
 
     return query.exec();
 }
+
+//
+// Generic function for find and update the vote of a poll data from database
+//
+// conditions : JavaScript object
+//      pollID : where pollID is id
+//
+// update : JavaScript object, the update that we want to make
+//      vote: the change in the vote
+//
+// options : JavaScript object
+//      new : bool - return the modified document rather than the original
+exports.findOneAndUpdate = function(conditions, update, options) {
+    return Poll.findOneAndUpdate(conditions, update, options).exec();
+};

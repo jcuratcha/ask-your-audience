@@ -34,3 +34,12 @@ exports.getPoll = function(id) {
 exports.getPolls = function() {
     return db.getPolls().then(polls => results(polls));
 }
+
+//
+// Finds and modifies the vote of a pollID
+//
+exports.findAndModify= function(id,index) {
+	var update = {};
+	update['votes.' + index] = 1;
+    return db.findOneAndUpdate({pollID: id},{$inc: update},{new : true});
+}
