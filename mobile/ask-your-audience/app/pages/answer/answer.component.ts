@@ -25,7 +25,7 @@ export class AnswerComponent implements OnInit {
 
 	ngOnInit() {
 		this.id = this.router.snapshot.params['id'];
-		this.pollService.getPoll(id)
+		this.pollService.getPoll(this.id)
 			.subscribe(newPoll => {
 				this.poll = newPoll;
 				this.question = newPoll.question;
@@ -38,7 +38,6 @@ export class AnswerComponent implements OnInit {
 		var votedOption = button.bindingContext;
 
 		var index = this.options.indexOf(votedOption);
-		console.log(index);
 
 		this.pollService.addPollVote(this.id, index);
 	}
