@@ -9,17 +9,18 @@ import { Poll } from './../poll';
 export class SideNavigationComponent {
   @Output() poll: EventEmitter<Poll> = new EventEmitter<Poll>();
   addDialog: boolean = false;
-  options: string[] = [""]; //an array for ng to help display options
+  options: string[] = null; //an array for ng to help display options
   tempArray: string[] = [""];
+  question: string;
 
   addPoll() {
     this.addDialog = true;
   }
 
-  verifyPoll(question: string) {
+  verifyPoll() {
     let newPoll: Poll = new Poll;
 
-    if (question.length === 0) {
+    if (this.question.length === 0) {
       alert("Please enter a question!");
       return;
     }
@@ -36,7 +37,7 @@ export class SideNavigationComponent {
       return;
     }
     //has question + at least 1 option
-    newPoll.question = question;
+    newPoll.question = this.question;
     newPoll.options = this.tempArray;
     newPoll.voted = false;
     let n = this.tempArray.length;
@@ -45,7 +46,8 @@ export class SideNavigationComponent {
 
     this.poll.emit(newPoll);
     this.tempArray = [""];
-    this.options = [""];
+    this.options = null;
+    this.question = null;
     this.addDialog = false;
   }
 
@@ -56,5 +58,9 @@ export class SideNavigationComponent {
 
   addOptionValue(option: string, index: number) {
     this.tempArray[index] = option;
+  }
+
+  initOptions(){
+    this.options = [""];
   }
 }
