@@ -47,7 +47,13 @@ In the same bin folder, but in a different cmd window:
 - Type: node server.js
 	- Alternatively: type npm start
 		- This will execute  the start script defined in the "package.json" file
--This cmd window must stay running to use web server
+- This cmd window must stay running to use web server
+
+#### To run tests:
+
+- In a cmd window at the same directory as the "package.json" file
+- Type: npm test
+- NOTE: Make sure the server is not running before starting tests
 
 ##### USEFUL INFO:
 - The application should automatically create a database called aya
