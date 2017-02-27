@@ -132,7 +132,7 @@ describe("Server", function() {
         it('returns null when poll ID does not exist', function() {
             var increaseVoteResult = null;
             sinon.stub(service, 'increaseVote').returns(Promise.resolve(increaseVoteResult));
-            var id = 0, expectedServiceResult = null;
+            var id = 0, index = 1, expectedServiceResult = null;
 
             return request(server)
                 .get(`/aya/api/vote/${id}/${index}`)
@@ -140,13 +140,13 @@ describe("Server", function() {
         });
 
         it('increments votes with given poll ID and index', function() {
-            var increaseVoteResult = [{pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}];
+            var increaseVoteResult = {pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"};
             sinon.stub(service, 'increaseVote').returns(Promise.resolve(increaseVoteResult));
             var id = 1, index = 1, expectedNumVotes = 1;
 
             return request(server)
                 .get(`/aya/api/vote/${id}/${index}`)
-                .then(res => expect(res[0].votes[1]).to.equal(expectedNumVotes));
+                .then(res => expect(res.body.votes[1]).to.equal(expectedNumVotes));
         });
     });
 });
