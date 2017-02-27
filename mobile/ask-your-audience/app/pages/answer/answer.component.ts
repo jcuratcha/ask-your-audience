@@ -33,12 +33,18 @@ export class AnswerComponent implements OnInit {
 			});
 	}
 
+	//
+	// Send vote request to server for tapped option and for current poll
+	// 
 	onVoteButtonTapped(eventData) {
 		var button = eventData.object;
 		var votedOption = button.bindingContext;
 
 		var index = this.options.indexOf(votedOption);
 
-		this.pollService.addPollVote(this.id, index);
+		this.pollService.addPollVote(this.id, index)
+			.subscribe(votedPoll => {
+				console.log("Current vote: " + JSON.stringify(votedPoll));
+			});
 	}
 }	

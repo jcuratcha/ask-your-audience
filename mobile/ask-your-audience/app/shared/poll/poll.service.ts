@@ -50,10 +50,12 @@ export class PollService {
 		let headers = this.createRequestHeaders();
 
 		console.log("	Adding vote for pollID: " + id + "; optionID: " + vote);
+		console.log("	" + Config.apiUrl + "/aya/api/vote/" + id + '/' + vote + "/")
 
-		return this.http.get(Config.apiUrl + "/aya/api/vote/" + id + '/' + vote, {
+		return this.http.get(Config.apiUrl + "/aya/api/vote/" + id + '/' + vote + "/", {
 			headers: headers
 		})
+		.map(res => res.json())
 		.catch(this.handleErrors);
 	}
 
