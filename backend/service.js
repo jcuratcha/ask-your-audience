@@ -36,9 +36,10 @@ exports.getPolls = function() {
 }
 
 //
-// Finds and Modifies the votes of a poll by incrementing it by 1
+// Increases the vote of an option in the poll with pollID
 //
-exports.findAndModify= function(id,index) {
-	var update = { `votes.${id}` : 1 };
+exports.increaseVote= function(id,index) {
+	var update = {};
+	update['votes.' + index] = 1;
     return db.findOneAndUpdate({pollID: id},{$inc: update},{new : true});
 }
