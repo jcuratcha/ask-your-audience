@@ -93,4 +93,26 @@ describe('Service', function() {
             return service.getPolls().then(result => expect(result.polls.length).to.equal(expectedNumPolls));
         });
     });
+
+    describe('increaseVote', function(){
+        afterEach(function() {
+            db.findOneAndUpdate.restore();
+        });
+
+        it('returns null when poll does not exist', function() {
+            var increaseVoteResult = null;
+            sinon.stub(db, 'findOneAndUpdate').returns(Promise.resolve(increaseVoteResult));
+            var id = 0, index = 1, expectedValue = null;
+
+            return service.increaseVote(id, index).then(result => expect(result).to.equal(expectedValue));
+        });
+
+        it ('returns poll with updated vote count', function() {
+            var increaseVoteResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}];
+            sinon.stub(db, 'findOneAndUpdate').returns(Promise.resolve(increaseVoteResult));
+            var id = 1, index = 1, expectedNumVotes = 1;
+
+            return service.increaseVote(id, index).then(result => expect(result[0].votes[1]).to.equal(expectedNumVotes));
+        });
+    });
 });

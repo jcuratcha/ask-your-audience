@@ -69,4 +69,34 @@ describe('DB', function() {
             sinon.assert.calledOnce(query.limit);
         }); 
     });
+
+    describe('findOneAndUpdate', function(){
+    	afterEach(function() {
+            Poll.findOneAndUpdate.restore();
+        });
+
+        it('returns null when poll does not exist', function() {
+            var findOneAndUpdateResult = {
+               exec : function(exec) {
+               	return Promise.resolve(null);
+               }
+       		};
+            sinon.stub(Poll, 'findOneAndUpdate').returns(findOneAndUpdateResult);
+            var id = 0, index = 1, expectedValue = null;
+
+            return db.findOneAndUpdate(id, index).then(result => expect(result).to.equal(expectedValue));
+        });
+        
+        it ('returns poll with updated vote count', function() {
+            var findOneAndUpdateResult = {
+               exec : function(exec) {
+               	return Promise.resolve([{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}]);
+               }
+       		};
+            sinon.stub(Poll, 'findOneAndUpdate').returns(findOneAndUpdateResult);
+            var id = 1, index = 1, expectedNumVotes = 1;
+
+            return db.findOneAndUpdate(id, index).then(result => expect(result[0].votes[1]).to.equal(expectedNumVotes));
+        });
+    });
 });

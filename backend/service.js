@@ -34,3 +34,12 @@ exports.getPoll = function(id) {
 exports.getPolls = function() {
     return db.getPolls().then(polls => results(polls));
 }
+
+//
+// Increases the vote of an option in the poll with pollID
+//
+exports.increaseVote= function(id,index) {
+	var update = {};
+	update['votes.' + index] = 1;
+    return db.findOneAndUpdate({pollID: id},{$inc: update},{new : true});
+}
