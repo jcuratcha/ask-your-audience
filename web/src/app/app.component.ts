@@ -41,4 +41,14 @@ export class AppComponent implements OnInit {
         });
     });
   }
+  constructor (private pollListService: PollListService) {}
+
+  ngOnInit() {
+    this.pollListService.getAllPolls()
+      .subscribe(loadedPolls => {
+          loadedPolls.forEach((poll: Poll) => {
+          this.polls.unshift(poll);
+        });
+    });
+  }
 }
