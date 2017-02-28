@@ -1,6 +1,10 @@
 export class Poll {
-  question: string;
-  options: string[];
-  votes: number[];
-  voted: boolean;
+	constructor(
+		public pollID: number, 
+		public question: string, 
+		public options: string[], 
+		public votes: number[], 
+		public owner: string) {}
+
+	public voted: boolean;
 }
