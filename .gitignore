@@ -1,9 +1,13 @@
-// ignore generated files
+# ignore generated files
 
-src/app/**/*.js //all js files that are generated
-src/main.js //this is the only js file in src/ that is generated
+#all js files that are generated
+src/app/**/*.js 
 
-src/**/*.map //ignore all generated map files
+#this is the only js file in src/ that is generated
+src/main.js 
+
+#ignore all generated map files
+src/**/*.map 
 
 node_modules/
 
