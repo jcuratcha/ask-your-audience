@@ -18,7 +18,7 @@ export class SideNavigationComponent {
   }
 
   verifyPoll() {
-    let newPoll: Poll = new Poll;
+    let newPoll: Poll = new Poll();
 
     if (this.question.length === 0) {
       alert("Please enter a question!");
