@@ -38,13 +38,11 @@ export class PollListService {
 	private createRequestHeaders() {
 		let headers	= new Headers();
 
-		headers.append("Authorization", "Bearer " + Config.token);
-
 		return headers;
 	}
 
 	handleErrors(error: Response) {
-		console.log(JSON.stringify(error.json()));
+		console.log(JSON.stringify(error));
 		return Observable.throw(error);
 	}
 }
