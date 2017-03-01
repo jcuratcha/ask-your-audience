@@ -6,4 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['app/navigation-panel/navigation-panel.component.css']
 })
 export class SideNavigationComponent {
+    let newPoll: Poll = new Poll();
 }
