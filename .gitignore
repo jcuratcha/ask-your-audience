@@ -1,4 +1,4 @@
-/node_modules
+// ignore generated files
 
 src/**/*.js
 !src/system.config.extras.js
@@ -6,5 +6,6 @@ src/**/*.js
 
 src/**/*.map
 
-npm-debug.log
 node_modules/
+
+npm-debug.log
