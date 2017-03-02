@@ -31,10 +31,13 @@ export class AppComponent implements OnInit {
   polls: Array<Poll> = [];
   name = 'test'; 
 
+<<<<<<< HEAD
   onNotify($event: Poll){
     let newPoll: Poll = Object.assign({}, $event);
     this.polls.unshift(newPoll);
   }
+=======
+>>>>>>> 88cb752... Added poll list service and http module
   constructor (private pollListService: PollListService) {}
 
   ngOnInit() {
