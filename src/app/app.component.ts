@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
     let newPoll: Poll = Object.assign({}, $event);
     this.polls.unshift(newPoll);
   }
-  
   constructor (private pollListService: PollListService) {}
 
   ngOnInit() {
