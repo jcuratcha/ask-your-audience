@@ -16,10 +16,7 @@ import { InputTextModule, DialogModule } from 'primeng/primeng';
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-<<<<<<< HEAD
     DialogModule,
-=======
->>>>>>> 88cb752... Added poll list service and http module
     HttpModule
   ],
   declarations: [ 
