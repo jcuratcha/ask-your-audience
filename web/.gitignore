@@ -9,7 +9,5 @@ src/main.js
 #ignore all generated map files
 src/**/*.map 
 
-node_modules/
-
 **/*.log
 node_modules/
