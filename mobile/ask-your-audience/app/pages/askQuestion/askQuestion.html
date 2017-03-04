@@ -1,35 +1,12 @@
 
 <StackLayout>
-	<Label text="123"></Label>
-	<UILabel text="asd"></UILabel>
-   <!--<Label text="What would you like to ask?" top="10" width="360" height="15" ></Label>
+<Label text="What would you like to ask?" top="10" width="360" height="15" ></Label>
    <TextView hint="Question" [(ngModel)]="question" width="350" height="125" style.backgroundColor="lightgray"></TextView>
 	
-	 <Label text="options"></Label>
+
+	<Button text="create question"  (tap)="submit()"></Button>
 	
-	<GridLayout width="350" height="250" top="180" style.backgroundColor="green">
-		
-		
-	<ListView [items]="pollList" class="small-spacing" (itemTap)="onItemTap($event)" width="400" height="600">
-		<template let-item="item">
-			<StackLayout>
-
-<CheckBox #CB1 text="CheckBox Label" checked="false"></CheckBox>
-    <Button (tap)="toggleCheck()" text="Toggle it!"></Button>
-    <Button (tap)="getCheckProp()" text="Check Property"></Button>
-
-
-					
-			</StackLayout>
-		</template>
-	</ListView>
-</GridLayout>
-
-	<Button text="edit" class="submit-button" ></Button>
-	<Button text="delete" class="submit-button"></Button>
-	<Button text="create question" class="submit-button" (tap)="submit()"></Button>-->
-	
-	</StackLayout>
+</StackLayout>
 
 
 

@@ -17,55 +17,8 @@ import { topmost } from 'ui/frame';
 })
 
 export class askQuestionComponent {
-clickMessage = '';
 
-  onClickMe() {
-    alert("You are my hero!");
+  submit() {
+    console.log("hello");
   }
-
-
- //    pollList: Array<Poll> = [];
-
-	//constructor(private pollListService: PollListService, private router: Router, private page: Page) {}
-
-	//ngOnInit() {
-	//	this.pollList = this.createMockPollList();
-	//}	
-
-	//public onItemTap(args) {
-	//	var tappedItem = args.view;
-	//	var poll = tappedItem.bindingContext;
-	//	console.log("Question with pollID = " + poll.id + " tapped.");
-
-	//	this.router.navigate(["/answer"]);
-	//	// console.log("Question with pollID = " + args.index + " tapped.");
-	//}
-
-	//createMockPollList() {
-	//	var polls = [];
-
-	//	for (var i = 0; i < 5; ++i) {
-	//		polls.unshift(new Poll(i, "Question " + i, ["a1", "a2", "a3"], [i,i+1,i+2], "me"));
-	//	}
-
-	//	return polls;
-	//}
-
-
-	//question = "";
- // submit() {
- //   alert("You’re asking:" + this.question);
- // }
-
-
-
-//@ViewChild("CB1") FirstCheckBox: ElementRef;
-//    constructor() {}
-//     toggleCheck() {
-//        this.FirstCheckBox.nativeElement.toggle();
-//    }
- 
-//     getCheckProp() {
-//        console.log('checked prop value = ' + this.FirstCheckBox.nativeElement.checked);
-//    }
 }
