@@ -10,10 +10,14 @@ export const routes = [
 	{ path: "", component: LoginComponent },
 	{ path: "home", component: HomeComponent },
 	{ path: "list", component: ListComponent },
+<<<<<<< HEAD
 	{ path: "askQuestion", component: askQuestionComponent},
 	{ path: "myActivity", component: myActivityComponent},
 	{ path: "answeredQuestions", component: answeredQuestionsComponent},
 	{ path: "answer", component: ListComponent }
+=======
+	{ path: "answer/:id", component: AnswerComponent }
+>>>>>>> AYA-MC-1-android-client
 ];
 
 export const navigatableComponents = [

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { Http, Headers, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
@@ -10,19 +10,20 @@ import { Poll } from "./poll";
 export class PollListService {
 	constructor(private http: Http) {}
 
-	load() {
-		let headers = new Headers();
-		// headers.append("Authorization", "Bearer " + Config.token);
+	private getAllPointsUrl = "/aya/api/get-polls";
 
-		console.log("Fetching polls.");
+	getAllPolls() {
+		let headers = this.createRequestHeaders();
 
-		return this.http.get(Config.apiUrl + "/aya/api/get-polls", {
+		console.log("Fetching all polls.");
+
+		return this.http.get(Config.apiUrl + this.getAllPointsUrl, {
 			headers: headers
 		})
-		.map(res => res.json())
+		.map(res => res.json()['polls'])
 		.map(data => {
 			let pollList = [];
-			data.Result.forEach((poll) => {
+			data.forEach((poll) => {
 				pollList.push(new Poll(
 					poll.pollID,
 					poll.question,
@@ -34,6 +35,14 @@ export class PollListService {
 			return pollList;
 		})
 		.catch(this.handleErrors);
+	}
+
+	private createRequestHeaders() {
+		let headers	= new Headers();
+
+		headers.append("Authorization", "Bearer " + Config.token);
+
+		return headers;
 	}
 
 	handleErrors(error: Response) {

@@ -1,9 +1,5 @@
 <StackLayout>
-    <TextField hint="Email Address" keyboardType="email" [(ngModel)]="person.email"
-	  autocorrect="false" autocapitalizationType="none"></TextField>
-	<TextField hint="Password" secure="true" [(ngModel)]="person.password"></TextField>
-    <Label text="Leave blank to go anonymous" class="sub-description"></Label>
+    <Label text="Ask Your Audience" class="main-title"></Label>
 
-    <Button [text]="isLoggingIn ? 'Sign in' : 'Sign up'" class="submit-button" (tap)="submit()"></Button>
-	<Button [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>
+    <Button text="Get Started!" class="submit-button" (tap)="login()"></Button>
 </StackLayout>

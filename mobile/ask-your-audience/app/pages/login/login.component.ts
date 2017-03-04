@@ -25,38 +25,7 @@ export class LoginComponent implements OnInit {
 		this.page.actionBarHidden = true;
 	}
 
-	submit() {
-		if (this.isLoggingIn) {
-		this.login();
-		} else {
-			this.signUp();
-		}
-	}
-
 	login() {
 		this.router.navigate(["/home"]);
-		/*
-		Change this back to the actual login method,
-		when we have login information
-		*/
-		// this.personService.login(this.person)
-		// .subscribe(
-		// 	() => this.router.navigate(["/list"]),
-		// 	(error) => alert("Unfortunately we could not find your account.")
-		// );
-	}
-
-	signUp() {
-		this.personService.register(this.person)
-		.subscribe(
-		() => {
-			alert("Your account was successfully created.");
-			this.toggleDisplay();
-		},
-		() => alert("Unfortunately we were unable to create your account.")
-		);
-	}
-	toggleDisplay() {
-		this.isLoggingIn = !this.isLoggingIn;
 	}
 }

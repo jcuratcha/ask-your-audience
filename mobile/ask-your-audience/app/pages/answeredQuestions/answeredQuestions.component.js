@@ -1,0 +1,20 @@
+"use strict";
+var core_1 = require("@angular/core");
+var poll_list_service_1 = require("../../shared/poll/poll-list.service");
+var answeredQuestionsComponent = (function () {
+    function answeredQuestionsComponent() {
+    }
+    answeredQuestionsComponent.prototype.ngOnInit = function () {
+    };
+    return answeredQuestionsComponent;
+}());
+answeredQuestionsComponent = __decorate([
+    core_1.Component({
+        selector: "list",
+        templateUrl: "pages/answeredQuestions/answeredQuestions.html",
+        styleUrls: ["pages/answeredQuestions/answeredQuestions-common.css", "pages/answeredQuestions/answeredQuestions.css"],
+        providers: [poll_list_service_1.PollListService]
+    })
+], answeredQuestionsComponent);
+exports.answeredQuestionsComponent = answeredQuestionsComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYW5zd2VyZWRRdWVzdGlvbnMuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYW5zd2VyZWRRdWVzdGlvbnMuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxzQ0FBeUU7QUFFekUseUVBQXNFO0FBVXRFLElBQWEsMEJBQTBCO0lBQXZDO0lBTUEsQ0FBQztJQUpELDZDQUFRLEdBQVI7SUFFRSxDQUFDO0lBRUgsaUNBQUM7QUFBRCxDQUFDLEFBTkQsSUFNQztBQU5ZLDBCQUEwQjtJQVB0QyxnQkFBUyxDQUFDO1FBQ1YsUUFBUSxFQUFFLE1BQU07UUFDaEIsV0FBVyxFQUFFLGdEQUFnRDtRQUM3RCxTQUFTLEVBQUUsQ0FBQyxzREFBc0QsRUFBRSwrQ0FBK0MsQ0FBQztRQUNwSCxTQUFTLEVBQUUsQ0FBQyxtQ0FBZSxDQUFDO0tBQzVCLENBQUM7R0FFVywwQkFBMEIsQ0FNdEM7QUFOWSxnRUFBMEIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIEVsZW1lbnRSZWYsIE9uSW5pdCwgVmlld0NoaWxkIH0gZnJvbSBcIkBhbmd1bGFyL2NvcmVcIjtcbmltcG9ydCB7IFBvbGwgfSBmcm9tIFwiLi4vLi4vc2hhcmVkL3BvbGwvcG9sbFwiO1xuaW1wb3J0IHsgUG9sbExpc3RTZXJ2aWNlIH0gZnJvbSBcIi4uLy4uL3NoYXJlZC9wb2xsL3BvbGwtbGlzdC5zZXJ2aWNlXCI7XG5pbXBvcnQgdGFiVmlld01vZHVsZSA9IHJlcXVpcmUoXCJ1aS90YWItdmlld1wiKTtcblxuQENvbXBvbmVudCh7XG5cdHNlbGVjdG9yOiBcImxpc3RcIixcblx0dGVtcGxhdGVVcmw6IFwicGFnZXMvYW5zd2VyZWRRdWVzdGlvbnMvYW5zd2VyZWRRdWVzdGlvbnMuaHRtbFwiLFxuXHRzdHlsZVVybHM6IFtcInBhZ2VzL2Fuc3dlcmVkUXVlc3Rpb25zL2Fuc3dlcmVkUXVlc3Rpb25zLWNvbW1vbi5jc3NcIiwgXCJwYWdlcy9hbnN3ZXJlZFF1ZXN0aW9ucy9hbnN3ZXJlZFF1ZXN0aW9ucy5jc3NcIl0sXG5cdHByb3ZpZGVyczogW1BvbGxMaXN0U2VydmljZV1cbn0pXG5cbmV4cG9ydCBjbGFzcyBhbnN3ZXJlZFF1ZXN0aW9uc0NvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XG5cbm5nT25Jbml0KCkge1xuICAgIFxuICB9XG5cbn0iXX0=

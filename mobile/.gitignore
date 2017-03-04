@@ -1,0 +1,7 @@
+// .gitignore for the Mobile Client
+
+// ignore javascript files, these are compiled and generated from our typescript files
+app/**/*.js
+hooks/
+platforms/
+node_modules/

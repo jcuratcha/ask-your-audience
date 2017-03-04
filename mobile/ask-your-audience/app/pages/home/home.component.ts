@@ -11,7 +11,9 @@ import { Page } from "ui/page";
 export class HomeComponent {
 email="test";
 
-	constructor(private router: Router, private page: Page) {}
+	constructor(private router: Router, private page: Page) {
+		console.log("Current page: HomeComponent");
+	}
 
 
 	goToQuestionCreation() {
@@ -20,8 +22,12 @@ email="test";
 	}
 
 	goToQuestionList() {
+<<<<<<< HEAD
 		console.log("Going to Question List page");
 		this.router.navigate(["/answer"]);
+=======
+		this.router.navigate(["/list"]);
+>>>>>>> AYA-MC-1-android-client
 	}
 
 	goToPersonActivity() {
