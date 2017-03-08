@@ -17,10 +17,14 @@ export class SideNavigationComponent {
     this.addDialog = true;
   }
 
+  close() {
+    this.addDialog = false;
+  }
+
   verifyPoll() {
     let newPoll: Poll = new Poll();
-
-    if (this.question.length === 0) {
+    
+    if (this.question === undefined) {
       alert("Please enter a question!");
       return;
     }
@@ -60,7 +64,7 @@ export class SideNavigationComponent {
     this.tempArray[index] = option;
   }
 
-  initOptions(){
+  initOptions() {
     this.options = [""];
   }
 }

@@ -21,12 +21,8 @@ export class SinglePollComponent {
       this.active = !this.active;
     }
 
-    addVote(i:number){
-      if(this.poll.voted){
-        alert("You've already voted for this!");
-      }else{
-        this.poll.votes[i]++;
-        this.poll.voted = true;
-      }
+
+    closePoll($event: boolean){
+      this.active = false;
     }
 }

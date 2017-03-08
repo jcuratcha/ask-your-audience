@@ -1,10 +1,6 @@
 <div class="myButton" (click)="toggle()" title="{{poll.question}}">
     {{this.shownText}}
 </div>
-<div *ngIf="active">
-    <ul *ngFor="let options of poll.options; let i=index">
-        <li (click)="addVote(i)">
-            {{options}}: votes {{poll.votes[i]}}
-        </li>
-    </ul>
-</div>
+<span *ngIf="active">
+    <pop-up [poll]="poll" (close)='closePoll($event)'></pop-up>
+</span>
