@@ -16,7 +16,7 @@ export class PollService {
 	getPoll(id: number) {
 		let headers = this.createRequestHeaders();
 
-		console.log("Fetching poll id = " + id);
+		console.log("	Fetching poll id = " + id);
 
 		return this.http.get(Config.apiUrl + "/aya/api/get-polls/" + id, {
 			headers: headers
@@ -40,6 +40,22 @@ export class PollService {
 			return new Poll(data.pollID, data.question, options, votes, data.owner);
 
 		})
+		.catch(this.handleErrors);
+	}
+
+	//
+	//	Adds a vote for an option on the current poll id passed in
+	//
+	addPollVote(id: number, vote: number) {
+		let headers = this.createRequestHeaders();
+
+		console.log("	Adding vote for pollID: " + id + "; optionID: " + vote);
+		console.log("	" + Config.apiUrl + "/aya/api/vote/" + id + '/' + vote + "/")
+
+		return this.http.get(Config.apiUrl + "/aya/api/vote/" + id + '/' + vote + "/", {
+			headers: headers
+		})
+		.map(res => res.json())
 		.catch(this.handleErrors);
 	}
 
