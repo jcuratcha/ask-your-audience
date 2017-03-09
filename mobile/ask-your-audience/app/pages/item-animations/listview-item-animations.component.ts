@@ -17,19 +17,20 @@ import * as applicationModule from "application";
 })
 @Injectable()
 export class ListViewItemAnimationsComponent extends OptionsExampleBase implements OnInit {
-    private _dataItems: ObservableArray<DataItem>;
+    private _dataItems: ObservableArray<DataItem>;//dataItem is a stack based array
 
     private _itemInsertAnimation: string;
     private _itemDeleteAnimation: string;
     private _optionsParamName: string;
     private _itemsCount;
 
+    options="";
+    description="";
+
     constructor(private _page: Page, private _router: Router) {
         super();
         if (applicationModule.ios) {
-           // this._page.on("navigatingTo", this.onNavigatingTo, this);
             this._optionsParamName = "animation";
-            //this._optionsService.paramName = this._optionsParamName;
             this.router = _router;
             this.navigationParameters = {
                 selectedIndex: 0, paramName: this._optionsParamName,
@@ -44,14 +45,14 @@ export class ListViewItemAnimationsComponent extends OptionsExampleBase implemen
         this._dataItems = new ObservableArray<DataItem>();
     }
 
-test(){
-    //so the _dataItems works
-     this._dataItems.push(new DataItem(2,"test2"));
-     this._dataItems.getItem(0);
-     alert( this._dataItems.getItem(0).name+"\n"+this._dataItems.getItem(0).description);
-
-     //this._dataItems.push(new DataItem(this._itemsCount,"test"));
-}
+  submit() {
+    var information="You’re asking: \n" +this.description+"\nwith options:\n";
+    var i=0;
+    for(i=0;i<this._dataItems.length;i++){
+      information+=this._dataItems.getItem(i).name+"\n";
+    }
+    alert(information);
+  }
 
     get dataItems(): ObservableArray<DataItem> {
         return this._dataItems;
@@ -74,7 +75,7 @@ test(){
     }
 
     public onAddItemClick() {
-        this._dataItems.push(new DataItem(this._itemsCount,"test"));
+        this._dataItems.push(new DataItem(this._itemsCount,this.options));
         this._itemsCount++;
     }
 
@@ -115,31 +116,4 @@ test(){
         this.itemInsertAnimation = "Slide";
         this.itemDeleteAnimation = "Slide";
     }
-
-    /*public onNavigatingTo(args) {
-        if (args.isBackNavigation) {
-            if (this._optionsService.paramName === this._optionsParamName) {
-                switch (this._optionsService.paramValue) {
-                    case "Default":
-                        this.onDefaultTap();
-                        this.navigationParameters.selectedIndex = 0;
-                        break;
-                    case "Fade":
-                        this.onFadeTap();
-                        this.navigationParameters.selectedIndex = 1;
-                        break;
-                    case "Scale":
-                        this.onScaleTap();
-                        this.navigationParameters.selectedIndex = 2;
-                        break;
-                    case "Slide":
-                        this.onSlideTap();
-                        this.navigationParameters.selectedIndex = 3;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }*/
 }
