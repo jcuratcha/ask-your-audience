@@ -18,6 +18,7 @@ import * as applicationModule from "application";
 @Injectable()
 export class ListViewItemAnimationsComponent extends OptionsExampleBase implements OnInit {
     private _dataItems: ObservableArray<DataItem>;
+
     private _itemInsertAnimation: string;
     private _itemDeleteAnimation: string;
     private _optionsParamName: string;
@@ -43,6 +44,15 @@ export class ListViewItemAnimationsComponent extends OptionsExampleBase implemen
         this._dataItems = new ObservableArray<DataItem>();
     }
 
+test(){
+    //so the _dataItems works
+     this._dataItems.push(new DataItem(2,"test2"));
+     this._dataItems.getItem(0);
+     alert( this._dataItems.getItem(0).name+"\n"+this._dataItems.getItem(0).description);
+
+     //this._dataItems.push(new DataItem(this._itemsCount,"test"));
+}
+
     get dataItems(): ObservableArray<DataItem> {
         return this._dataItems;
     }
@@ -64,7 +74,7 @@ export class ListViewItemAnimationsComponent extends OptionsExampleBase implemen
     }
 
     public onAddItemClick() {
-        this._dataItems.push(new DataItem(1,"test"));
+        this._dataItems.push(new DataItem(this._itemsCount,"test"));
         this._itemsCount++;
     }
 
