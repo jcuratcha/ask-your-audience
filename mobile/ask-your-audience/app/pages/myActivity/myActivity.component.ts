@@ -1,6 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild ,ChangeDetectionStrategy} from "@angular/core";
 import { Poll } from "../../shared/poll/poll";
 import { PollListService } from "../../shared/poll/poll-list.service";
+import { SegmentedBarItem } from "ui/segmented-bar";
+
+
+let sortList = ["Questions I asked","My response"];
 
 @Component({
 	selector: "list",
@@ -10,12 +14,24 @@ import { PollListService } from "../../shared/poll/poll-list.service";
 })
 
 export class myActivityComponent implements OnInit {
-	groceryList: Array<Object> = [];
+
+
+ public pokemons: Array<string>;
+    public picked: string;
 
   ngOnInit() {
-    this.groceryList.push({ name: "Question1" });
-    this.groceryList.push({ name: "Question2" });
-    this.groceryList.push({ name: "Question3" });
+    this.pokemons = [];
+
+        for (let i = 0; i < sortList.length; i++) {
+            this.pokemons.push(sortList[i]);
+        }
   }
 
+public selectedIndexChanged(picker) {
+        console.log("picker selection: " + picker.selectedIndex);
+        this.picked = this.pokemons[picker.selectedIndex];
+    }
+
+
+    
 }

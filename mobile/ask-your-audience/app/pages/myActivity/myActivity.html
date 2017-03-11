@@ -1,22 +1,35 @@
 
-<AbsoluteLayout width="350" height="550" style.backgroundColor="lightgray">
-   <Label text="Activity and Results" top="10" width="360" height="75" backgroundColor="red"></Label>
+<Stacklayout>
+<label text="Activity and Results" width="300" height="20"></label>
 
-	<AbsoluteLayout top="85" width="360" height="75" backgroundColor="yellow">
-	<RadioButton>test</RadioButton>
-		</AbsoluteLayout>
+<ListPicker #picker class="p-15" 
+                [items]="pokemons" [
+                selectedIndex]="selectedIndex" 
+                (selectedIndexChange)="selectedIndexChanged(picker)" width="200" height="50">
+</ListPicker>
 
-	<GridLayout width="350" height="250" top="160" style.backgroundColor="green">
-	<ListView [items]="groceryList" class="small-spacing">
-  <template let-item="item">
-    <Label [text]="item.name" class="medium-spacing"></Label>
-  </template>
-</ListView>
-	</GridLayout>
-	
-	
- </AbsoluteLayout>
+<ScrollView width="350" height="120">
+    <GridLayout class="m-15" rows="auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto">
+        <Label class="h3 m-5" height="23" row="0" text="Title 1"></Label>
+        <Label class="h3 m-5" height="23" row="1" text="Title 2"></Label>
+        <Label class="h3 m-5" height="23" row="2" text="Title 3"></Label>
+        <Label class="h3 m-5" height="23" row="3" text="Title 4"></Label>
+        <Label class="h3 m-5" height="23" row="4" text="Title 5"></Label>
+        <Label class="h3 m-5" height="23" row="5" text="Title 6"></Label>
+        <Label class="h3 m-5" height="23" row="6" text="Title 7"></Label>
+        <Label class="h3 m-5" height="23" row="7" text="Title 8"></Label>
+        <Label class="h3 m-5" height="23" row="8" text="Title 9"></Label>
+        <Label class="h3 m-5" height="23" row="9" text="Title 10"></Label>
+        <Label class="h3 m-5" height="23" row="10" text="Title 10"></Label>
+        <Label class="h3 m-5" height="23" row="11" text="Title 11"></Label>
+        <Label class="h3 m-5" height="23" row="12" text="Title 12"></Label>
+        <Label class="h3 m-5" height="23" row="13" text="Title 13"></Label>
+        <Label class="h3 m-5" height="23" row="14" text="Title 14"></Label>
+        <Label class="h3 m-5" height="23" row="15" text="Title 15"></Label>
+    </GridLayout>
+</ScrollView>
 
+</Stacklayout>
 	
 
 
