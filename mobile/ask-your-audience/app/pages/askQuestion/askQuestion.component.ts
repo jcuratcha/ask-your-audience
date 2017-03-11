@@ -12,7 +12,7 @@ import * as applicationModule from "application";
 @Component({
     moduleId: module.id,
     selector: "tk-listview-item-animations",
-    templateUrl: "askQuestion.component.html",
+    templateUrl: "askQuestion.html",
     styleUrls: ["askQuestion.component.css"]
 })
 @Injectable()
