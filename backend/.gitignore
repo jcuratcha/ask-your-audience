@@ -1,4 +1,0 @@
-// .gitignore for the backend
-
-// ignore javascript files, these are compiled and generated from our typescript files
-node_modules/
