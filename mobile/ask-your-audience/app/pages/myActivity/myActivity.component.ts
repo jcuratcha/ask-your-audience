@@ -38,7 +38,7 @@ private _dataItems: ObservableArray<DataItem>;
         for (let i = 0; i < sortList.length; i++) {
             this.pokemons.push(sortList[i]);
         }
-           this._dataItems = new ObservableArray(this._dataItemService.getIdenticalDataItems(25));
+           this._dataItems = new ObservableArray(this._dataItemService.getIdenticalDataItems(5));
   }
 
 public selectedIndexChanged(picker) {

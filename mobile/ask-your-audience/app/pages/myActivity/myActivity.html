@@ -1,5 +1,5 @@
 
-<Stacklayout>
+<!--<Stacklayout>
 <label text="Activity and Results" width="300" height="20"></label>
 
 <ListPicker #picker class="p-15" 
@@ -12,24 +12,52 @@
 
 
 <GridLayout rows="auto, *" tkExampleTitle tkToggleNavButton>
-    <Label text="Selection states"></Label>
-    <!-- >> angular-listview-howto-item-selection-events-html -->
     <RadListView [items]="dataItems" row="1" multipleSelection="true" selectionBehavior="Press" (itemSelected)="itemSelected($event)"
         (itemDeselected)="itemDeselected($event)">
-        <!-- << angular-listview-howto-item-selection-events-html -->
-        
-        <!-- >> angular-listview-howto-item-selection-template-html -->
         <template tkListItemTemplate let-item="item">
             <StackLayout [backgroundColor]="item.selected ? 'red' : 'white'">
                 <Label class="nameLabel" [text]="123"></Label>
-                <Label class="descriptionLabel" [text]="  1234"></Label>
             </StackLayout>
         </template>
-        <!-- << angular-listview-howto-item-selection-template-html -->
         <ListViewLinearLayout tkListViewLayout itemHeight="50" scrollDirection="Vertical"></ListViewLinearLayout>
     </RadListView>
 </GridLayout>
-</Stacklayout>
+</Stacklayout>-->
 	
 
 
+<Stacklayout >
+    <ActionBar title="Activity"></ActionBar>
+
+    <TabView>
+    <StackLayout *tabItem="{title: 'Questions asked', iconSource: '~/icon.png'}" >
+        <GridLayout rows="auto, *" tkExampleTitle tkToggleNavButton>
+    <RadListView [items]="dataItems" row="1" multipleSelection="true" selectionBehavior="Press" (itemSelected)="itemSelected($event)"
+        (itemDeselected)="itemDeselected($event)">
+        <template tkListItemTemplate let-item="item">
+            <StackLayout [backgroundColor]="item.selected ? 'red' : 'white'">
+                <Label class="nameLabel" text="asked Questions from DB"></Label>
+            </StackLayout>
+        </template>
+        <ListViewLinearLayout tkListViewLayout itemHeight="50" scrollDirection="Vertical"></ListViewLinearLayout>
+    </RadListView>
+</GridLayout>
+    </StackLayout>
+
+
+
+    <StackLayout *tabItem="{title: 'Questions answered'}">
+       <GridLayout rows="auto, *" tkExampleTitle tkToggleNavButton>
+    <RadListView [items]="dataItems" row="1" multipleSelection="true" selectionBehavior="Press" (itemSelected)="itemSelected($event)"
+        (itemDeselected)="itemDeselected($event)">
+        <template tkListItemTemplate let-item="item">
+            <StackLayout [backgroundColor]="item.selected ? 'red' : 'white'">
+                <Label class="nameLabel" text="answered questions from DB"></Label>
+            </StackLayout>
+        </template>
+        <ListViewLinearLayout tkListViewLayout itemHeight="50" scrollDirection="Vertical"></ListViewLinearLayout>
+    </RadListView>
+</GridLayout>
+    </StackLayout>
+</TabView>
+    </Stacklayout>
