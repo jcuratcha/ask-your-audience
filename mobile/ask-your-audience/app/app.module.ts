@@ -7,6 +7,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { DATAFORM_DIRECTIVES } from 'nativescript-telerik-ui-pro/dataform/angular';
 import { LISTVIEW_DIRECTIVES } from 'nativescript-telerik-ui-pro/listview/angular';
 import { AppComponent } from "./app.component";
+import { myActivityComponent} from "./pages/myActivity/myActivity.component";
 import { routes, navigatableComponents } from "./app.routing";
 
 @NgModule({

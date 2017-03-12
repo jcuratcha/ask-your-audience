@@ -7,6 +7,7 @@ import { DataItem } from "../../listview/dataItem";
 import { DataItemService } from "../../listview/dataItem.service";
 import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
 
+
 let sortList = ["Questions I asked","My response"];
 
 @Component({
