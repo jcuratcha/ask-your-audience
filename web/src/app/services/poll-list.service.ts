@@ -9,16 +9,21 @@ import { Poll } from "../poll";
 
 @Injectable()
 export class PollListService {
+
 	constructor(private http: Http) {}
 
 	private getAllPointsUrl = "/aya/api/get-polls";
+	private postNewPollUrl = "/aya/api/create-polls";
+	
+	private dbUrl = Config.getDbUrl();
 
 	getAllPolls(): Observable<Poll[]> {
 		let headers = this.createRequestHeaders();
 
 		console.log("Fetching all polls.");
+		console.log("Current dbUrl: " + this.dbUrl);
 
-		return this.http.get(Config.apiUrl + this.getAllPointsUrl, {
+		return this.http.get(this.dbUrl + this.getAllPointsUrl, {
 			headers: headers
 		})
 		.map(res => res.json()['polls'])
@@ -31,6 +36,17 @@ export class PollListService {
 				pollList.push(newPoll);
 			});
 			return pollList;
+		})
+		.catch(this.handleErrors);
+	}
+
+	createNewPoll(poll: Poll) {
+		let headers = this.createRequestHeaders();
+
+		console.log("Creating new poll");
+
+		return this.http.post(this.dbUrl, {
+			headers: headers
 		})
 		.catch(this.handleErrors);
 	}
