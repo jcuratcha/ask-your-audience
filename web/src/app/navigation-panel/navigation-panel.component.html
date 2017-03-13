@@ -2,17 +2,17 @@
     <h3>
         Ask Your Audience
     </h3>
-    <div class="myButton" (click)="addPoll()">
+    <div id="addAPollButton" class="myButton" (click)="addPoll()">
         Add a poll
     </div>
 </div>
 <p-dialog header="Add a new Poll" width="400" [(visible)]="this.addDialog" modal="modal" responsive="true">
-    <span>What is your question? <input [(ngModel)]='question' (keyup)="initOptions()"></span><br>
+    <span>What is your question? <input id="question" [(ngModel)]='question' (keyup)="initOptions()"></span><br>
     <span *ngIf='question != null'>
         <span class="spacing">Options: </span><br>
-        <input *ngFor="let option of options; let i = index" #option (keyup)="addOptionValue(option.value, i)" class="spacing">
-        <button type="button" pButton icon="fa-check" width="50px" class="spacing" (click)="addOption()">+</button><br>
+        <input *ngFor="let option of options; let i = index" #option (keyup)="addOptionValue(option.value, i)" class="spacing" #elem [id]="'option_'+i" >
+        <button id="addOptionButton" type="button" pButton icon="fa-check" width="50px" class="spacing" (click)="addOption()">+</button><br>
     </span>
-    <button type="button" pButton icon="fa-check" width="50px" (click)="verifyPoll()" class="spacing">Add Poll</button>
-    <button type="button" pButton icon="fa-check" width="50px" (click)="close()" class="spacing">Cancel</button>
+    <button id="createPollButton" type="button" pButton icon="fa-check" width="50px" (click)="verifyPoll()" class="spacing">Add Poll</button>
+    <button id="cancelPollButton" type="button" pButton icon="fa-check" width="50px" (click)="close()" class="spacing">Cancel</button>
 </p-dialog>
