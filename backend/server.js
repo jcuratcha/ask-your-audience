@@ -14,7 +14,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 //
-// Add headers to allow CORS
+// Add headers to allow CORS to work in Chrome and Firefox
 //
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
