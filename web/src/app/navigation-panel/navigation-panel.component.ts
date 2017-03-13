@@ -53,16 +53,16 @@ export class SideNavigationComponent {
     newPoll.votes = Array.apply(null, Array(n)).map(Number.prototype.valueOf, 0);
 
     let id = "";
-    this.pollService.createNewPoll(newPoll).subscribe((id) => {
+    this.pollService.createNewPoll(newPoll).subscribe((id: number) => {
         newPoll.pollID = id;
-        console.log("Voting in poll with id = " + JSON.stringify(id));
-    });
+        console.log("Voting in poll with id = " + id);
 
-    this.poll.emit(newPoll);
-    this.tempArray = [""];
-    this.options = null;
-    this.question = null;
-    this.addDialog = false;
+        this.poll.emit(newPoll);
+        this.tempArray = [""];
+        this.options = null;
+        this.question = null;
+        this.addDialog = false;
+    });
   }
 
   addOption() {
