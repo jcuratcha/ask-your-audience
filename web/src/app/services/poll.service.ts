@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers, Response } from "@angular/http";
+import { Http, Headers, Response, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
@@ -72,12 +72,17 @@ export class PollService {
 	//
 	createNewPoll(poll: Poll) {
 		let headers = this.createRequestHeaders();
+		headers.append('Content-Type', 'application/json');
+
+		let options = new RequestOptions({ headers: headers });
 
 		console.log("Creating new poll");
 
-		return this.http.post(this.dbUrl, {
-			headers: headers
-		})
+		return this.http.post(this.dbUrl + this.postNewPollUrl, {
+			"questions": poll.question,
+			"options": poll.options
+		}, options)
+		.map(res => res.json()['pollID'])
 		.catch(this.handleErrors);
 	}
 
