@@ -1,10 +1,33 @@
 # Ask Your Audience
 
-Current Production Server: http://ec2-52-60-106-250.ca-central-1.compute.amazonaws.com:8080
+Production Web Server: http://ec2-52-60-106-250.ca-central-1.compute.amazonaws.com:3000
 
-Testing Server: http://ec2-54-213-112-197.us-west-2.compute.amazonaws.com:8080
+Production API Server: http://ec2-52-60-106-250.ca-central-1.compute.amazonaws.com:8080
 
-## Server Setup
+Develop Web Server: http://ec2-54-213-112-197.us-west-2.compute.amazonaws.com:3000
+
+Develop API Server: http://ec2-54-213-112-197.us-west-2.compute.amazonaws.com:8080
+
+Testing Web Server: http://ec2-35-161-110-163.us-west-2.compute.amazonaws.com:3000
+
+Testing API Server: http://ec2-35-161-110-163.us-west-2.compute.amazonaws.com:8080
+
+## Frontend Angular Web App Server Setup
+
+### Prerequisites
+
+- Install Node.js version 7.5 (should include npm during installation)
+- Install MongoDB version 3.4.2
+
+The web client is built and run independent from the backend API, but they must be run on the same machine at the same time, because the hostname of the webapp is used to access that instance's running backend server.
+
+### Steps to run:
+
+- change directory into `ask-your-audience/web`
+- run `npm install`
+- run `npm run start` to build then start serving the webapp on port :3000
+
+## Backend API Server Setup
 
 ### Prerequisites
 

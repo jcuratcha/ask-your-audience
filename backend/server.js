@@ -14,6 +14,16 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 //
+// Add headers to allow CORS to work in Chrome and Firefox
+//
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    next();
+});
+
+//
 //  Calls the service that creates a poll using the information inside the POST (JSON) body
 //
 app.post('/aya/api/create-polls', function(req, res) {

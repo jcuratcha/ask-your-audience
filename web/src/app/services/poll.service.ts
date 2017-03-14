@@ -1,14 +1,20 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { Http, Headers, Response, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
 import { Config } from "../config";
-import { Poll } from "./poll";
+import { Poll } from "../poll";
 
 @Injectable()
 export class PollService {
 	constructor(private http: Http) {}
+
+	private postNewPollUrl = "/aya/api/create-polls";
+	private getPollUrl = "/aya/api/get-polls/";
+	private addVoteUrl = "/aya/api/vote/";
+
+	private dbUrl = Config.getDbUrl();
 
 	//
 	// Calls server to get the poll with the id passed in.
@@ -18,19 +24,19 @@ export class PollService {
 
 		console.log("	Fetching poll id = " + id);
 
-		return this.http.get(Config.apiUrl + "/aya/api/get-polls/" + id, {
+		return this.http.get(this.dbUrl + this.getPollUrl + id, {
 			headers: headers
 		})
 		.map(res => res.json()['polls'][0])
 		.map(data => {
-			let options = [];
-			let votes = [];
+			let options : string[] = [];
+			let votes : number[] = [];
 
-			data['options'].forEach((option) => {
+			data['options'].forEach((option: string) => {
 				options.push(option);
 			})
 
-			data['votes'].forEach((vote) => {
+			data['votes'].forEach((vote: number) => {
 				votes.push(vote);
 			})
 			// data.forEach((poll) => {
@@ -49,13 +55,34 @@ export class PollService {
 	addPollVote(id: number, vote: number) {
 		let headers = this.createRequestHeaders();
 
-		console.log("	Adding vote for pollID: " + id + "; optionID: " + vote);
-		console.log("	" + Config.apiUrl + "/aya/api/vote/" + id + '/' + vote + "/")
+		let fullRequestUrl = this.dbUrl + this.addVoteUrl + id + '/' + vote + '/';
 
-		return this.http.get(Config.apiUrl + "/aya/api/vote/" + id + '/' + vote + "/", {
+		console.log("	Adding vote for pollID: " + id + "; optionID: " + vote);
+		console.log("	" + fullRequestUrl)
+
+		return this.http.get(fullRequestUrl, {
 			headers: headers
 		})
 		.map(res => res.json())
+		.catch(this.handleErrors);
+	}
+
+	//
+	//	Send a post request with a new poll to add to the database
+	//
+	createNewPoll(poll: Poll) {
+		let headers = this.createRequestHeaders();
+		headers.append('Content-Type', 'application/json');
+
+		let options = new RequestOptions({ headers: headers });
+
+		console.log("Creating new poll");
+
+		return this.http.post(this.dbUrl + this.postNewPollUrl, {
+			"questions": poll.question,
+			"options": poll.options
+		}, options)
+		.map(res => res.json()['pollID'])
 		.catch(this.handleErrors);
 	}
 
@@ -64,8 +91,6 @@ export class PollService {
 	//
 	private createRequestHeaders() {
 		let headers	= new Headers();
-
-		headers.append("Authorization", "Bearer " + Config.token);
 
 		return headers;
 	}
