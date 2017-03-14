@@ -1,3 +1,32 @@
-// Global .gitignore file
+#-----------------------------------------------
+# Web
+#-----------------------------------------------
 
-// each of our components (web, server, mobile) will have their own gitignore files
+#all js files that are generated
+web/src/app/**/*.js 
+
+#this is the only js file in src/ that is generated
+web/src/main.js 
+
+#ignore all generated map files
+web/src/**/*.map 
+
+**/*.log
+web/node_modules/
+
+#-----------------------------------------------
+# Backend/Server
+#-----------------------------------------------
+
+# ignore javascript files, these are compiled and generated from our typescript files
+backend/node_modules/
+
+#-----------------------------------------------
+# Mobile
+#-----------------------------------------------
+
+# ignore javascript files, these are compiled and generated from our typescript files
+mobile/ask-your-audience/app/**/*.js
+mobile/ask-your-audience/hooks/
+mobile/ask-your-audience/platforms/
+mobile/ask-your-audience/node_modules/
