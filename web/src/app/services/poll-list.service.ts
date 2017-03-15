@@ -12,13 +12,19 @@ export class PollListService {
 	constructor(private http: Http) {}
 
 	private getAllPointsUrl = "/aya/api/get-polls";
+	
+	private dbUrl = Config.getDbUrl();
 
+	//
+	// Fetch all available polls from database
+	//
 	getAllPolls(): Observable<Poll[]> {
 		let headers = this.createRequestHeaders();
 
 		console.log("Fetching all polls.");
+		console.log("Current dbUrl: " + this.dbUrl);
 
-		return this.http.get(Config.apiUrl + this.getAllPointsUrl, {
+		return this.http.get(this.dbUrl + this.getAllPointsUrl, {
 			headers: headers
 		})
 		.map(res => res.json()['polls'])
@@ -35,12 +41,18 @@ export class PollListService {
 		.catch(this.handleErrors);
 	}
 
+	//
+	// Creates request headers for making Http requests
+	//
 	private createRequestHeaders() {
 		let headers	= new Headers();
 
 		return headers;
 	}
 
+	// 
+	// Simple logging infrastructure to handle errors
+	//
 	handleErrors(error: Response) {
 		console.log(JSON.stringify(error));
 		return Observable.throw(error);

@@ -1,10 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Poll } from './../poll';
+import { PollService } from '../services/poll.service';
 
 @Component({
   selector: 'side-nav',
   templateUrl: 'app/navigation-panel/navigation-panel.component.html',
-  styleUrls: ['app/navigation-panel/navigation-panel.component.css']
+  styleUrls: ['app/navigation-panel/navigation-panel.component.css'],
+  providers: [ PollService ]
 })
 export class SideNavigationComponent {
   @Output() poll: EventEmitter<Poll> = new EventEmitter<Poll>();
@@ -12,6 +14,8 @@ export class SideNavigationComponent {
   options: string[] = null; //an array for ng to help display options
   tempArray: string[] = [""];
   question: string;
+
+  constructor(private pollService: PollService) {}
 
   addPoll() {
     this.addDialog = true;
@@ -48,11 +52,17 @@ export class SideNavigationComponent {
     //add votes of 0
     newPoll.votes = Array.apply(null, Array(n)).map(Number.prototype.valueOf, 0);
 
-    this.poll.emit(newPoll);
-    this.tempArray = [""];
-    this.options = null;
-    this.question = null;
-    this.addDialog = false;
+    let id = "";
+    this.pollService.createNewPoll(newPoll).subscribe((id: number) => {
+        newPoll.pollID = id;
+        console.log("Voting in poll with id = " + id);
+
+        this.poll.emit(newPoll);
+        this.tempArray = [""];
+        this.options = null;
+        this.question = null;
+        this.addDialog = false;
+    });
   }
 
   addOption() {
