@@ -1,6 +1,7 @@
 describe('vote-spec', function() {
   it('increment a vote', function() {
     browser.get('http://localhost:3000');
+
     // create a poll
     element(by.id('addAPollButton')).click();
     element(by.id('question')).sendKeys('a or b?');
