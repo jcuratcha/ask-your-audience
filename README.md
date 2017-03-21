@@ -74,9 +74,16 @@ In the same bin folder, but in a different cmd window:
 
 #### To run tests:
 
-- In a cmd window at the same directory as the "package.json" file
+##### Unit tests
+- In a cmd window at the same directory as the "package.json" file (i.e. the `backend` directory)
 - Type: npm test
 - NOTE: Make sure the server is not running before starting tests
+
+##### Postman tests (Command Line)
+- You'll need to have [Newman](https://github.com/postmanlabs/newman) installed, to install this run `npm install newman --global`
+- Make sure you're in this project's root folder
+- Run `newman run "backend\Ask Your Audience.postman_collection.json"` to run the Postman tests in the command line
+- The test results should be displayed, along with stats on how many tests have succeeded or failed
 
 ##### USEFUL INFO:
 - The application should automatically create a database called aya
