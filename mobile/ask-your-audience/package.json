@@ -1,8 +1,8 @@
 {
-  "description": "NativeScript Application",
-  "license": "SEE LICENSE IN <your-license-filename>",
-  "readme": "NativeScript Application",
-  "repository": "<fill-your-repository-here>",
+  "description": "Ask Your Audience",
+  "license": "license",
+  "readme": "README",
+  "repository": "jcuratcha/ask-your-audience",
   "nativescript": {
     "id": "org.nativescript.askyouraudience",
     "tns-android": {
