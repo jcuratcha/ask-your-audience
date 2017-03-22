@@ -17,9 +17,11 @@
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
-							"tests[\"Status code name has string\"] = responseCode.name.has(\"OK\");",
+							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");",
 							"",
-							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							"",
+							""
 						]
 					}
 				}
@@ -43,7 +45,7 @@
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
-							"tests[\"Status code name has string\"] = responseCode.name.has(\"OK\");",
+							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");",
 							"",
 							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
@@ -74,7 +76,7 @@
 							"",
 							"tests[\"Status code is 200\"] = responseCode.code === 201;",
 							"",
-							"tests[\"Status code name has string\"] = responseCode.name.has(\"Created\");",
+							"tests[\"Status code name is Created\"] = responseCode.name.has(\"Created\");",
 							"",
 							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
 						]
@@ -100,20 +102,6 @@
 			"response": []
 		},
 		{
-			"name": "Create Person",
-			"request": {
-				"url": "{{AYA-production}}/aya/api/create-person",
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"What should I buy?\",\r\n    \"ipaddress\" : \"663b:400c:e5fa:6638:d321:99f:177:40b4\"\r\n}"
-				},
-				"description": "Creates a Person object in the database"
-			},
-			"response": []
-		},
-		{
 			"name": "Add vote for option for Poll ID",
 			"event": [
 				{
@@ -135,7 +123,7 @@
 							"",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
-							"tests[\"Status code name has string\"] = responseCode.name.has(\"OK\");"
+							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");"
 						]
 					}
 				}

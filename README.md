@@ -82,8 +82,18 @@ In the same bin folder, but in a different cmd window:
 ##### Postman tests (Command Line)
 - You'll need to have [Newman](https://github.com/postmanlabs/newman) installed, to install this run `npm install newman --global`
 - Make sure you're in this project's root folder
-- Run `newman run "backend\Ask Your Audience.postman_collection.json"` to run the Postman tests in the command line
+- Run `newman run "backend\test\Ask Your Audience.postman_collection.json" -e "backend\test\AYA Develop-Staging.postman_environment.json"` to run the Postman tests in the command line
 - The test results should be displayed, along with stats on how many tests have succeeded or failed
+
+##### Importing/Exporting Postman Collections
+- To do the above step, you'll need to make sure that the Collection and the Environment json files exist. Their path relative to the project root should be `backend/test/Ask Your Audience.postman_collection.json` and `backend/test/AYA Develop-Staging.postman_environment.json`
+	- This requires exporting the Postman Collection ![](./docs/postman-export.png "Postman exporting")
+	- This also requires exporting/downloading the environment you want to use ![](./docs/postman-export-environment.png "Postman exporting")
+	- Make sure that the exported file is in the right folder and named correctly as above
+	- Note: You might notice that the Environment file has "Devlop-Staging" in the name. This means that these Postman tests will be run against our Develop/Staging server. This is the current setup for our Postman tests, but this can be changed at any time after discussion if desired.
+- If you want to edit the collection (say, if you wanted to update the collection), you'll need to import it into Postman
+	- ![](./docs/postman-import-1.png "Postman import button")
+	- ![](./docs/postman-import-2.png "Postman import dialog")
 
 ##### USEFUL INFO:
 - The application should automatically create a database called aya
