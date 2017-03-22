@@ -12,7 +12,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'app/**/*.js',
+      'app/**/*.js'
     ],
 
 
@@ -25,6 +25,9 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
     },
+
+    // allow for typescript tests to be run
+    mime: { 'text/x-typescript': ['ts','tsx'] },
 
 
     // test results reporter to use
