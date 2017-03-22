@@ -29,9 +29,11 @@
     "tns-core-modules": "2.5.0"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.5.46",
     "babel-traverse": "6.4.5",
     "babel-types": "6.4.5",
     "babylon": "6.4.5",
+    "jasmine": "^2.5.3",
     "karma": "^1.5.0",
     "karma-jasmine": "^1.1.0",
     "karma-nativescript-launcher": "^0.4.0",
