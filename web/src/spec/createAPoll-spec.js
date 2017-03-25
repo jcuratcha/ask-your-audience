@@ -1,5 +1,5 @@
-describe('createAPoll-spec', function() {
-  it('creates a poll', function() {
+describe('Creating a poll', function() {
+  it('should create a single poll', function() {
     browser.get('http://localhost:3000');
 
     // get number of polls existing already

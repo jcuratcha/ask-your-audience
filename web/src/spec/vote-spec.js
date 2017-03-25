@@ -1,5 +1,5 @@
-describe('vote-spec', function() {
-  it('increment a vote', function() {
+describe('Voting on a poll', function() {
+  it('should increment the selected option', function() {
     browser.get('http://localhost:3000');
 
     // create a poll

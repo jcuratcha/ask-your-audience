@@ -1,5 +1,5 @@
-describe('cancelCreatePoll-spec', function() {
-  it('cancels a poll being created', function() {
+describe('Canceling a poll', function() {
+  it('should cancel a poll being created', function() {
     browser.get('http://localhost:3000');
     // get number of polls existing already
     let polls = element.all(by.tagName('single-poll')).count();
