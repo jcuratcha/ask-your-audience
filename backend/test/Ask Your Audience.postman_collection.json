@@ -1,0 +1,141 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Ask Your Audience",
+		"_postman_id": "03fb50b6-ea87-ea42-bc58-80b25306df08",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Poll from Poll ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{API-URI}}{{port}}/aya/api/get-polls/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Polls",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{API-URI}}{{port}}/aya/api/get-polls",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Poll",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response body contains the new pollID\"] = responseBody.has(\"pollID\");",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"pollID should be a valid value\"] = jsonData.pollID > 0;",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 201;",
+							"",
+							"tests[\"Status code name is Created\"] = responseCode.name.has(\"Created\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{API-URI}}{{port}}/aya/api/create-polls",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questions\" : \"What is the question?\",\r\n    \"options\" : [\"to be\", \"not to be\"]\r\n}"
+				},
+				"description": "Creates a poll and saves it to the database."
+			},
+			"response": []
+		},
+		{
+			"name": "Add vote for option for Poll ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"contains pollID\"] = responseBody.has(\"pollID\");",
+							"",
+							"tests[\"contains question\"] = responseBody.has(\"question\");",
+							"",
+							"tests[\"contains owner\"] = responseBody.has(\"owner\");",
+							"",
+							"tests[\"contains votes\"] = responseBody.has(\"votes\");",
+							"",
+							"tests[\"contains options\"] = responseBody.has(\"options\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{API-URI}}{{port}}/aya/api/vote/1/0",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
