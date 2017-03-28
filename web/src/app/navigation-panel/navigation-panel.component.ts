@@ -8,6 +8,7 @@ import { PollService } from '../services/poll.service';
   styleUrls: ['app/navigation-panel/navigation-panel.component.css'],
   providers: [ PollService ]
 })
+
 export class SideNavigationComponent {
   @Output() poll: EventEmitter<Poll> = new EventEmitter<Poll>();
   addDialog: boolean = false;

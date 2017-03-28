@@ -1,8 +1,11 @@
-import {SideNavigationComponent} from './navigation-panel/navigation-panel.component';
+import { SideNavigationComponent } from './navigation-panel.component';
 
 describe ('navigation-panel.component', () => {
+    
+    let testSideNav: SideNavigationComponent = null;
+
    beforeEach( () => {
-      let testSideNav = new SideNavigationComponent ();
+      let testSideNav = new SideNavigationComponent(null);
    });
 
    it ('addPoll: changes addDialog to false', () => {
@@ -10,7 +13,7 @@ describe ('navigation-panel.component', () => {
       testSideNav.addPoll();
       expect(testSideNav.addDialog).toBe(false);
       testSideNav.addPoll();
-      expect(textSideNav.addDialog).toBe(false);
+      expect(testSideNav.addDialog).toBe(false);
    })
 
 })
