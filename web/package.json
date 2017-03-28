@@ -11,6 +11,7 @@
     "prestart": "npm run build",
     "start": "concurrently \"npm run build:watch\" \"npm run serve\"",
     "pree2e": "npm run build:e2e",
+    "pree2e": "npm run build && npm run build:e2e",
     "e2e": "concurrently \"npm run serve\" \"npm run protractor\" --kill-others --success first",
     "preprotractor": "webdriver-manager update",
     "protractor": "protractor protractor.config.js",
