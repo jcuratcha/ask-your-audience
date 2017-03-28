@@ -9,15 +9,16 @@ import { PollListService } from './services/poll-list.service'
   providers: [PollListService]
 })
 
-export class AppComponent implements OnInit { 
+export class AppComponent implements OnInit {
   polls: Array<Poll> = [];
-  name = 'test'; 
+  name = 'test';
 
   onNotify($event: Poll){
     let newPoll: Poll = Object.assign({}, $event);
-    this.polls.unshift(newPoll);
+    if ($event != null)
+      this.polls.unshift(newPoll);
   }
-  
+
   constructor (private pollListService: PollListService) {}
 
   ngOnInit() {
