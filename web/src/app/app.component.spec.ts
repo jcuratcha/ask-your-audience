@@ -1,27 +1,42 @@
-/* import { AppComponent } from './app.component';
-
-describe ('app.component', () => {
-   it ('Component test 1: simple', () => {
-      let app = new AppComponent(null);
-      expect (true).toBe(true);
-   });
-});
- */
-// import '../../node_modules/reflect-metadata/core-js/modules/es7.reflect.metadata';
-import {Poll} from './poll';
+import { Component } from '@angular/core';
 import { AppComponent } from './app.component';
+import { Poll } from './poll';
+   describe('app.component', function() {
 
-describe ('app.component', () => {
-   it ('A "notification" will add a copy of the new poll to' +
-            'the blank internal polls list', () => {
+      it('A "notification" will add a copy of the' +
+            'new poll to the blank internal polls list', () => {
+         let app = new AppComponent(null);
 
+         let pollID = 123456;
+         let question = "test Question";
+         let options = ["a", "b", "c", "d"];
+         let votes = [1, 2, 3, 4];
+         let owner = "test owner";
+         let testPoll = new Poll(pollID, question, options, votes, owner);
+
+         app.onNotify(testPoll);
+         expect(app.polls[0].pollID).toBe(pollID);
+         expect(app.polls[0].question).toBe(question);
+         expect(app.polls[0].options).toEqual(options);
+         expect(app.polls[0].votes).toEqual(votes);
+         expect(app.polls[0].owner).toBe(owner);
+      });
+
+      it('A non-initialized component will not be added to the list', () => {
+         let app = new AppComponent(null);
+         let testPoll = new Poll(123456, "test question", ["Yes", "No"], [152, 180], "test owner");
+
+         app.onNotify(testPoll); // added first (2nd pos)
+         app.onNotify(null);  // added 2nd (1st pos)
+         expect(app.polls[0].pollID).toBe(testPoll.pollID); // we'll just assume from here that the first is not the same
+      });
    });
-});
-
-describe('poll', () => {
-   it ('Component test 2: simple single class', () => {
-      let appComponent = new AppComponent(null);
-      let poll = new Poll(0, null, null, null, null);
-      expect(poll).not.toEqual(null);
+/*
+   describe('app.component', function() {
+      it('A "notification" will add a copy of the' +
+            'new poll to the blank internal polls list', () => {
+         let app = new AppComponent(null);
+         expect(app.polls[0]).toBe()
+      });
    });
-});
+*/

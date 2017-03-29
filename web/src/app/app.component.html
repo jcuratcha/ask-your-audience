@@ -2,7 +2,7 @@
 </side-nav>
 <div style="margin-left: 16%">
     <span *ngFor="let poll of polls; let i=index">
-        <single-poll [poll]="poll">
+        <single-poll id="poll_{{i}}" [poll]="poll">
         </single-poll>
     </span>
 </div>
