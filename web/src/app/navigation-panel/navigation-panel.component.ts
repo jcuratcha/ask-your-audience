@@ -28,22 +28,22 @@ export class SideNavigationComponent {
 
   verifyPoll() {
     let newPoll: Poll = new Poll();
-    
-    if (this.question === undefined) {
+
+    if (this.question === null || this.question === undefined || this.question.trim() == "") {
       alert("Please enter a question!");
-      return;
+      return -2;
     }
 
-    let empty = true;
+    let choices = 0;
     this.tempArray.forEach(element => {
-      if (element != "") {
-        empty = false;
+      if (element !== null && element !== undefined && element.trim() != "") {
+        choices++;
       }
     });
 
-    if (empty) {
-      alert("Please enter at least one option");
-      return;
+    if (choices < 2) {
+      alert("Please enter at least two options");
+      return -1;     // for debugging purposes
     }
     //has question + at least 1 option
     newPoll.question = this.question;
@@ -64,6 +64,8 @@ export class SideNavigationComponent {
         this.question = null;
         this.addDialog = false;
     });
+
+    return 0;
   }
 
   addOption() {
