@@ -69,12 +69,22 @@ export class SideNavigationComponent {
   }
 
   addOption() {
+    // in case it hasn't yet been initialized
+    if (this.options === null)
+      this.options = new Array<string>();
+
     this.options.push("");
     this.tempArray.push("");
   }
 
   addOptionValue(option: string, index: number) {
+    if (option === null || option === undefined)
+      return -1;
+    if (index >= this.tempArray.length || index < 0)
+      return -2;
+
     this.tempArray[index] = option;
+      return 0;
   }
 
   initOptions() {
