@@ -21,7 +21,6 @@ export class SinglePollComponent {
       this.active = !this.active;
     }
 
-
     closePoll($event: boolean){
       this.active = false;
     }

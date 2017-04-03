@@ -46,8 +46,4 @@ describe ('single-poll.component', () => {
       expect(testComponent.active).toBe(false);
 
    });
-
-   it ('closePoll: find out if Suneet meant to ignore the input of this function', () => {
-      expect(true).toBe(false);
-   })
 })

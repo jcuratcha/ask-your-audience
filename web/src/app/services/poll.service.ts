@@ -95,11 +95,16 @@ export class PollService {
 		return headers;
 	}
 
-	// 
+	//
 	// Simple logging infrastructure to handle errors
 	//
 	handleErrors(error: Response) {
 		console.log(JSON.stringify(error.json()));
 		return Observable.throw(error);
+	}
+
+	// stub method to test the function
+	test_createRequestHeaders() {
+		return this.createRequestHeaders();
 	}
 }
