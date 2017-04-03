@@ -16,6 +16,7 @@ export class HomeComponent {
 
 	goToQuestionCreation() {
 		console.log("Going to Question Creation page");
+		this.router.navigate(["/askQuestion"]);
 	}
 
 	goToQuestionList() {
@@ -23,6 +24,7 @@ export class HomeComponent {
 	}
 
 	goToPersonActivity() {
-		console.log("Going to current user's Activity page");
+		//this.router.navigate(["/myActivity"]);
+		//console.log("Going to current user's Activity page");
 	}
 }

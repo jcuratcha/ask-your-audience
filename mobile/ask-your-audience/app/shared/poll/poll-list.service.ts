@@ -11,11 +11,16 @@ export class PollListService {
 	constructor(private http: Http) {}
 
 	private getAllPointsUrl = "/aya/api/get-polls";
+    
+    addPolls(){
+		console.log("add polls\n");
+	}
+
 
 	getAllPolls() {
 		let headers = this.createRequestHeaders();
 
-		console.log("Fetching all polls.");
+		console.log("Fetching all polls. testing ");
 
 		return this.http.get(Config.apiUrl + this.getAllPointsUrl, {
 			headers: headers

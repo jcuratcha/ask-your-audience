@@ -1,0 +1,7 @@
+# .gitignore for the Mobile Client
+
+# ignore javascript files, these are compiled and generated from our typescript files
+ask-your-audience/app/**/*.js
+ask-your-audience/hooks/
+ask-your-audience/platforms/
+ask-your-audience/node_modules/

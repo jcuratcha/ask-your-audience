@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { Http, Headers ,RequestOptions} from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
@@ -9,6 +9,8 @@ import { Poll } from "./poll";
 @Injectable()
 export class PollService {
 	constructor(private http: Http) {}
+
+	private postNewPollUrl = "/aya/api/create-polls";
 
 	//
 	// Calls server to get the poll with the id passed in.
@@ -70,6 +72,23 @@ export class PollService {
 		return headers;
 	}
 
+    createNewPoll(question:string,options:string[]) {
+		let headers = this.createRequestHeaders();
+		headers.append('Content-Type', 'application/json');
+
+		let questionOptions = new RequestOptions({ headers: headers });
+
+		console.log("Creating new poll_asd");
+
+
+		 return this.http.post(Config.apiUrl + this.postNewPollUrl, {
+		 	"questions": question,
+		 	"options": options
+		 }, options)
+		 .map(res => res.json()['pollID'])
+		 .catch(this.handleErrors);
+	}
+    
 	// 
 	// Simple logging infrastructure to handle errors
 	//
