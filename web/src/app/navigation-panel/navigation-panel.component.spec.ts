@@ -97,32 +97,32 @@ describe ('navigation-panel.component', () => {
    it ("addOptionValue: doesn't change option val when the supplied option is null", () => {
       testSideNav.tempArray[0] = "";
 
-      expect(testSideNav.addOptionValue(null, 0)).toBe(-1);
+      expect(testSideNav.addOptionValue(null, 0)).toBe("Error: Option either null or undefined");
    });
 
    it ("addOptionValue: doesn't change option val when the supplied option is undefined", () => {
       testSideNav.tempArray[0] = "";
 
-      expect(testSideNav.addOptionValue(undefined, 0)).toBe(-1);
+      expect(testSideNav.addOptionValue(undefined, 0)).toBe("Error: Option either null or undefined");
    });
 
    it ("addOptionValue: doesn't change option val when the index is larger than the array size", () => {
       testSideNav.tempArray[0] = "";
 
-      expect(testSideNav.addOptionValue('a', testSideNav.tempArray.length)).toBe(-2);
+      expect(testSideNav.addOptionValue('a', testSideNav.tempArray.length)).toBe("Error: index out of array bounds");
    });
 
    it ("addOptionValue: doesn't change option val when the index is less than 0", () => {
       testSideNav.tempArray[0] = "";
 
-      expect(testSideNav.addOptionValue('a', -1)).toBe(-2);
+      expect(testSideNav.addOptionValue('a', -1)).toBe("Error: index out of array bounds");
    });
 
    it ("addOptionValue: change value when passed a valid index", () => {
       let testIndex:number = 0;
       testSideNav.tempArray[testIndex] = "X";
 
-      expect(testSideNav.addOptionValue('X', testIndex)).toBe(0);
+      expect(testSideNav.addOptionValue('X', testIndex)).toBe("Success");
       expect(testSideNav.tempArray[testIndex]).toBe("X");
    });
 

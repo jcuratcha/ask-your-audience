@@ -79,12 +79,12 @@ export class SideNavigationComponent {
 
   addOptionValue(option: string, index: number) {
     if (option === null || option === undefined)
-      return -1;
+      return "Error: Option either null or undefined";
     if (index >= this.tempArray.length || index < 0)
-      return -2;
+      return "Error: index out of array bounds";
 
     this.tempArray[index] = option;
-      return 0;
+      return "Success";
   }
 
   initOptions() {
