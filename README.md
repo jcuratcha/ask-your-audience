@@ -124,7 +124,13 @@ cd mobile/ask-your-audience
 tns run android
 ```
 
-This will start up an AVD/Android Emulator and install the app on that device.
+This will start up an AVD/Android Emulator and install the app on that device. If an Android device with USB Debugging enabled is connected to the computer via USB, Ask Your Audience will be installed there instead, and the emulator will not be started.
+
+### Running Unit Tests
+
+To run the unit tests, make sure that the repository is cloned, and that you are in the `ask-your-audience` directory (just like when running the client in the section above).
+
+Then, you can run `tns test android --justlaunch` to run the test suite. This will start the Android Emulator (if no physical devices connected), then run the tests and then exit.
 
 ### Troubleshooting
 
