@@ -2,7 +2,7 @@ import {PopupComponent} from './pop-up.component';
 import {Poll} from '../poll';
 import {PollService} from '../services/poll.service';
 
-describe('pop-up.component', () => {
+describe('Pop-up component: shows a dialog for a poll to be voted on |', () => {
    let testPollService:PollService;
    let testPoll:Poll;
    let testPopupComponent:PopupComponent;

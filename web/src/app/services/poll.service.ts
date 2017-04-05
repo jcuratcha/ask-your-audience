@@ -15,6 +15,7 @@ export class PollService {
 	private addVoteUrl = "/aya/api/vote/";
 
 	private dbUrl = Config.getDbUrl();
+	public preventSending:boolean = false;
 
 	//
 	// Calls server to get the poll with the id passed in.
@@ -24,29 +25,34 @@ export class PollService {
 
 		console.log("	Fetching poll id = " + id);
 
-		return this.http.get(this.dbUrl + this.getPollUrl + id, {
-			headers: headers
-		})
-		.map(res => res.json()['polls'][0])
-		.map(data => {
-			let options : string[] = [];
-			let votes : number[] = [];
-
-			data['options'].forEach((option: string) => {
-				options.push(option);
+		if (this.preventSending === false)
+		{
+			return this.http.get(this.dbUrl + this.getPollUrl + id, {
+				headers: headers
 			})
+			.map(res => res.json()['polls'][0])
+			.map(data => {
+				let options : string[] = [];
+				let votes : number[] = [];
 
-			data['votes'].forEach((vote: number) => {
-				votes.push(vote);
+				data['options'].forEach((option: string) => {
+					options.push(option);
+				})
+
+				data['votes'].forEach((vote: number) => {
+					votes.push(vote);
+				})
+				// data.forEach((poll) => {
+				// 	return new Poll(data.pollID, data.question, data.options, data.votes, data.owner);
+				// });
+
+				return new Poll(data.pollID, data.question, options, votes, data.owner);
+
 			})
-			// data.forEach((poll) => {
-			// 	return new Poll(data.pollID, data.question, data.options, data.votes, data.owner);
-			// });
-
-			return new Poll(data.pollID, data.question, options, votes, data.owner);
-
-		})
-		.catch(this.handleErrors);
+			.catch(this.handleErrors);
+		}
+		else
+			return null;
 	}
 
 	//
@@ -60,11 +66,16 @@ export class PollService {
 		console.log("	Adding vote for pollID: " + id + "; optionID: " + vote);
 		console.log("	" + fullRequestUrl)
 
-		return this.http.get(fullRequestUrl, {
-			headers: headers
-		})
-		.map(res => res.json())
-		.catch(this.handleErrors);
+		if (this.preventSending === false)
+		{
+			return this.http.get(fullRequestUrl, {
+				headers: headers
+			})
+			.map(res => res.json())
+			.catch(this.handleErrors);
+		}
+		else
+			return null;
 	}
 
 	//
@@ -78,12 +89,17 @@ export class PollService {
 
 		console.log("Creating new poll");
 
-		return this.http.post(this.dbUrl + this.postNewPollUrl, {
-			"questions": poll.question,
-			"options": poll.options
-		}, options)
-		.map(res => res.json()['pollID'])
-		.catch(this.handleErrors);
+		if (this.preventSending === false)
+		{
+			return this.http.post(this.dbUrl + this.postNewPollUrl, {
+				"questions": poll.question,
+				"options": poll.options
+			}, options)
+			.map(res => res.json()['pollID'])
+			.catch(this.handleErrors);
+		}
+		else
+			return null;
 	}
 
 	//

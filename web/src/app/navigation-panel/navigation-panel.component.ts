@@ -31,7 +31,7 @@ export class SideNavigationComponent {
 
     if (this.question === null || this.question === undefined || this.question.trim() == "") {
       alert("Please enter a question!");
-      return -2;
+      return "ERROR: No question has been provided (or is blank space)";
     }
 
     let choices = 0;
@@ -43,7 +43,7 @@ export class SideNavigationComponent {
 
     if (choices < 2) {
       alert("Please enter at least two options");
-      return -1;     // for debugging purposes
+      return "ERROR: Not enough choices have been registered, minimum needed is 2";     // for debugging purposes
     }
     //has question + at least 1 option
     newPoll.question = this.question;
@@ -65,7 +65,7 @@ export class SideNavigationComponent {
         this.addDialog = false;
     });
 
-    return 0;
+    return "SUCCESS: Poll Verified";
   }
 
   addOption() {
