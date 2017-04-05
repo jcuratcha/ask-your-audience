@@ -15,7 +15,7 @@
     "preprotractor": "webdriver-manager update",
     "protractor": "protractor protractor.config.js",
     "pretest": "npm run build",
-    "test": "concurrently \"npm run build:watch\" \"karma start karma.conf.js\"",
+    "test": "concurrently \"npm run build\" \"karma start karma.conf.js\"",
     "pretest:once": "npm run build",
     "test:once": "karma start karma.conf.js --single-run",
     "lint": "tslint ./src/**/*.ts -t verbose"
@@ -55,7 +55,11 @@
     "protractor": "5.1.1",
     "rimraf": "^2.5.4",
     "@types/node": "^6.0.46",
-    "@types/jasmine": "2.5.36"
+    "@types/jasmine": "2.5.36",
+    "karma-browserify": "5.1.1",
+    "watchify": "3.9.0",
+    "brfs": "1.4.3",
+    "browserify": "14.1.0"
   },
   "repository": {}
 }
