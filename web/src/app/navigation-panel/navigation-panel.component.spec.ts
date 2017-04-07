@@ -1,16 +1,23 @@
-import {SideNavigationComponent} from './navigation-panel/navigation-panel.component';
+import { SideNavigationComponent } from './navigation-panel.component';
+import { PollService } from '../services/poll.service'
+// import { Http, Headers, Response, RequestOptions } from "@angular/http";
 
-describe ('navigation-panel.component', () => {
-   beforeEach( () => {
-      let testSideNav = new SideNavigationComponent ();
-   });
+let testSideNav:SideNavigationComponent
+describe('navigation-panel.component', () => {
+    // let pollS = new PollService();
+    // let testSideNav = new SideNavigationComponent(pollS);
+    let pollS: PollService
 
-   it ('addPoll: changes addDialog to false', () => {
-      testSideNav.addDialog = true;
-      testSideNav.addPoll();
-      expect(testSideNav.addDialog).toBe(false);
-      testSideNav.addPoll();
-      expect(textSideNav.addDialog).toBe(false);
-   })
+    beforeEach(() => {
+          testSideNav = new SideNavigationComponent (pollS);
+    });
+
+    it('addPoll: changes addDialog to false', () => {
+        testSideNav.addDialog = true;
+        testSideNav.addPoll();
+        expect(testSideNav.addDialog).toBe(false);
+        testSideNav.addPoll();
+        expect(testSideNav.addDialog).toBe(false);
+    })
 
 })
