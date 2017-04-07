@@ -20,7 +20,7 @@ export class PollListService {
 	getAllPolls() {
 		let headers = this.createRequestHeaders();
 
-		console.log("Fetching all polls. testing ");
+		console.log("Fetching all polls.");
 
 		return this.http.get(Config.apiUrl + this.getAllPointsUrl, {
 			headers: headers
