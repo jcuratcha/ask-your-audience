@@ -66,9 +66,9 @@ app.get('/aya/api/vote/:id/:index', function(req, res) {
 //
 // Calls the service that finds and removes a poll via pollID
 //
-app.delete('/aya/api/remove/:id', function(req, res) {
+app.delete('/aya/api/remove-poll/:id', function(req, res) {
     if (process.env.NODE_ENV !== 'test') {
-        console.log('/aya/api/remove/%d called', req.params.id);
+        console.log('/aya/api/remove-poll/%d called', req.params.id);
     }
     service.removePoll(req.params.id).then(polls => res.json(polls));
 });
