@@ -150,7 +150,7 @@ describe("Server", function() {
         });
     });
 
-    describe('GET /aya/api/remove/:id', function() {
+    describe('DELETE /aya/api/remove/:id', function() {
         afterEach(function() {
             service.removePoll.restore();
         });
@@ -161,7 +161,7 @@ describe("Server", function() {
             var id = 0, expectedServiceResult = null;
 
             return request(server)
-                .get(`/aya/api/remove/${id}`)
+                .delete(`/aya/api/remove/${id}`)
                 .then(res => expect(res.body).to.equal(expectedServiceResult));
         });
 
@@ -171,7 +171,7 @@ describe("Server", function() {
             var id = 1, expectedPollID = 1;
 
             return request(server)
-                .get(`/aya/api/remove/${id}`)
+                .delete(`/aya/api/remove/${id}`)
                 .then(res => expect(res.body.pollID).to.equal(expectedPollID));
         });
     });
