@@ -2,20 +2,19 @@
 import { Component, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { DataItem } from "../dataItem";
-import { DataItemService } from "../dataItem.service";
+
 import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
 
 @Component({
     moduleId: module.id,
     selector: "tk-listview-observable-array",
-    providers: [DataItemService],
     templateUrl: "listview-observable-array.component.html",
     styleUrls: ["listview-observable-array.component.css"]
 })
 export class ListviewObservableArrayComponent implements OnInit {
     private _dataItems: ObservableArray<DataItem>;
 
-    constructor(private _dataItemService: DataItemService) {
+    constructor() {
     }
 
     get dataItems(): ObservableArray<DataItem> {
