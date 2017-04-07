@@ -1,6 +1,6 @@
 import {} from 'jasmine';
 
-import { Poll } from '../shared/poll/poll';
+import { Poll } from '../../shared/poll/poll';
 
 describe("Poll creation", function() {
 
