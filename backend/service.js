@@ -38,8 +38,15 @@ exports.getPolls = function() {
 //
 // Increases the vote of an option in the poll with pollID
 //
-exports.increaseVote= function(id,index) {
+exports.increaseVote = function(id,index) {
 	var update = {};
 	update['votes.' + index] = 1;
     return db.findOneAndUpdate({pollID: id},{$inc: update},{new : true});
+}
+
+//
+// Remove the poll with pollID
+//
+exports.removePoll = function(id) {
+    return db.findOneAndRemove({pollID: id});
 }

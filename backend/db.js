@@ -52,7 +52,7 @@ exports.getPolls = function(options) {
 }
 
 //
-// Generic function for find and update the vote of a poll data from database
+// Generic function for find and update the vote of a poll from database
 //
 // conditions : JavaScript object
 //      pollID : where pollID is id
@@ -64,4 +64,13 @@ exports.getPolls = function(options) {
 //      new : bool - return the modified document rather than the original
 exports.findOneAndUpdate = function(conditions, update, options) {
     return Poll.findOneAndUpdate(conditions, update, options).exec();
+};
+
+//
+// Generic function for find and remove the vote of a poll from database
+//
+// conditions : JavaScript object
+//      pollID : where pollID is id
+exports.findOneAndRemove = function(conditions) {
+    return Poll.findOneAndRemove(conditions).exec();
 };
