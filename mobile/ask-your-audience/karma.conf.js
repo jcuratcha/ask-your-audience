@@ -12,15 +12,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: 'node_modules/zone.js/dist/zone.js', included: true, served: true },
-      { pattern: 'node_modules/zone.js/dist/long-stack-trace-zone.js', included: true, served: true },
-      { pattern: 'node_modules/zone.js/dist/proxy.js', included: true, served: true }, 
-      { pattern: 'node_modules/zone.js/dist/sync-test.js', included: true, served: true },
-      { pattern: 'node_modules/zone.js/dist/jasmine-patch.js', included: true, served: true }, 
-      { pattern: 'node_modules/zone.js/dist/async-test.js', included: true, served: true },
-      { pattern: 'node_modules/zone.js/dist/fake-async-test.js', included: true, served: true },
-      { pattern: 'app/tests/setup.js', included: true, served: true, included: true, served: true },
-      { pattern: 'app/tests/*spec.js', included: true, served: true, included: true, served: true },
+      { pattern: 'app/tests/*.spec.js', included: true, served: true, included: true, served: true },
     ],
 
 

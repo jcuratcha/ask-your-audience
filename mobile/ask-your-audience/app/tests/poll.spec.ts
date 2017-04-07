@@ -18,6 +18,7 @@ describe("Poll creation", function() {
         var createPoll = function() {
             new Poll(null, null, null, null, null); 
         }  
+
         expect(createPoll).toThrow();
     });
 
