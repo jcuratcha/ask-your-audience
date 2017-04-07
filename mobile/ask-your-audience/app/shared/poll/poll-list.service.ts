@@ -9,8 +9,6 @@ import { Poll } from "./poll";
 @Injectable()
 export class PollListService {
 	constructor(private http: Http) {}
-
-	private getAllPointsUrl = "/aya/api/get-polls";
     
     addPolls(){
 		console.log("add polls\n");
@@ -22,7 +20,7 @@ export class PollListService {
 
 		console.log("Fetching all polls.");
 
-		return this.http.get(Config.apiUrl + this.getAllPointsUrl, {
+		return this.http.get(Config.apiUrl +  "/aya/api/get-polls/" , {
 			headers: headers
 		})
 		.map(res => res.json()['polls'])
