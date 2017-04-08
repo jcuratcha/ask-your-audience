@@ -115,4 +115,26 @@ describe('Service', function() {
             return service.increaseVote(id, index).then(result => expect(result[0].votes[1]).to.equal(expectedNumVotes));
         });
     });
+
+    describe('removePoll', function(){
+        afterEach(function() {
+            db.findOneAndRemove.restore();
+        });
+
+        it('returns null when poll does not exist', function() {
+            var removePollResult = null;
+            sinon.stub(db, 'findOneAndRemove').returns(Promise.resolve(removePollResult));
+            var id = 0, expectedValue = null;
+
+            return service.removePoll(id).then(result => expect(result).to.equal(expectedValue));
+        });
+
+        it ('returns poll when poll does exist', function() {
+            var removePollResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}];
+            sinon.stub(db, 'findOneAndRemove').returns(Promise.resolve(removePollResult));
+            var id = 1, expectedPollID = 1;
+
+            return service.removePoll(id).then(result => expect(result[0].pollID).to.equal(expectedPollID));
+        });
+    });
 });

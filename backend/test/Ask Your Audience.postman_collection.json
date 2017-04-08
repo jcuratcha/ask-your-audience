@@ -47,13 +47,51 @@
 							"",
 							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");",
 							"",
-							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							"",
+							"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");"
 						]
 					}
 				}
 			],
 			"request": {
 				"url": "{{API-URI}}{{port}}/aya/api/get-polls",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add vote for option for Poll ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"contains pollID\"] = responseBody.has(\"pollID\");",
+							"",
+							"tests[\"contains question\"] = responseBody.has(\"question\");",
+							"",
+							"tests[\"contains owner\"] = responseBody.has(\"owner\");",
+							"",
+							"tests[\"contains votes\"] = responseBody.has(\"votes\");",
+							"",
+							"tests[\"contains options\"] = responseBody.has(\"options\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{API-URI}}{{port}}/aya/api/vote/1/0",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -102,35 +140,25 @@
 			"response": []
 		},
 		{
-			"name": "Add vote for option for Poll ID",
+			"name": "Delete poll for pollID",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"contains pollID\"] = responseBody.has(\"pollID\");",
-							"",
-							"tests[\"contains question\"] = responseBody.has(\"question\");",
-							"",
-							"tests[\"contains owner\"] = responseBody.has(\"owner\");",
-							"",
-							"tests[\"contains votes\"] = responseBody.has(\"votes\");",
-							"",
-							"tests[\"contains options\"] = responseBody.has(\"options\");",
-							"",
-							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							"tests[\"Body is null when request doesn't exist\"] = responseBody === \"null\";",
 							"",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"",
-							"tests[\"Status code name is OK\"] = responseCode.name.has(\"OK\");"
+							"tests[\"Status code is OK\"] = responseCode.name.has(\"OK\");"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "{{API-URI}}{{port}}/aya/api/vote/1/0",
-				"method": "GET",
+				"url": "{{API-URI}}{{port}}/aya/api/remove-poll/1",
+				"method": "DELETE",
 				"header": [],
 				"body": {},
 				"description": ""
