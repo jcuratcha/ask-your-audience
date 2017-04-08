@@ -12,6 +12,8 @@ Testing Web Server: http://ec2-35-161-110-163.us-west-2.compute.amazonaws.com:30
 
 Testing API Server: http://ec2-35-161-110-163.us-west-2.compute.amazonaws.com:8080
 
+Travis CI Builds page: https://travis-ci.com/jcuratcha/ask-your-audience
+
 ## Frontend Angular Web App Server Setup
 
 ### Prerequisites
