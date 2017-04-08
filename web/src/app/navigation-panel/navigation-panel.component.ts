@@ -8,6 +8,7 @@ import { PollService } from '../services/poll.service';
   styleUrls: ['app/navigation-panel/navigation-panel.component.css'],
   providers: [ PollService ]
 })
+
 export class SideNavigationComponent {
   @Output() poll: EventEmitter<Poll> = new EventEmitter<Poll>();
   addDialog: boolean = false;
@@ -27,22 +28,22 @@ export class SideNavigationComponent {
 
   verifyPoll() {
     let newPoll: Poll = new Poll();
-    
-    if (this.question === undefined) {
+
+    if (this.question === null || this.question === undefined || this.question.trim() == "") {
       alert("Please enter a question!");
-      return;
+      return "ERROR: No question has been provided (or is blank space)";
     }
 
-    let empty = true;
+    let choices = 0;
     this.tempArray.forEach(element => {
-      if (element != "") {
-        empty = false;
+      if (element !== null && element !== undefined && element.trim() != "") {
+        choices++;
       }
     });
 
-    if (empty) {
-      alert("Please enter at least one option");
-      return;
+    if (choices < 2) {
+      alert("Please enter at least two options");
+      return "ERROR: Not enough choices have been registered, minimum needed is 2";     // for debugging purposes
     }
     //has question + at least 1 option
     newPoll.question = this.question;
@@ -63,15 +64,27 @@ export class SideNavigationComponent {
         this.question = null;
         this.addDialog = false;
     });
+
+    return "SUCCESS: Poll Verified";
   }
 
   addOption() {
+    // in case it hasn't yet been initialized
+    if (this.options === null)
+      this.options = new Array<string>();
+
     this.options.push("");
     this.tempArray.push("");
   }
 
   addOptionValue(option: string, index: number) {
+    if (option === null || option === undefined)
+      return "Error: Option either null or undefined";
+    if (index >= this.tempArray.length || index < 0)
+      return "Error: index out of array bounds";
+
     this.tempArray[index] = option;
+      return "Success";
   }
 
   initOptions() {

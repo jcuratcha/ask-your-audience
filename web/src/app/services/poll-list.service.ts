@@ -5,6 +5,8 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 
 import { Config } from "../config";
+// import { Config } from "../../../e2e/config";
+
 import { Poll } from "../poll";
 
 @Injectable()
@@ -12,7 +14,7 @@ export class PollListService {
 	constructor(private http: Http) {}
 
 	private getAllPointsUrl = "/aya/api/get-polls";
-	
+
 	private dbUrl = Config.getDbUrl();
 
 	//
@@ -50,11 +52,16 @@ export class PollListService {
 		return headers;
 	}
 
-	// 
+	//
 	// Simple logging infrastructure to handle errors
 	//
 	handleErrors(error: Response) {
 		console.log(JSON.stringify(error));
 		return Observable.throw(error);
+	}
+
+	// stub method to test the function
+	test_createRequestHeaders() {
+		return this.createRequestHeaders();
 	}
 }
