@@ -75,9 +75,6 @@ export class PollService {
 
 		let questionOptions = new RequestOptions({ headers: headers });
 
-		console.log("Creating new poll_asd");
-
-
 		 return this.http.post(Config.apiUrl + this.postNewPollUrl, {
 		 	"questions": question,
 		 	"options": options

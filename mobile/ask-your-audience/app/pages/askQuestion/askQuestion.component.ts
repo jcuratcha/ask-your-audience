@@ -8,6 +8,8 @@ import { Observable } from "data/observable";
 import * as frameModule from "ui/frame";
 import * as applicationModule from "application";
 
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
+
 import { Poll } from "../../shared/poll/poll";
 import { PollService } from "../../shared/poll/poll.service";
 
@@ -16,13 +18,89 @@ import { PollService } from "../../shared/poll/poll.service";
     selector: "askQuestion",
     templateUrl: "askQuestion.html",
     styleUrls: ["askQuestion.component.css"],
-    providers: [PollService]
+    providers: [PollService],
 })
 @Injectable()
 export class askQuestionComponent implements OnInit {
-    protected navigationParameters;
-    protected router: Router;
+    private navigationParameters;
+    private router;
+
+    private _dataItems: ObservableArray<DataItem>;
+
+    private _itemInsertAnimation: string;
+    private _itemDeleteAnimation: string;
+    private _optionsParamName: string;
+    private _itemsCount;
+
+    public model = {
+        options: "",
+        question: ""
+    };
     
+    constructor(private pollService: PollService, private page: Page, private _router: Router) {
+        if (applicationModule.ios) {
+            this._optionsParamName = "animation";
+            this.router = _router;
+            this.navigationParameters = {
+                selectedIndex: 0, paramName: this._optionsParamName,
+                items: ["Default", "Fade", "Scale", "Slide"]
+            };
+        }
+                this.onDefaultTap();
+    }
+
+    ngOnInit() {
+        this._itemsCount = 0;
+        this._dataItems = new ObservableArray<DataItem>();
+    }
+
+    submit() {
+        if (this._dataItems.length < 2) {
+            alert("You need at least two choices for your audience to choose from!");
+            return;
+        } else if (this.model.question == null || this.model.question.length === 0) {
+            console.log(this.model.question.trim.length + "/" + this.model.question);
+            alert("Your question must be more than just empty or a few spaces!");
+            return;
+        }
+
+        let question = this.model.question;
+        let pollOptions:string[] = [];
+
+        for(var i=0; i < this._dataItems.length; i++){
+            pollOptions.push(this._dataItems.getItem(i).name);
+        }
+
+        this.pollService.createNewPoll(question, pollOptions)
+            .subscribe(
+                (newPollID) => {
+                    console.log("poll id for new poll:"+newPollID)
+                    alert("Thanks for asking your question!");
+                },
+                (error) => {
+                    console.log("Error: " + error);
+                    alert("Looks like there was a problem getting your question out, please try again later!");
+                });
+    }
+
+    public onAddItemClick() {
+        this._dataItems.push(new DataItem(this._itemsCount,this.model.options));
+        this.model.options == ""
+        this._itemsCount++;
+    }
+
+    public onResetClick(args: ListViewEventData) {
+        while (this._dataItems.length) {
+            this._dataItems.pop();
+        }
+        this._itemsCount = 0;
+    }
+
+    public onRemoveItemClick(args: ListViewEventData) {
+        this._dataItems.pop();
+        this._itemsCount--;
+    }
+
     public onOptionsTapped() {
         this.router.navigate(['/options'], {
             queryParams: { 
@@ -36,51 +114,9 @@ export class askQuestionComponent implements OnInit {
         frameModule.topmost().goBack();
     }
 
-    private _dataItems: ObservableArray<DataItem>;
-
-    private _itemInsertAnimation: string;
-    private _itemDeleteAnimation: string;
-    private _optionsParamName: string;
-    private _itemsCount;
-
-    options="";
-    description="";
-
-    constructor(private pollService: PollService,private _page: Page, private _router: Router) {
-        if (applicationModule.ios) {
-            this._optionsParamName = "animation";
-            this.router = _router;
-            this.navigationParameters = {
-                selectedIndex: 0, paramName: this._optionsParamName,
-                items: ["Default", "Fade", "Scale", "Slide"]
-            };
-        }
-        this.onDefaultTap();
-    }
-
-    ngOnInit() {
-        this._itemsCount = 0;
-        this._dataItems = new ObservableArray<DataItem>();
-    }
-
-  submit() {
-    var information="You’re asking: \n" +this.description+"\nwith options:\n";
-    var i=0;
-    let question=this.description;
-    let pollOptions:string[]=[];
-
-    for(i=0;i<this._dataItems.length;i++){
-      information+=this._dataItems.getItem(i).name+"\n";
-      pollOptions.push(this._dataItems.getItem(i).name);
-    }
-    alert(information);
-    this.pollService.createNewPoll(question,pollOptions).subscribe(
-        newPollID=>{console.log("poll id for new poll:"+newPollID)});
-  }
-
     get dataItems(): ObservableArray<DataItem> {
         return this._dataItems;
-    }
+        }
 
     get itemInsertAnimation(): string {
         return this._itemInsertAnimation;
@@ -96,29 +132,6 @@ export class askQuestionComponent implements OnInit {
 
     set itemDeleteAnimation(value: string) {
         this._itemDeleteAnimation = value;
-    }
-
-    public onAddItemClick() {
-        this._dataItems.push(new DataItem(this._itemsCount,this.options));
-        this._itemsCount++;
-    }
-
-    public onResetClick(args: ListViewEventData) {
-        while (this._dataItems.length) {
-            this._dataItems.pop();
-        }
-        this._itemsCount = 0;
-    }
-
-    public onUpdateItemClick(args: ListViewEventData) {
-        for (var index = 0; index < this._dataItems.length; index++) {
-            this._dataItems.getItem(index).name = "This is an updated item";
-            this._dataItems.getItem(index).description = "This is the updated item's description.";
-        }
-    }
-
-    public onRemoveItemClick(args: ListViewEventData) {
-        this._dataItems.splice(this._dataItems.length - 1, 1);
     }
 
     public onDefaultTap() {
@@ -141,5 +154,5 @@ export class askQuestionComponent implements OnInit {
         this.itemDeleteAnimation = "Slide";
     }
 
-    
+
 }
