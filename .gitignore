@@ -33,7 +33,6 @@ backend/node_modules/
 
 # ignore javascript files, these are compiled and generated from our typescript files
 mobile/ask-your-audience/app/**/*.js
-!mobile/ask-your-audience/app/tests/setup.js
 mobile/ask-your-audience/hooks/
 mobile/ask-your-audience/platforms/
 mobile/ask-your-audience/node_modules/

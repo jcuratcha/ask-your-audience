@@ -46,5 +46,6 @@ export class AnswerComponent implements OnInit {
 			.subscribe(votedPoll => {
 				console.log("Current vote: " + JSON.stringify(votedPoll));
 			});
+
 	}
 }	

@@ -1,0 +1,29 @@
+   <StackLayout>
+       <ActionBar title="AskQuestion"></ActionBar>
+	<label text="What would you like to ask"></label>
+    <TextView hint="question description" [(ngModel)]="description" width="350" height="100" backgroundColor="lightgray"></TextView>
+    <label text="add options" color="red"></label>
+   <StackLayout row="100" orientation="horizontal" horizontalAlignment="center">
+            <Button text="Add" (tap)="onAddItemClick()" class="iosButton"></Button>
+            <Button text="Del" (tap)="onRemoveItemClick()" class="iosButton"></Button>
+            <Button text="Reset" (tap)="onResetClick()" class="iosButton"></Button>
+        </StackLayout>
+    <TextField hint="options" [(ngModel)]="options"></TextField>
+
+<GridLayout height="300">
+<RadListView [items]="dataItems" row="1">
+        <ListViewLinearLayout tkListViewLayout scrollDirection="Vertical" [itemInsertAnimation]="itemInsertAnimation" [itemDeleteAnimation]="itemDeleteAnimation"></ListViewLinearLayout>
+        <template tkListItemTemplate let-item="item">
+            <StackLayout orientation="vertical">
+                <Label class="nameLabel" [text]="item.name"></Label>
+                <Label class="descriptionLabel" [text]="item.description"></Label>
+            </StackLayout>
+        </template>
+    </RadListView>
+
+</GridLayout>
+<button text="submit" (tap)="submit()"></button>
+
+    </StackLayout>
+
+
