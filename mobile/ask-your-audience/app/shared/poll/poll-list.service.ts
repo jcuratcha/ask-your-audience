@@ -9,11 +9,6 @@ import { Poll } from "./poll";
 @Injectable()
 export class PollListService {
 	constructor(private http: Http) {}
-    
-    addPolls(){
-		console.log("add polls\n");
-	}
-
 
 	getAllPolls() {
 		let headers = this.createRequestHeaders();
