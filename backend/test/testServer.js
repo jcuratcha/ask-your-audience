@@ -149,4 +149,30 @@ describe("Server", function() {
                 .then(res => expect(res.body.votes[1]).to.equal(expectedNumVotes));
         });
     });
+
+    describe('DELETE /aya/api/remove-poll/:id', function() {
+        afterEach(function() {
+            service.removePoll.restore();
+        });
+
+        it('returns null when poll ID does not exist', function() {
+            var removePollResult = null;
+            sinon.stub(service, 'removePoll').returns(Promise.resolve(removePollResult));
+            var id = 0, expectedServiceResult = null;
+
+            return request(server)
+                .delete(`/aya/api/remove-poll/${id}`)
+                .then(res => expect(res.body).to.equal(expectedServiceResult));
+        });
+
+        it('increments votes with given poll ID and index', function() {
+            var removePollResult = {pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"};
+            sinon.stub(service, 'removePoll').returns(Promise.resolve(removePollResult));
+            var id = 1, expectedPollID = 1;
+
+            return request(server)
+                .delete(`/aya/api/remove-poll/${id}`)
+                .then(res => expect(res.body.pollID).to.equal(expectedPollID));
+        });
+    });
 });

@@ -1,6 +1,3 @@
-// Karma configuration
-// Generated on Tue Mar 28 2017 00:56:08 GMT-0500 (Central Daylight Time)
-
 module.exports = function(config) {
   config.set({
 
@@ -10,13 +7,12 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify','jasmine'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'src/shim_reflect-metadata.js',
-      'src/app/**/*.spec.js'
+      { pattern: 'app/tests/**/*.spec.js', included: true, served: true, included: true, served: true },
     ],
 
 
@@ -28,9 +24,10 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/shim_reflect-metadata.js': ['browserify'],
-      'src/app/**/*.spec.js': ['browserify']
     },
+
+    // allow for typescript tests to be run
+    mime: { 'text/x-typescript': ['ts','tsx'] },
 
 
     // test results reporter to use
@@ -58,20 +55,26 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: [],
 
+    customLaunchers: {
+      android: {
+        base: 'NS',
+        platform: 'android'
+      },
+      ios: {
+        base: 'NS',
+        platform: 'ios'
+      },
+      ios_simulator: {
+        base: 'NS',
+        platform: 'ios',
+        arguments: ['--emulator']
+      }
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
-
-    browserify: {
-      debug: true,
-      transform: ['brfs']
-    },
-
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity
+    singleRun: true
   })
 }

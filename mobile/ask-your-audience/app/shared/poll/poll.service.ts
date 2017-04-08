@@ -35,7 +35,7 @@ export class PollService {
 			data['votes'].forEach((vote) => {
 				votes.push(vote);
 			})
-
+			
 			return new Poll(data.pollID, data.question, options, votes, data.owner);
 
 		})
