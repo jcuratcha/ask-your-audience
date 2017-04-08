@@ -5,7 +5,13 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "noEmitHelpers": true,
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "types": [
+            "jasmine"
+        ],
+        "typeRoots": [
+            "../node_modules/@types"
+        ]
     },
     "exclude": [
         "node_modules",
