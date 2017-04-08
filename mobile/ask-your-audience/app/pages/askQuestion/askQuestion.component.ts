@@ -21,7 +21,7 @@ import { PollService } from "../../shared/poll/poll.service";
     providers: [PollService],
 })
 @Injectable()
-export class askQuestionComponent implements OnInit {
+export class AskQuestionComponent implements OnInit {
     private navigationParameters;
     private router;
 
