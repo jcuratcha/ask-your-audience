@@ -1,10 +1,11 @@
 import { Component, OnInit, Injectable } from "@angular/core";
 import { Router } from '@angular/router';
 import { ObservableArray } from "data/observable-array";
-import { DataItem } from "../../listview/dataItem";
-import { OptionsExampleBase } from "../../options-example-base";
+import { DataItem } from "../../utils/listview/dataItem";
 import { Page } from "ui/page";
 import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
+import { Observable } from "data/observable";
+import * as frameModule from "ui/frame";
 import * as applicationModule from "application";
 
 import { Poll } from "../../shared/poll/poll";
@@ -12,13 +13,29 @@ import { PollService } from "../../shared/poll/poll.service";
 
 @Component({
     moduleId: module.id,
-    selector: "tk-listview-item-animations",
+    selector: "askQuestion",
     templateUrl: "askQuestion.html",
     styleUrls: ["askQuestion.component.css"],
     providers: [PollService]
 })
 @Injectable()
-export class askQuestionComponent extends OptionsExampleBase implements OnInit {
+export class askQuestionComponent implements OnInit {
+    protected navigationParameters;
+    protected router: Router;
+    
+    public onOptionsTapped() {
+        this.router.navigate(['/options'], {
+            queryParams: { 
+                selectedIndex: this.navigationParameters.selectedIndex,
+                paramName: this.navigationParameters.paramName,
+                items: this.navigationParameters.items }
+            });
+    }
+    
+    public onNavigationButtonTap() {
+        frameModule.topmost().goBack();
+    }
+
     private _dataItems: ObservableArray<DataItem>;
 
     private _itemInsertAnimation: string;
@@ -30,7 +47,6 @@ export class askQuestionComponent extends OptionsExampleBase implements OnInit {
     description="";
 
     constructor(private pollService: PollService,private _page: Page, private _router: Router) {
-        super();
         if (applicationModule.ios) {
             this._optionsParamName = "animation";
             this.router = _router;

@@ -1,4 +1,3 @@
-// >> angular-listview-observable-array-component
 import { Component, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { DataItem } from "../dataItem";
@@ -48,4 +47,3 @@ export class ListviewObservableArrayComponent implements OnInit {
         this._dataItems.splice(this._dataItems.length - 1, 1);
     }
 }
-// << angular-listview-observable-array-component
