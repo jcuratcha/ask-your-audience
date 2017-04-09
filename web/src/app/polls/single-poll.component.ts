@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import{ Poll } from './../poll';
+import{ Poll } from './../shared/poll';
 
 @Component({
   selector: 'single-poll',
