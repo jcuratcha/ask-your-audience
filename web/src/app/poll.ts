@@ -4,7 +4,8 @@ export class Poll {
 		public question?: string, 
 		public options?: string[], 
 		public votes?: number[], 
-		public owner?: string) {}
+		public owner?: string,
+		public active?: boolean) {}
 
 	public voted: boolean;
 }

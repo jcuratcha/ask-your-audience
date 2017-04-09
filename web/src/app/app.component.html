@@ -1,8 +1,11 @@
 <side-nav (poll)='onNotify($event)'>
 </side-nav>
 <div style="margin-left: 16%">
+    <div id="pollCount" style="display: none;">{{polls.length}}</div>
     <span *ngFor="let poll of polls; let i=index">
-        <single-poll id="poll_{{i}}" [poll]="poll">
-        </single-poll>
+        <span *ngIf="poll.active">
+            <single-poll id="poll_{{polls.length - i}}" [poll]="poll">
+            </single-poll>
+        </span>
     </span>
 </div>
