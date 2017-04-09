@@ -7,11 +7,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var profileSchema = new Schema({
-    _id : Number,
-    username : { type: String, required: true, unique: true },
+    profileID : Number,
+    username : String,
     password : String,
     displayName : String,
-    votedPolls : [{ type: Number, ref: 'Poll' }]
+    votedPolls : [Number]
 });
 
 module.exports = mongoose.model('Profile', profileSchema);

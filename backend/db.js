@@ -85,7 +85,7 @@ exports.findOneAndRemove = function(conditions) {
 //  display : the display name selected by the user
 //
 exports.createProfile = function(id, user, pass, display, votes) {
-    return new Profile({_id : id, username : user, password : pass, displayName : display, votedPolls : votes}).save();
+    return new Profile({profileID : id, username : user, password : pass, displayName : display, votedPolls : votes}).save();
 }
 
 //

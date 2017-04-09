@@ -138,7 +138,7 @@ describe('DB', function() {
 
         it('returns profile data on successful save', function () {
             var id = 1, user = 'bob1', pass = 'password', display = 'Bob', votes = [];
-            var expectedResults = {_id : id, username : user, password : pass, displayName : display, votedPolls : votes};
+            var expectedResults = {profileID : id, username : user, password : pass, displayName : display, votedPolls : votes};
             sinon.stub(Profile.prototype, 'save').returns(Promise.resolve(expectedResults));
             
             return db.createProfile(id, user, pass, display, votes).then(result => expect(result).to.equal(expectedResults));
@@ -146,7 +146,7 @@ describe('DB', function() {
 
         it('returns null when username is already taken', function () {
             var id = 1, user = 'bob1', pass = 'password', display = 'Bob', votes = [];
-            var expectedResults = {_id : id, username : user, password : pass, displayName : display, votedPolls : votes};
+            var expectedResults = {profileID : id, username : user, password : pass, displayName : display, votedPolls : votes};
             sinon.stub(Profile.prototype, 'save').returns(Promise.resolve(expectedResults));
             
             return db.createProfile(id, user, pass, display, votes).then(result => expect(result).to.equal(expectedResults));
