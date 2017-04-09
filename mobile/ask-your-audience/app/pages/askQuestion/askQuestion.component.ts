@@ -38,6 +38,8 @@ export class AskQuestionComponent implements OnInit {
     };
     
     constructor(private pollService: PollService, private page: Page, private _router: Router) {
+        console.log("Current page: AnswerComponent");
+
         if (applicationModule.ios) {
             this._optionsParamName = "animation";
             this.router = _router;
@@ -46,7 +48,7 @@ export class AskQuestionComponent implements OnInit {
                 items: ["Default", "Fade", "Scale", "Slide"]
             };
         }
-                this.onDefaultTap();
+        this.onDefaultTap();
     }
 
     ngOnInit() {
@@ -59,7 +61,6 @@ export class AskQuestionComponent implements OnInit {
             alert("You need at least two choices for your audience to choose from!");
             return;
         } else if (this.model.question == null || this.model.question.length === 0) {
-            console.log(this.model.question.trim.length + "/" + this.model.question);
             alert("Your question must be more than just empty or a few spaces!");
             return;
         }
