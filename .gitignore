@@ -18,6 +18,9 @@ web/src/shim_reflect-metadata.js
 #ignore all generated map files
 web/src/**/*.map 
 
+#exclude generated test js files
+web/src/spec/unit/**/*.spec.js
+
 **/*.log
 web/node_modules/
 
