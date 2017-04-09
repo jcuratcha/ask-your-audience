@@ -6,6 +6,7 @@ import { AppComponent }  from './app.component';
 import { SinglePollComponent } from './polls/single-poll.component'
 import { SideNavigationComponent } from './navigation-panel/navigation-panel.component'
 import { PopupComponent } from './pop-up/pop-up.component'
+import { LoginComponent } from './login/login.component'
 
 import { InputTextModule, DialogModule } from 'primeng/primeng';
 
@@ -23,7 +24,8 @@ import { InputTextModule, DialogModule } from 'primeng/primeng';
     AppComponent,
     SinglePollComponent,
     SideNavigationComponent,
-    PopupComponent
+    PopupComponent,
+    LoginComponent
   ],
   bootstrap:    [ AppComponent ]
 })
