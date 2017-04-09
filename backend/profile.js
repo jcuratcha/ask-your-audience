@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 var profileSchema = new Schema({
     profileID : Number,
-    username : String,
+    username : { type: String, unique: true },
     password : String,
     displayName : String,
     votedPolls : [Number]

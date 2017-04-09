@@ -137,4 +137,42 @@ describe('Service', function() {
             return service.removePoll(id).then(result => expect(result[0].pollID).to.equal(expectedPollID));
         });
     });
+
+    describe('newProfile', function() {
+        var user = 'bob1', pass = 'password', display = 'Robert', votes = [1, 5, 6];
+        var user2 = 'joe2', pass2 = 'password', display2 = 'Jonathon', votes2 = [1, 2, 3, 4, 5];
+        var user3 = 'tim3', pass3 = 'password', display3 = 'Timothy', votes3 = [1, 2, 3];
+
+        afterEach(function() {
+            db.createProfile.restore();
+            db.getProfiles.restore();
+        });
+
+        it('returns profileID 1 on first profile created', function() {
+            var getProfilesResult = [];
+            sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+            var insertResults = {profileID : 1, username: user, password : pass, displayName : display, votedPolls : votes}, expectedValue = 1;
+            sinon.stub(db, 'createProfile').returns(Promise.resolve(insertResults));
+
+            return service.newProfile(user, pass, display).then(profileID => expect(profileID).to.equal(expectedValue));
+        });
+
+        it('returns profileID 2 on second profile created', function() {
+            var getProfilesResult = [{profileID : 1, username : "hpotter1", password : "urawizard", displayName : "Harry Potter", votes : []}];
+            sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+            var insertResults = {profileID : 2, username: user2, password : pass2, displayName : display2, votedPolls : votes2}, expectedValue = 2;
+            sinon.stub(db, 'createProfile').returns(Promise.resolve(insertResults));
+
+            return service.newProfile(user2, pass2, display2).then(profileID => expect(profileID).to.equal(expectedValue));
+        });
+
+        it('increments profile ID on additional creations', function() {
+            var getProfilesResult = [{profileID : 10, username : "hpotter1", password : "urawizard", displayName : "Harry Potter", votes : []}];
+            sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+            var insertResults = {profileID : 11, username: user3, password : pass3, displayName : display3, votedPolls : votes3}, expectedValue = 11;
+            sinon.stub(db, 'createProfile').returns(Promise.resolve(insertResults));
+
+            return service.newProfile(user2, pass2, display2).then(profileID => expect(profileID).to.equal(expectedValue));
+        });
+    });
 });
