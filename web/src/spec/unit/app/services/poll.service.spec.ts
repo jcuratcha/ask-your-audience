@@ -1,4 +1,4 @@
-import {PollService} from './poll.service';
+import {PollService} from '../../../../app/services/poll.service';
 import {Headers} from '@angular/http';
 
 let testPollService:PollService;

@@ -1,5 +1,5 @@
-import {PollListService} from './poll-list.service';
-import {Headers} from '@angular/http';
+import { PollListService } from '../../../../app/services/poll-list.service';
+import { Headers } from '@angular/http';
 
 describe ('Poll list service: creating/fetching polls from database', () => {
    let testPollListService:PollListService;

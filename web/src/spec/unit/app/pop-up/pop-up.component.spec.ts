@@ -1,6 +1,6 @@
-import {PopupComponent} from './pop-up.component';
-import {Poll} from '../poll';
-import {PollService} from '../services/poll.service';
+import { PopupComponent } from '../../../../app/pop-up/pop-up.component';
+import { Poll } from '../../../../app/shared/poll';
+import { PollService } from '../../../../app/services/poll.service';
 
 describe('Pop-up component: shows a dialog for a poll to be voted on |', () => {
    let testPollService:PollService;
