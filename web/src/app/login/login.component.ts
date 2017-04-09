@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 
 export class LoginComponent {
-    loggedIn: boolean;
+    loggedIn: boolean = true;
 
-    
+
 }
