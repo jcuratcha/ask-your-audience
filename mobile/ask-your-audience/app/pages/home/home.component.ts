@@ -24,6 +24,7 @@ export class HomeComponent {
 	}
 
 	goToPersonActivity() {
+		this.router.navigate(["/graph_testing"]);
 		//this.router.navigate(["/myActivity"]);
 		//console.log("Going to current user's Activity page");
 	}
