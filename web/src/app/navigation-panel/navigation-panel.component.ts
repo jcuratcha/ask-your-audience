@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Poll } from './../poll';
 import { PollService } from '../services/poll.service';
 
@@ -9,7 +9,7 @@ import { PollService } from '../services/poll.service';
   providers: [ PollService ]
 })
 
-export class SideNavigationComponent {
+export class SideNavigationComponent{
   @Output() poll: EventEmitter<Poll> = new EventEmitter<Poll>();
   addDialog: boolean = false;
   options: string[] = null; //an array for ng to help display options
@@ -17,7 +17,6 @@ export class SideNavigationComponent {
   question: string;
 
   constructor(private pollService: PollService) {}
-
   addPoll() {
     this.addDialog = true;
   }
@@ -90,4 +89,7 @@ export class SideNavigationComponent {
   initOptions() {
     this.options = [""];
   }
+
+
+
 }
