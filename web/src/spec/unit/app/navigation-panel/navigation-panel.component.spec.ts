@@ -1,4 +1,4 @@
-import { SideNavigationComponent } from './navigation-panel.component';
+import { SideNavigationComponent } from '../../../../app/navigation-panel/navigation-panel.component';
 
 describe ('Navigation Panel: options and actions available from here |', () => {
 
