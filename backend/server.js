@@ -7,11 +7,13 @@ var service = require('./service.js');
 
 var app = express();
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
 
 //
 // Middleware used to parse JSON inside request body into a Javascript object
 //
 app.use(bodyParser.json());
+app.set('secret', 'COMP4350');
 
 //
 // Add headers to allow CORS to work in Chrome and Firefox
@@ -78,10 +80,28 @@ app.delete('/aya/api/remove-poll/:id', function(req, res) {
 //
 app.post('/aya/api/register', function(req, res) {
     if (process.env.NODE_ENV !== 'test') {
-        console.log('/aya/api/create-profile called');
+        console.log('/aya/api/register called');
     }
     service.newProfile(req.body.username, req.body.password, req.body.displayName).then(profileID => res.json({"profileID" : profileID}));
 });
+
+//
+// Calls the service that authenticates the user's credentials using the infromation inside the POST (JSON) body
+//
+app.post('/aya/api/authenticate', function(req, res) {
+    if (process.env.NODE_ENV !== 'test') {
+        console.log('/aya/api/authenticate called');
+    }    
+    service.authUser(req.body.username, req.body.password)
+        .then(function(result) {
+            if(result) {
+                var token = jwt.sign(username, app.get('secret');
+                res.json({success : true, token : token});
+            } else {                
+                res.json({success : false, message : 'Authentication failed. Incorrect username or password.'});
+            }
+        });
+}
 
 var port = 8080;
 
