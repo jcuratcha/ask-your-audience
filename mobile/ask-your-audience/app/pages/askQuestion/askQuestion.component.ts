@@ -1,24 +1,30 @@
 import { Component, OnInit, Injectable } from "@angular/core";
 import { Router } from '@angular/router';
 import { ObservableArray } from "data/observable-array";
-import { DataItem } from "../../listview/dataItem";
-import { OptionsExampleBase } from "../../options-example-base";
+import { DataItem } from "../../utils/listview/dataItem";
 import { Page } from "ui/page";
 import { ListViewEventData } from "nativescript-telerik-ui-pro/listview";
+import { Observable } from "data/observable";
+import * as frameModule from "ui/frame";
 import * as applicationModule from "application";
+
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 import { Poll } from "../../shared/poll/poll";
 import { PollService } from "../../shared/poll/poll.service";
 
 @Component({
     moduleId: module.id,
-    selector: "tk-listview-item-animations",
+    selector: "askQuestion",
     templateUrl: "askQuestion.html",
     styleUrls: ["askQuestion.component.css"],
-    providers: [PollService]
+    providers: [PollService],
 })
 @Injectable()
-export class askQuestionComponent extends OptionsExampleBase implements OnInit {
+export class AskQuestionComponent implements OnInit {
+    private navigationParameters;
+    private router;
+
     private _dataItems: ObservableArray<DataItem>;
 
     private _itemInsertAnimation: string;
@@ -26,11 +32,14 @@ export class askQuestionComponent extends OptionsExampleBase implements OnInit {
     private _optionsParamName: string;
     private _itemsCount;
 
-    options="";
-    description="";
+    public model = {
+        options: "",
+        question: ""
+    };
+    
+    constructor(private pollService: PollService, private page: Page, private _router: Router) {
+        console.log("Current page: AnswerComponent");
 
-    constructor(private pollService: PollService,private _page: Page, private _router: Router) {
-        super();
         if (applicationModule.ios) {
             this._optionsParamName = "animation";
             this.router = _router;
@@ -47,24 +56,68 @@ export class askQuestionComponent extends OptionsExampleBase implements OnInit {
         this._dataItems = new ObservableArray<DataItem>();
     }
 
-  submit() {
-    var information="You’re asking: \n" +this.description+"\nwith options:\n";
-    var i=0;
-    let question=this.description;
-    let pollOptions:string[]=[];
+    submit() {
+        if (this._dataItems.length < 2) {
+            alert("You need at least two choices for your audience to choose from!");
+            return;
+        } else if (this.model.question == null || this.model.question.length === 0) {
+            alert("Your question must be more than just empty or a few spaces!");
+            return;
+        }
 
-    for(i=0;i<this._dataItems.length;i++){
-      information+=this._dataItems.getItem(i).name+"\n";
-      pollOptions.push(this._dataItems.getItem(i).name);
+        let question = this.model.question;
+        let pollOptions:string[] = [];
+
+        for(var i=0; i < this._dataItems.length; i++){
+            pollOptions.push(this._dataItems.getItem(i).name);
+        }
+
+        this.pollService.createNewPoll(question, pollOptions)
+            .subscribe(
+                (newPollID) => {
+                    console.log("poll id for new poll:"+newPollID)
+                    alert("Thanks for asking your question!");
+                },
+                (error) => {
+                    console.log("Error: " + error);
+                    alert("Looks like there was a problem getting your question out, please try again later!");
+                });
     }
-    alert(information);
-    this.pollService.createNewPoll(question,pollOptions).subscribe(
-        newPollID=>{console.log("poll id for new poll:"+newPollID)});
-  }
+
+    public onAddItemClick() {
+        this._dataItems.push(new DataItem(this._itemsCount,this.model.options));
+        this.model.options == ""
+        this._itemsCount++;
+    }
+
+    public onResetClick(args: ListViewEventData) {
+        while (this._dataItems.length) {
+            this._dataItems.pop();
+        }
+        this._itemsCount = 0;
+    }
+
+    public onRemoveItemClick(args: ListViewEventData) {
+        this._dataItems.pop();
+        this._itemsCount--;
+    }
+
+    public onOptionsTapped() {
+        this.router.navigate(['/options'], {
+            queryParams: { 
+                selectedIndex: this.navigationParameters.selectedIndex,
+                paramName: this.navigationParameters.paramName,
+                items: this.navigationParameters.items }
+            });
+    }
+    
+    public onNavigationButtonTap() {
+        frameModule.topmost().goBack();
+    }
 
     get dataItems(): ObservableArray<DataItem> {
         return this._dataItems;
-    }
+        }
 
     get itemInsertAnimation(): string {
         return this._itemInsertAnimation;
@@ -80,29 +133,6 @@ export class askQuestionComponent extends OptionsExampleBase implements OnInit {
 
     set itemDeleteAnimation(value: string) {
         this._itemDeleteAnimation = value;
-    }
-
-    public onAddItemClick() {
-        this._dataItems.push(new DataItem(this._itemsCount,this.options));
-        this._itemsCount++;
-    }
-
-    public onResetClick(args: ListViewEventData) {
-        while (this._dataItems.length) {
-            this._dataItems.pop();
-        }
-        this._itemsCount = 0;
-    }
-
-    public onUpdateItemClick(args: ListViewEventData) {
-        for (var index = 0; index < this._dataItems.length; index++) {
-            this._dataItems.getItem(index).name = "This is an updated item";
-            this._dataItems.getItem(index).description = "This is the updated item's description.";
-        }
-    }
-
-    public onRemoveItemClick(args: ListViewEventData) {
-        this._dataItems.splice(this._dataItems.length - 1, 1);
     }
 
     public onDefaultTap() {
@@ -125,5 +155,5 @@ export class askQuestionComponent extends OptionsExampleBase implements OnInit {
         this.itemDeleteAnimation = "Slide";
     }
 
-    
+
 }
