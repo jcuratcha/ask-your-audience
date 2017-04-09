@@ -6,8 +6,7 @@ import { AppComponent }  from './app.component';
 import { SinglePollComponent } from './polls/single-poll.component'
 import { SideNavigationComponent } from './navigation-panel/navigation-panel.component'
 import { PopupComponent } from './pop-up/pop-up.component'
-
-import { InputTextModule, DialogModule } from 'primeng/primeng';
+import { InputTextModule, DialogModule, ChartModule } from 'primeng/primeng';
 
 
 @NgModule({
@@ -17,7 +16,8 @@ import { InputTextModule, DialogModule } from 'primeng/primeng';
     ReactiveFormsModule,
     InputTextModule,
     DialogModule,
-    HttpModule
+    HttpModule,
+    ChartModule
   ],
   declarations: [ 
     AppComponent,

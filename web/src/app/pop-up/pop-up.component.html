@@ -1,6 +1,8 @@
 <p-dialog header="{{poll.question}}" width="400" [(visible)]="this.showPoll" modal="modal" responsive="true" (onAfterHide)="closeDialog()">
     <div *ngFor="let options of poll.options; let i=index" id="displayPoll_{{i}}">
-        {{options}} with {{poll.votes[i]}} <button id="vote_{{i}}" type="button" pButton icon="fa-check" width="50px" (click)="vote(i)" 
+        Vote for: {{options}} <button id="vote_{{i}}" type="button" pButton icon="fa-check" width="50px" (click)="vote(i); update($event); chart.reinit(); chart.refresh()" 
         *ngIf="!poll.voted" class="spacing">vote</button>
     </div>
+
+    <p-chart type="bar" [data]="chartData" [options]="chartOptions" #chart ></p-chart>
 </p-dialog>
