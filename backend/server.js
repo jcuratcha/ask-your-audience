@@ -73,6 +73,16 @@ app.delete('/aya/api/remove-poll/:id', function(req, res) {
     service.removePoll(req.params.id).then(polls => res.json(polls));
 });
 
+//
+//  Calls the service that creates a profile using the information inside the POST (JSON) body
+//
+app.post('/aya/api/register', function(req, res) {
+    if (process.env.NODE_ENV !== 'test') {
+        console.log('/aya/api/create-profile called');
+    }
+    service.newProfile(req.body.username, req.body.password, req.body.displayName).then(profileID => res.json({"profileID" : profileID}));
+});
+
 var port = 8080;
 
 //

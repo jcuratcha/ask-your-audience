@@ -10,6 +10,7 @@ mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/aya');
 
 var Poll = require('./poll.js');
+var Profile = require('./profile.js');
 
 //
 // Inserts poll object into the database
@@ -74,3 +75,43 @@ exports.findOneAndUpdate = function(conditions, update, options) {
 exports.findOneAndRemove = function(conditions) {
     return Poll.findOneAndRemove(conditions).exec();
 };
+
+//
+// Inserts profile object into the database
+//
+//       id : the id assigned to the profile
+//     user : a unique username selected by the user
+//     pass : the password chosen by the user
+//  display : the display name selected by the user
+//
+exports.createProfile = function(id, user, pass, display, votes) {
+    return new Profile({_id : id, username : user, password : pass, displayName : display, votedPolls : votes}).save();
+}
+
+//
+// Generic function for retrieving profile data from database
+//
+// options : JavaScript object
+//      criteria : conditions to narrow search
+//          sort : sort the search results
+//         limit : limit number of results received
+//
+exports.getProfiles = function(options) {
+    var query = Profile.find();
+    
+    if (options !== undefined) {
+        if (options.criteria !== undefined) {
+            query = Profile.find(options.criteria);
+        }
+
+        if (options.sort !== undefined) {
+            query = query.sort(options.sort);
+        }
+
+        if (options.limit !== undefined) {
+            query = query.limit(options.limit);
+        }
+    }
+
+    return query.exec();
+}

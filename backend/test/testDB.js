@@ -1,4 +1,5 @@
 var Poll = require('../poll.js');
+var Profile = require('../profile.js');
 var db = require('../db.js');
 var sinon = require('sinon');
 var expect = require('chai').expect;
@@ -11,7 +12,7 @@ describe('DB', function() {
 
         it('returns poll data on successful save', function() {
             var id = 1, q = 'question', o = ['a', 'b', 'c'], ip = "123.456.789.123";
-            var expectedResults = {pollID : id, question: q, options : o, votes : [0, 0, 0], owner : ip};
+            var expectedResults = "Hello World";
             sinon.stub(Poll.prototype, 'save').returns(Promise.resolve(expectedResults));
             
             return db.insert(id, q, o, ip).then(result => expect(result).to.equal(expectedResults));
@@ -128,5 +129,79 @@ describe('DB', function() {
 
             return db.findOneAndRemove(id).then(result => expect(result[0].pollID).to.equal(expectedPollID));
         });
+    });    
+
+    describe('createProfile', function () {
+        afterEach(function() {
+            Profile.prototype.save.restore();
+        });
+
+        it('returns profile data on successful save', function () {
+            var id = 1, user = 'bob1', pass = 'password', display = 'Bob', votes = [];
+            var expectedResults = {_id : id, username : user, password : pass, displayName : display, votedPolls : votes};
+            sinon.stub(Profile.prototype, 'save').returns(Promise.resolve(expectedResults));
+            
+            return db.createProfile(id, user, pass, display, votes).then(result => expect(result).to.equal(expectedResults));
+        });
+
+        it('returns null when username is already taken', function () {
+            var id = 1, user = 'bob1', pass = 'password', display = 'Bob', votes = [];
+            var expectedResults = {_id : id, username : user, password : pass, displayName : display, votedPolls : votes};
+            sinon.stub(Profile.prototype, 'save').returns(Promise.resolve(expectedResults));
+            
+            return db.createProfile(id, user, pass, display, votes).then(result => expect(result).to.equal(expectedResults));
+        });
+    });
+
+    describe('getProfiles', function() {
+        var query = {
+                limit : function(limit) {},
+                sort : function(sort) {},
+                exec : function(exec) {}
+        };
+
+        beforeEach(function() {
+            sinon.stub(Profile, 'find').returns(query);
+            sinon.stub(query, 'sort').returns(query);
+            sinon.stub(query, 'limit').returns(query);
+        });
+
+        afterEach(function() {
+            Profile.find.restore();
+            query.sort.restore();
+            query.limit.restore();
+        });
+
+        it('calls find() only once when no options are given', function() {
+            db.getProfiles();
+
+            sinon.assert.calledOnce(Profile.find);
+            sinon.assert.notCalled(query.sort);
+            sinon.assert.notCalled(query.limit);
+        });
+
+        it('calls only find() twice once when only criteria is given', function() {
+            db.getProfiles({criteria : {ProfileID : 1}});
+
+            sinon.assert.calledTwice(Profile.find);
+            sinon.assert.notCalled(query.sort);
+            sinon.assert.notCalled(query.limit);
+        });
+
+        it('calls sort() once when only sort is given', function() {
+            db.getProfiles({sort : "ascending"});
+
+            sinon.assert.calledOnce(Profile.find);
+            sinon.assert.calledOnce(query.sort);
+            sinon.assert.notCalled(query.limit);
+        });
+
+        it('calls limit() once when only limit is given', function() {
+            db.getProfiles({limit : 1});
+
+            sinon.assert.calledOnce(Profile.find);
+            sinon.assert.notCalled(query.sort);
+            sinon.assert.calledOnce(query.limit);
+        }); 
     });
 });

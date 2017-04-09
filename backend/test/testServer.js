@@ -175,4 +175,54 @@ describe("Server", function() {
                 .then(res => expect(res.body.pollID).to.equal(expectedPollID));
         });
     });
+
+    describe('POST /aya/api/register', function() {
+        var requestBody = {
+            username : "bob1",
+            password : "password",
+            displayName : "Bob"
+        }
+        var requestBody2 = {
+            username : "joe1",
+            password : "password",
+            displayName : "Jonathon"
+        }
+
+        afterEach(function() {
+            service.newProfile.restore();
+        });
+
+        it('sends profileID 1 on first profile created', function() {
+            var expectedServiceResult = expectedServerResult = 1;
+            sinon.stub(service, 'newProfile').returns(Promise.resolve(expectedServiceResult));
+
+            return request(server)
+                .post('/aya/api/register')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body.profileID).to.equal(expectedServerResult));
+        });
+
+        it('sends profileID 2 on second profile created', function() {
+            var expectedServiceResult = expectedServerResult = 2
+            sinon.stub(service, 'newProfile').returns(Promise.resolve(expectedServiceResult));
+
+            return request(server)
+                .post('/aya/api/register')
+                .type('application/json')
+                .send(requestBody2)
+                .then(res => expect(res.body.profileID).to.equal(expectedServerResult));
+        });
+
+        it('sends null profileID when username already exists', function() {
+            var expectedServiceResult = expectedServerResult = null;
+            sinon.stub(service, 'newProfile').returns(Promise.resolve(expectedServiceResult));
+
+            return request(server)
+                .post('/aya/api/register')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body.profileID).to.equal(expectedServerResult));
+        });
+    });
 });
