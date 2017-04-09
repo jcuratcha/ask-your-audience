@@ -64,3 +64,11 @@ exports.newProfile = function(user, pass, display) {
         .then(usernameResult => (usernameResult.length != 0) ? null : queryResults[0].profileID+1)
         .then(id => db.createProfile(id, user, pass, display, votes).then(profile => profile.profileID)));
 }
+
+//
+//  Checks to see if the user exists and the password supplied matches the one we have stored
+//
+exports.authUser = function(user, pass) {
+    return db.getProfiles({criteria : {username : user}, limit : 1})
+        .then(queryResult => (queryResult.length == 0) ? false : (queryResult[0].password === pass ? true : false));
+}
