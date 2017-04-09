@@ -91,17 +91,17 @@ app.post('/aya/api/register', function(req, res) {
 app.post('/aya/api/authenticate', function(req, res) {
     if (process.env.NODE_ENV !== 'test') {
         console.log('/aya/api/authenticate called');
-    }    
+    }
     service.authUser(req.body.username, req.body.password)
         .then(function(result) {
             if(result) {
-                var token = jwt.sign(username, app.get('secret');
+                var token = jwt.sign(username, app.get('secret'));
                 res.json({success : true, token : token});
-            } else {                
+            } else {
                 res.json({success : false, message : 'Authentication failed. Incorrect username or password.'});
             }
         });
-}
+});
 
 var port = 8080;
 
