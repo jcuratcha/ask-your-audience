@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
             }
         });
 
+//TODO: after the login in verified, we can navigate to home, otherwise, return.
 		this.router.navigate(["/home"]);
     }
 }
