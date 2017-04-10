@@ -95,7 +95,7 @@ app.post('/aya/api/authenticate', function(req, res) {
     service.authUser(req.body.username, req.body.password)
         .then(function(result) {
             if(result) {
-                var token = jwt.sign(username, app.get('secret'));
+                var token = jwt.sign(req.body.username, app.get('secret'));
                 res.json({success : true, token : token});
             } else {
                 res.json({success : false, message : 'Authentication failed. Incorrect username or password.'});

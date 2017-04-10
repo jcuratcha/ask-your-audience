@@ -60,9 +60,9 @@ exports.newProfile = function(user, pass, display) {
     var votes = [];
 
     return db.getProfiles({sort : {profileID : "descending"}, limit : 1})
-        .then(queryResults => (queryResults.length == 0) ? 1 : db.getProfiles({criteria : {username : user}, limit : 1})
-        .then(usernameResult => (usernameResult.length != 0) ? null : queryResults[0].profileID+1)
-        .then(id => db.createProfile(id, user, pass, display, votes).then(profile => profile.profileID)));
+        .then(queryResults => (queryResults.length == 0) ? 1 : (db.getProfiles({criteria : {username : user}, limit : 1})
+        .then(usernameResult => (usernameResult.length != 0) ? null : queryResults[0].profileID+1)))
+        .then(id => id == null ? null : db.createProfile(id, user, pass, display, votes).then(profile => profile.profileID));
 }
 
 //

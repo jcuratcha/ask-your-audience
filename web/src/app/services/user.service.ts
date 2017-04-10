@@ -3,8 +3,7 @@ import { Http, Headers, Response, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
-import { Config } from "../config";
-import { User } from "../user";
+import { Config } from "../shared/config";
 
 @Injectable()
 export class UserService {
@@ -15,6 +14,41 @@ export class UserService {
 
 	private dbUrl = Config.getDbUrl();
 	public preventSending:boolean = false;
+
+
+	//
+	// Calls server to register a new user.
+	//
+	register(username: string, password: string, displayName: string) {
+		let headers = this.createRequestHeaders();
+		headers.append('Content-Type', 'application/json');
+
+		let options = new RequestOptions({ headers: headers });
+
+		console.log("	Registering username = " + username);
+
+		if (this.preventSending === false)
+		{
+			return this.http.post(this.dbUrl + this.postRegisterUrl, {
+				"username": username,
+				"password": password,
+				"displayName": displayName
+			}, options)
+			.map(res => res.json())
+			.map(data => {
+			    console.log(data);
+					let userID: number = -1;
+					if(data['profileID'] !== null)
+							userID = data['profileID'];
+					else
+							console.log("Username is already in use.");
+					return userID;
+			})
+			.catch(this.handleErrors);
+		}
+		else
+			return null;
+	}
 
 	//
 	// Calls server to check if user credentials are valid.
@@ -36,7 +70,7 @@ export class UserService {
 			}, options)
 			.map(res => res.json())
       .map(data => {
-          let token = null;
+          let token: string = null;
           if(data['success'])
               token = data['token'];
           else

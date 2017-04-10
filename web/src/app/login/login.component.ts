@@ -9,15 +9,33 @@ import { UserService } from '../services/user.service';
 })
 
 export class LoginComponent {
-    loggedIn: boolean = true;
+    loggedIn: boolean = false;
     username: string;
     password: string;
 
     constructor(private userService: UserService) {}
 
     sendCredentials() {
-        this.userService.authenticate("test", "test2").subscribe((user: this.username, pass: this.password) => {
-      });
+        if (this.username === null || this.username === undefined || this.username.trim() == "") {
+            alert("Please enter a username.");
+            return "ERROR: No username has been provided (or is blank space)";
+        }
+
+        if (this.password === null || this.password === undefined || this.password.trim() == "") {
+            alert("Please enter a password.");
+            return "ERROR: No password has been provided (or is blank space)";
+        }
+
+        let result = "";
+        this.userService.authenticate(username.value, password.value).subscribe((result: string) => {
+            if(result){
+
+            }
+        });
+    }
+
+    sendRegistration() {
+        this.userService.register("test", "test2", "Bobby Joe");
     }
 
 
