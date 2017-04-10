@@ -15,6 +15,11 @@ describe('Creating a poll', function() {
     count.then(expectedID => {
       // the poll should exist
       expect(element(by.id('poll_'+expectedID)).isPresent()).toEqual(true);
+
+      // verify contents
+      element(by.id('poll_'+expectedID)).click();
+      expect(element(by.id('displayPoll_0')).getText()).toEqual('Vote for: a vote');
+      expect(element(by.id('displayPoll_1')).getText()).toEqual('Vote for: b vote');
     });
   });
 });

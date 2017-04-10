@@ -25,6 +25,11 @@ describe('Creating polls', function() {
       expect(element(by.id('poll_'+expectedID)).isPresent()).toEqual(true);
       let expectedID2 = expectedID - 1;
       expect(element(by.id('poll_'+expectedID2)).isPresent()).toEqual(true);
+
+      // verify contents of older poll (newest is verified on single poll test)
+      element(by.id('poll_'+expectedID2)).click();
+      expect(element(by.id('displayPoll_0')).getText()).toEqual('Vote for: a vote');
+      expect(element(by.id('displayPoll_1')).getText()).toEqual('Vote for: b vote');
     });
   });
 });
