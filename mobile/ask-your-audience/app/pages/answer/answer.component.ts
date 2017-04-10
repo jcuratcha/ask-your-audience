@@ -8,7 +8,7 @@ import { PollService } from "../../shared/poll/poll.service";
 @Component({
 	selector: "answer",
 	templateUrl: "pages/answer/answer.html",
-	styleUrls: ["pages/answer/answer-common.css", "pages/answer/answer.css"],
+	styleUrls: ["pages/answer/answer-common.css"],
 	providers: [PollService]
 })
 
@@ -46,5 +46,6 @@ export class AnswerComponent implements OnInit {
 			.subscribe(votedPoll => {
 				console.log("Current vote: " + JSON.stringify(votedPoll));
 			});
+
 	}
 }	

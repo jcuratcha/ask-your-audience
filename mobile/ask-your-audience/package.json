@@ -1,14 +1,14 @@
 {
-  "description": "NativeScript Application",
-  "license": "SEE LICENSE IN <your-license-filename>",
-  "readme": "NativeScript Application",
-  "repository": "<fill-your-repository-here>",
+  "description": "Ask Your Audience",
+  "license": "license",
+  "readme": "README",
+  "repository": "jcuratcha/ask-your-audience",
   "nativescript": {
     "id": "org.nativescript.askyouraudience",
-    "tns-android": {
+    "tns-ios": {
       "version": "2.5.0"
     },
-    "tns-ios": {
+    "tns-android": {
       "version": "2.5.0"
     }
   },
@@ -22,15 +22,23 @@
     "@angular/platform-browser-dynamic": "2.4.3",
     "@angular/router": "3.4.3",
     "nativescript-angular": "1.4.0",
+    "nativescript-https": "^1.0.1",
+    "nativescript-telerik-ui-pro": "^1.6.1",
     "nativescript-theme-core": "~1.0.2",
+    "nativescript-unit-test-runner": "^0.3.4",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~5.0.1",
-    "tns-core-modules": "2.5.0"
+    "tns-core-modules": "^2.5.2"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.5.46",
     "babel-traverse": "6.4.5",
     "babel-types": "6.4.5",
     "babylon": "6.4.5",
+    "jasmine": "^2.5.3",
+    "karma": "^1.5.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-nativescript-launcher": "^0.4.0",
     "lazy": "1.0.11",
     "nativescript-dev-android-snapshot": "^0.*.*",
     "nativescript-dev-typescript": "^0.3.5",

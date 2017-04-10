@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { Poll } from './poll';
+import { Poll } from './shared/poll';
 
 import { PollListService } from './services/poll-list.service'
 

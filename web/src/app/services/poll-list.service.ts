@@ -4,10 +4,9 @@ import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 
-import { Config } from "../config";
-// import { Config } from "../../../e2e/config";
+import { Config } from "../shared/config";
+import { Poll } from "../shared/poll";
 
-import { Poll } from "../poll";
 
 @Injectable()
 export class PollListService {

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter} from '@angular/core';
-import { Poll } from './../poll';
+import { Poll } from './../shared/poll';
 import { PollService } from '../services/poll.service';
 
 @Component({

@@ -99,4 +99,34 @@ describe('DB', function() {
             return db.findOneAndUpdate(id, index).then(result => expect(result[0].votes[1]).to.equal(expectedNumVotes));
         });
     });
+
+    describe('findOneAndRemove', function(){
+    	afterEach(function() {
+            Poll.findOneAndRemove.restore();
+        });
+
+        it('returns null when poll does not exist', function() {
+            var findOneAndRemoveResult = {
+               exec : function(exec) {
+               	return Promise.resolve(null);
+               }
+       		};
+            sinon.stub(Poll, 'findOneAndRemove').returns(findOneAndRemoveResult);
+            var id = 0, expectedValue = null;
+
+            return db.findOneAndRemove(id).then(result => expect(result).to.equal(expectedValue));
+        });
+        
+        it ('returns poll when poll does exist', function() {
+            var findOneAndRemoveResult = {
+               exec : function(exec) {
+               	return Promise.resolve([{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}]);
+               }
+       		};
+            sinon.stub(Poll, 'findOneAndRemove').returns(findOneAndRemoveResult);
+            var id = 1, expectedPollID = 1;
+
+            return db.findOneAndRemove(id).then(result => expect(result[0].pollID).to.equal(expectedPollID));
+        });
+    });
 });
