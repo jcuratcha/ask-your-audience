@@ -14,9 +14,9 @@ describe('DB', function() {
             var id = 1, q = 'question', o = ['a', 'b', 'c'], ip = "123.456.789.123";
             var expectedResults = {pollID : id, question: q, options : o, votes : [0, 0, 0], owner : ip};
             sinon.stub(Poll.prototype, 'save').returns(Promise.resolve(expectedResults));
-            
+
             return db.insert(id, q, o, ip).then(result => expect(result).to.equal(expectedResults));
-        }); 
+        });
     });
 
     describe('getPolls', function() {
@@ -68,7 +68,7 @@ describe('DB', function() {
             sinon.assert.calledOnce(Poll.find);
             sinon.assert.notCalled(query.sort);
             sinon.assert.calledOnce(query.limit);
-        }); 
+        });
     });
 
     describe('findOneAndUpdate', function(){
@@ -87,7 +87,7 @@ describe('DB', function() {
 
             return db.findOneAndUpdate(id, index).then(result => expect(result).to.equal(expectedValue));
         });
-        
+
         it ('returns poll with updated vote count', function() {
             var findOneAndUpdateResult = {
                exec : function(exec) {
@@ -117,7 +117,7 @@ describe('DB', function() {
 
             return db.findOneAndRemove(id).then(result => expect(result).to.equal(expectedValue));
         });
-        
+
         it ('returns poll when poll does exist', function() {
             var findOneAndRemoveResult = {
                exec : function(exec) {
@@ -129,7 +129,7 @@ describe('DB', function() {
 
             return db.findOneAndRemove(id).then(result => expect(result[0].pollID).to.equal(expectedPollID));
         });
-    });    
+    });
 
     describe('createProfile', function () {
         afterEach(function() {
@@ -140,7 +140,7 @@ describe('DB', function() {
             var id = 1, user = 'bob1', pass = 'password', display = 'Bob', votes = [];
             var expectedResults = {profileID : id, username : user, password : pass, displayName : display, votedPolls : votes};
             sinon.stub(Profile.prototype, 'save').returns(Promise.resolve(expectedResults));
-            
+
             return db.createProfile(id, user, pass, display, votes).then(result => expect(result).to.equal(expectedResults));
         });
 
@@ -148,7 +148,7 @@ describe('DB', function() {
             var id = 1, user = 'bob1', pass = 'password', display = 'Bob', votes = [];
             var expectedResults = {profileID : id, username : user, password : pass, displayName : display, votedPolls : votes};
             sinon.stub(Profile.prototype, 'save').returns(Promise.resolve(expectedResults));
-            
+
             return db.createProfile(id, user, pass, display, votes).then(result => expect(result).to.equal(expectedResults));
         });
     });
@@ -157,19 +157,22 @@ describe('DB', function() {
         var query = {
                 limit : function(limit) {},
                 sort : function(sort) {},
-                exec : function(exec) {}
+                exec : function(exec) {},
+                select : function(select) {}
         };
 
         beforeEach(function() {
             sinon.stub(Profile, 'find').returns(query);
             sinon.stub(query, 'sort').returns(query);
             sinon.stub(query, 'limit').returns(query);
+            sinon.stub(query, 'select').returns(query);
         });
 
         afterEach(function() {
             Profile.find.restore();
             query.sort.restore();
             query.limit.restore();
+            query.select.restore();
         });
 
         it('calls find() only once when no options are given', function() {
@@ -178,6 +181,7 @@ describe('DB', function() {
             sinon.assert.calledOnce(Profile.find);
             sinon.assert.notCalled(query.sort);
             sinon.assert.notCalled(query.limit);
+            sinon.assert.notCalled(query.select);
         });
 
         it('calls only find() twice once when only criteria is given', function() {
@@ -186,6 +190,7 @@ describe('DB', function() {
             sinon.assert.calledTwice(Profile.find);
             sinon.assert.notCalled(query.sort);
             sinon.assert.notCalled(query.limit);
+            sinon.assert.notCalled(query.select);
         });
 
         it('calls sort() once when only sort is given', function() {
@@ -194,6 +199,7 @@ describe('DB', function() {
             sinon.assert.calledOnce(Profile.find);
             sinon.assert.calledOnce(query.sort);
             sinon.assert.notCalled(query.limit);
+            sinon.assert.notCalled(query.select);
         });
 
         it('calls limit() once when only limit is given', function() {
@@ -202,6 +208,16 @@ describe('DB', function() {
             sinon.assert.calledOnce(Profile.find);
             sinon.assert.notCalled(query.sort);
             sinon.assert.calledOnce(query.limit);
-        }); 
+            sinon.assert.notCalled(query.select);
+        });
+
+        it('calls select() once when only select is given', function() {
+            db.getProfiles({select : "username"});
+
+            sinon.assert.calledOnce(Profile.find);
+            sinon.assert.notCalled(query.sort);
+            sinon.assert.notCalled(query.limit);
+            sinon.assert.calledOnce(query.select);
+        });
     });
 });
