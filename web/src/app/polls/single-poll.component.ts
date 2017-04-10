@@ -15,9 +15,7 @@ export class SinglePollComponent implements OnChanges {
   shownText: string;
   poll_list_refresh:boolean = true;
 
-
   ngOnInit() {
-    ///TODO: fix character length issue
     this.shownText = this.poll.question;
   }
 
@@ -34,10 +32,6 @@ export class SinglePollComponent implements OnChanges {
     this.poll_list_refresh = true;
     console.log("dddd");
   }
-
-
-
-  ngOnChanges() {
-
-  }
+  
+  ngOnChanges() {}
 }

@@ -7,7 +7,6 @@ import "rxjs/add/operator/map";
 import { Config } from "../shared/config";
 import { Poll } from "../shared/poll";
 
-
 @Injectable()
 export class PollListService {
 	constructor(private http: Http) {}

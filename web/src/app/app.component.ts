@@ -37,17 +37,14 @@ export class AppComponent implements OnInit, DoCheck {
       let count = 1;
       this.pollListService.getAllPolls()
         .subscribe(
-          loadedPolls => {
-          loadedPolls.forEach((poll: Poll) => {
+          (loadedPolls) => {
+            loadedPolls.forEach((poll: Poll) => {
             this.polls[this.polls.length - count] = poll;
-            count++;  
-            ;});
-        },
-          
-        );
-
-
-
+            count++;
+          });
+        },   
+      );
+      
       this.refresh_list = false;
     }
   }

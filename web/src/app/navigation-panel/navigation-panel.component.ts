@@ -9,7 +9,7 @@ import { PollService } from '../services/poll.service';
   providers: [ PollService ]
 })
 
-export class SideNavigationComponent{
+export class SideNavigationComponent {
   @Output() poll: EventEmitter<Poll> = new EventEmitter<Poll>();
   addDialog: boolean = false;
   options: string[] = null; //an array for ng to help display options
@@ -89,7 +89,4 @@ export class SideNavigationComponent{
   initOptions() {
     this.options = [""];
   }
-
-
-
 }

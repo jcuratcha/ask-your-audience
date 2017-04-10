@@ -12,7 +12,7 @@ import { ChartModule } from 'primeng/primeng';
   styleUrls: ['app/pop-up/pop-up.component.css'],
   providers: [PollService]
 })
-export class PopupComponent{
+export class PopupComponent {
   @Input() poll: Poll;
   @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
   showPoll: boolean = true;
@@ -61,7 +61,4 @@ export class PopupComponent{
   closeDialog() {
     this.close.emit(this.showPoll);
   }
-
-
-
 }
