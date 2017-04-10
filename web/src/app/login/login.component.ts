@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 })
 
 export class LoginComponent {
-    loggedIn: boolean = false;
+    loggedIn: boolean = window.sessionStorage['id'];
     registerUser: boolean = false;
     errorMessage: string = '';
     errorMessage2: string = '';
@@ -37,7 +37,7 @@ export class LoginComponent {
             if(result){
                 this.loggedIn = true;
                 this.userService.getLoggedInUser().subscribe((user: string) => {
-                    console.log(user);
+                    window.sessionStorage.setItem("user", user);
                 });
             } else {
                 this.errorMessage = "You have entered an incorrect username or password.";

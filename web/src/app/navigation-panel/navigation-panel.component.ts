@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Poll } from './../shared/poll';
 import { PollService } from '../services/poll.service';
 
@@ -15,7 +15,7 @@ export class SideNavigationComponent {
   options: string[] = null; //an array for ng to help display options
   tempArray: string[] = [""];
   question: string;
-  username: string = "bob";
+  name: string = window.sessionStorage['user'] ? JSON.parse(window.sessionStorage.getItem('user')).displayName : null);
 
   constructor(private pollService: PollService) {}
   addPoll() {

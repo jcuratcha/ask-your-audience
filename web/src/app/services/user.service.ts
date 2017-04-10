@@ -13,8 +13,6 @@ export class UserService {
 	private postRegisterUrl = "/aya/api/register";
 	private postAuthenticateUrl = "/aya/api/authenticate";
 	private getUserUrl = "/aya/api/get-profiles/"
-	private user: User;
-	private userID: number;
 
 	private dbUrl = Config.getDbUrl();
 	public preventSending:boolean = false;
@@ -78,7 +76,7 @@ export class UserService {
           let newUserID: number = null;
           if (data['success']) {
               newUserID = data['profileID'];
-							this.userID = newUserID;
+							window.sessionStorage.setItem("id": newUserID);
 					} else {
               console.log(data['message']);
 					}
@@ -95,16 +93,16 @@ export class UserService {
 	//
 	getLoggedInUser() {
 		let headers = this.createRequestHeaders();
-		if (this.preventSending === false)
+		if (this.preventSending === false && window.sessionStorage.getItem("id"))
 		{
-			return this.http.get(this.dbUrl + this.getUserUrl + this.userID, {
+			return this.http.get(this.dbUrl + this.getUserUrl + window.sessionStorage.getItem("id"), {
 				headers : headers
 			})
 			.map(res => res.json()['profiles'][0])
 			.map(data => {
-					this.user = new User(data.profileID, data.username, data.displayName, data.votedPolls);
-					console.log(this.user);
-					return JSON.stringify(this.user);
+					var user = new User(data.profileID, data.username, data.displayName, data.votedPolls);
+					console.log(user);
+					return JSON.stringify(user);
 			})
 			.catch(this.handleErrors);
 		}
