@@ -29,13 +29,13 @@ export class LoginComponent {
         let result = "";
         this.userService.authenticate(this.username, this.password).subscribe((result: string) => {
             if(result){
-
+                this.loggedIn = true;
             }
         });
     }
 
     sendRegistration() {
-        this.userService.register("test", "test2", "Bobby Joe").subscribe();
+        this.userService.register(this.username, this.password, "Bobby Joe").subscribe();
     }
 
 
