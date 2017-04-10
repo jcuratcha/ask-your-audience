@@ -30,7 +30,26 @@ export class RegisterComponent implements OnInit {
 	}
 
 	sendRegistration() {
-           this.userService.register(this.userName,this.userPassword,this.displayName).subscribe(data => {
+       var displayUser=this.displayName;
+	   var username=this.userName;
+	   var password=this.userPassword;
+
+        if (displayUser === null || displayUser === undefined || displayUser.trim() == "") {
+            alert("Please enter a display name.");
+            return ;
+        }
+
+        if (username === null || username === undefined || username.trim() == "") {
+            alert("Please enter a username.");
+            return ;
+        }
+
+        if (password === null || password === undefined || password.trim() == "") {
+            alert("Please enter a password.");
+            return ;
+        }
+
+         this.userService.register(username,password,displayUser).subscribe(data => {
            if(data != -1) {
                 this.successMessage = "Your profile has been created.";
                 this.registerUser = false;

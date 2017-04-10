@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
 
     loggedIn: boolean = false;
     registerUser: boolean = false;
-    errorMessage: string = '';
     successMessage: string = '';
 
 	userName:string='';
@@ -46,17 +45,14 @@ export class LoginComponent implements OnInit {
         var username=this.userName;
 		var password=this.Password;
 
-        this.errorMessage = '';
-        this.successMessage = '';
-
         if (username === null || username === undefined || username.trim() == "") {
-            this.errorMessage = "Please enter a username.";
-            return "ERROR: No username has been provided (or is blank space)";
+            alert("Please enter a username.");
+            return ;
         }
 
         if (password === null || password === undefined || password.trim() == "") {
-            this.errorMessage = "Please enter a password.";
-            return "ERROR: No password has been provided (or is blank space)";
+            alert("Please enter a password.");
+            return ;
         }
 
         let result = "";
@@ -68,7 +64,7 @@ export class LoginComponent implements OnInit {
                     console.log(user);
                 });
             } else {
-                this.errorMessage = "You have entered an incorrect username or password.";
+                alert("You have entered an incorrect username or password.");
             }
         });
 
