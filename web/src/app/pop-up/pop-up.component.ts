@@ -25,10 +25,6 @@ export class PopupComponent {
     this.createChartData();
   }
 
-  update($event: Event){
-     this.createChartData();
-  }
-
   createChartData() {
     this.chartData = {
       labels: this.poll.options,
@@ -50,6 +46,7 @@ export class PopupComponent {
       }
     };
   }
+
   vote(chart: UIChart, index: number) {
     this.pollService.addPollVote(this.poll.pollID, index)
     	.subscribe(poll => {
