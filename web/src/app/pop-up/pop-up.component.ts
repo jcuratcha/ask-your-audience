@@ -53,10 +53,10 @@ export class PopupComponent {
   vote(chart: UIChart, index: number) {
     this.pollService.addPollVote(this.poll.pollID, index)
     	.subscribe(poll => {
-        this.poll = poll
+        this.poll = poll;
         chart.data.datasets[0].data = this.poll.votes;
         chart.reinit();
-        chart.refresh()
+        chart.refresh();
       });
   }
 
