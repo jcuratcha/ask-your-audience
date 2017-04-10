@@ -1,0 +1,32 @@
+<StackLayout>
+
+    <ActionBar title="Ask A Question"></ActionBar>
+    <label text="What's your question?"></label>
+    <TextView hint="Enter your question here" [(ngModel)]="model.question" width="350" height="100" backgroundColor="lightgray"></TextView>
+    
+    <label text="Options" color="red"></label>
+    <StackLayout row="100" orientation="horizontal" horizontalAlignment="center">
+            <Button text="Add" (tap)="onAddItemClick()" class="iosButton"></Button>
+            <Button text="Delete Last" (tap)="onRemoveItemClick()" class="iosButton"></Button>
+            <Button text="Reset All" (tap)="onResetClick()" class="iosButton"></Button>
+    </StackLayout>
+    <TextField id="optionTextField" hint="Enter your option here" [(ngModel)]="model.options"></TextField>
+
+    <label text="Your current poll options"></label>
+    <GridLayout height="300">
+        <RadListView [items]="dataItems" row="1">
+            <ListViewLinearLayout tkListViewLayout scrollDirection="Vertical" [itemInsertAnimation]="itemInsertAnimation" [itemDeleteAnimation]="itemDeleteAnimation"></ListViewLinearLayout>
+            <template tkListItemTemplate let-item="item">
+                <StackLayout orientation="vertical">
+                    <Label class="nameLabel" [text]="item.name"></Label>
+                    <Label class="descriptionLabel" [text]="item.description"></Label>
+                </StackLayout>
+            </template>
+        </RadListView>
+
+    </GridLayout>
+    <button text="Submit" (tap)="submit()"></button>
+
+</StackLayout>
+
+

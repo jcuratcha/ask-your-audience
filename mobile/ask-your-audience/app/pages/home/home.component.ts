@@ -5,7 +5,7 @@ import { Page } from "ui/page";
 @Component({
 	selector: "home",
 	templateUrl: "pages/home/home.html",
-	styleUrls: ["pages/home/home-common.css", "pages/home/home.css"]
+	styleUrls: ["pages/home/home-common.css"]
 })
 
 export class HomeComponent {
@@ -16,6 +16,7 @@ export class HomeComponent {
 
 	goToQuestionCreation() {
 		console.log("Going to Question Creation page");
+		this.router.navigate(["/askQuestion"]);
 	}
 
 	goToQuestionList() {

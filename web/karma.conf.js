@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'src/shim_reflect-metadata.js',
-      'src/app/**/*.spec.js'
+      'src/spec/unit/**/*.spec.js'
     ],
 
 
@@ -29,7 +29,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'src/shim_reflect-metadata.js': ['browserify'],
-      'src/app/**/*.spec.js': ['browserify']
+      'src/spec/**/*.spec.js': ['browserify']
     },
 
 
@@ -63,7 +63,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     browserify: {
       debug: true,

@@ -11,11 +11,17 @@ node_modules/
 #all js files that are generated
 web/src/app/**/*.js 
 
-#this is the only js file in src/ that is generated
+#exclude generated files in src folder
 web/src/main.js 
+web/src/shim_reflect-metadata.js
 
 #ignore all generated map files
 web/src/**/*.map 
+
+#exclude generated test js files
+web/src/spec/unit/**/*.spec.js
+web/e2e/*.js
+web/e2e/*.map
 
 **/*.log
 web/node_modules/
