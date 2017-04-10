@@ -27,7 +27,7 @@ export class LoginComponent {
         }
 
         let result = "";
-        this.userService.authenticate(username.value, password.value).subscribe((result: string) => {
+        this.userService.authenticate(this.username, this.password).subscribe((result: string) => {
             if(result){
 
             }
@@ -35,7 +35,7 @@ export class LoginComponent {
     }
 
     sendRegistration() {
-        this.userService.register("test", "test2", "Bobby Joe");
+        this.userService.register("test", "test2", "Bobby Joe").subscribe();
     }
 
 

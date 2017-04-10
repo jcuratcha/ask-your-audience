@@ -86,7 +86,15 @@ exports.findOneAndRemove = function(conditions) {
 //    votes : the array of all polls this user has voted on
 //
 exports.createProfile = function(id, user, pass, display, votes) {
-    return new Profile({profileID : id, username : user, password : pass, displayName : display, votedPolls : votes}).save();
+    var newUser = new Profile({profileID : id, username : user, password : pass, displayName : display, votedPolls : votes});
+    return newUser.save(function(err) {
+        if (err) {
+            //Duplicate username
+            return null;
+        } else {
+            return newUser;
+        }
+    });
 }
 
 //
