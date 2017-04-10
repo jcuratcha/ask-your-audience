@@ -15,11 +15,11 @@ describe('Voting on a poll', function() {
     count.then(num => {
       // enter voting dialog
       element(by.id('poll_'+num)).click();
-      expect(element(by.id('displayPoll_0')).getText()).toEqual('a with 0 vote');
+      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual('0');
 
       // vote then check if corresponding option increments
       element(by.id('vote_0')).click();
-      expect(element(by.id('displayPoll_0')).getText()).toEqual('a with 1 vote');
+      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual('1');
     });
   });
 });

@@ -27,12 +27,10 @@ export class AppComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (this.refresh_list) {
-      let count = 1;
       this.pollListService.getAllPolls()
         .subscribe(loadedPolls => {
-            loadedPolls.forEach((poll: Poll) => {
-            this.polls[this.polls.length - count] = poll;
-            count++;
+            loadedPolls.forEach((poll: Poll, index: number) => {
+            this.polls[index] = poll;
           });
         }
       );
