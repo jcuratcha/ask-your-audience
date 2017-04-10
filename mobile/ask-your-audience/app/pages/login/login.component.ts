@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Person } from "../../shared/person/person";
-import { PersonService } from "../../shared/person/person.service";
 import { Router } from "@angular/router";
+import { UserService } from "../../shared/person/user.service";
 
 import { Page } from "ui/page";
 
 @Component({
 	selector: "my-app",
-	providers: [PersonService],
+	providers: [UserService],
 	templateUrl: "pages/login/login.html",
 	styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
 })
@@ -16,7 +16,14 @@ export class LoginComponent implements OnInit {
   person: Person;
   isLoggingIn = true;
 
-	constructor(private router: Router, private personService: PersonService, private page: Page) {
+    loggedIn: boolean = false;
+    registerUser: boolean = false;
+    successMessage: string = '';
+
+	userName:string='';
+	Password:string='';
+
+	constructor(private router: Router,private page: Page,private userService: UserService) {
 		console.log("Current page: LoginComponent");
 		this.person = new Person();
 	}
@@ -28,4 +35,40 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.router.navigate(["/home"]);
 	}
+
+	register(){
+		this.router.navigate(["/register"]);
+	}
+
+	 sendCredentials() {
+		 
+        var username=this.userName;
+		var password=this.Password;
+
+        if (username === null || username === undefined || username.trim() == "") {
+            alert("Please enter a username.");
+            return ;
+        }
+
+        if (password === null || password === undefined || password.trim() == "") {
+            alert("Please enter a password.");
+            return ;
+        }
+
+        let result = "";
+        let user = "";
+        this.userService.authenticate(username, password).subscribe((result: string) => {
+            if(result){
+                this.loggedIn = true;
+                this.userService.getLoggedInUser().subscribe((user: string) => {
+                    console.log(user);
+                });
+            } else {
+                alert("You have entered an incorrect username or password.");
+            }
+        });
+
+//TODO: after the login in verified, we can navigate to home, otherwise, return.
+		this.router.navigate(["/home"]);
+    }
 }
