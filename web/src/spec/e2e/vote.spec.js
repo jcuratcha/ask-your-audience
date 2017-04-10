@@ -10,15 +10,18 @@ describe('Voting on a poll', function() {
     element(by.id('option_1')).sendKeys('b');
     element(by.id('createPollButton')).click();
 
-    var until = protractor.ExpectedConditions;
-    browser.wait(until.presenceOf($('#poll_0')), 500, 'Poll 0 taking too long to appear in DOM');
+    // get newest pollID
+    let count = element(by.id('pollCount')).getAttribute('textContent');
+    count.then(num => {
+      let expectedCount = '0';
+      // enter voting dialog
+      element(by.id('poll_'+num)).click();
+      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual(expectedCount);
 
-    // enter voting dialog
-    element(by.id('poll_0')).click();
-    expect(element(by.id('displayPoll_0')).getText()).toEqual('a with 0 vote');
-
-    // vote then check if corresponding option increments
-    element(by.id('vote_0')).click();
-    expect(element(by.id('displayPoll_0')).getText()).toEqual('a with 1 vote');
+      // vote then check if corresponding option increments
+      expectedCount = '1';
+      element(by.id('vote_0')).click();
+      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual(expectedCount);
+    });
   });
 });

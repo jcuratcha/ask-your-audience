@@ -11,7 +11,7 @@ describe('DB', function() {
 
         it('returns poll data on successful save', function() {
             var id = 1, q = 'question', o = ['a', 'b', 'c'], ip = "123.456.789.123";
-            var expectedResults = {pollID : id, question: q, options : o, votes : [0, 0, 0], owner : ip};
+            var expectedResults = {pollID : id, question: q, options : o, votes : [0, 0, 0], owner : ip, active : true};
             sinon.stub(Poll.prototype, 'save').returns(Promise.resolve(expectedResults));
             
             return db.insert(id, q, o, ip).then(result => expect(result).to.equal(expectedResults));
@@ -90,19 +90,19 @@ describe('DB', function() {
         it ('returns poll with updated vote count', function() {
             var findOneAndUpdateResult = {
                exec : function(exec) {
-               	return Promise.resolve([{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}]);
+               	return Promise.resolve({pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123", active : true});
                }
        		};
             sinon.stub(Poll, 'findOneAndUpdate').returns(findOneAndUpdateResult);
             var id = 1, index = 1, expectedNumVotes = 1;
 
-            return db.findOneAndUpdate(id, index).then(result => expect(result[0].votes[1]).to.equal(expectedNumVotes));
+            return db.findOneAndUpdate(id, index).then(result => expect(result.votes[1]).to.equal(expectedNumVotes));
         });
     });
 
     describe('findOneAndRemove', function(){
     	afterEach(function() {
-            Poll.findOneAndRemove.restore();
+            Poll.findOneAndUpdate.restore();
         });
 
         it('returns null when poll does not exist', function() {
@@ -111,22 +111,22 @@ describe('DB', function() {
                	return Promise.resolve(null);
                }
        		};
-            sinon.stub(Poll, 'findOneAndRemove').returns(findOneAndRemoveResult);
+            sinon.stub(Poll, 'findOneAndUpdate').returns(findOneAndRemoveResult);
             var id = 0, expectedValue = null;
 
             return db.findOneAndRemove(id).then(result => expect(result).to.equal(expectedValue));
         });
         
-        it ('returns poll when poll does exist', function() {
+        it ('returns poll with poll ID and non-active status', function() {
             var findOneAndRemoveResult = {
                exec : function(exec) {
-               	return Promise.resolve([{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}]);
+               	return Promise.resolve({pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123", active : false});
                }
        		};
-            sinon.stub(Poll, 'findOneAndRemove').returns(findOneAndRemoveResult);
-            var id = 1, expectedPollID = 1;
+            sinon.stub(Poll, 'findOneAndUpdate').returns(findOneAndRemoveResult);
+            var id = 1, expectedPollID = 1, expectedStatus = false;
 
-            return db.findOneAndRemove(id).then(result => expect(result[0].pollID).to.equal(expectedPollID));
+            return db.findOneAndRemove(id).then(result => expect(result.pollID).to.equal(expectedPollID) && expect(result.active).to.equal(expectedStatus));
         });
     });
 });

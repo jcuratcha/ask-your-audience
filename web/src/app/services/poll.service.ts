@@ -46,7 +46,7 @@ export class PollService {
 				// 	return new Poll(data.pollID, data.question, data.options, data.votes, data.owner);
 				// });
 
-				return new Poll(data.pollID, data.question, options, votes, data.owner);
+				return new Poll(data.pollID, data.question, options, votes, data.owner, data.active);
 
 			})
 			.catch(this.handleErrors);

@@ -47,6 +47,7 @@ export class SideNavigationComponent {
     //has question + at least 1 option
     newPoll.question = this.question;
     newPoll.options = this.tempArray;
+    newPoll.active = true;
     newPoll.voted = false;
     let n = this.tempArray.length;
     //add votes of 0
