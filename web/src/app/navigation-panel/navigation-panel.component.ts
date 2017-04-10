@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Poll } from './../shared/poll';
 import { PollService } from '../services/poll.service';
 
@@ -17,7 +17,6 @@ export class SideNavigationComponent {
   question: string;
 
   constructor(private pollService: PollService) {}
-
   addPoll() {
     this.addDialog = true;
   }
