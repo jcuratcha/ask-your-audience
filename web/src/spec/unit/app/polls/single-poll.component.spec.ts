@@ -1,5 +1,5 @@
-import {Poll} from './../poll';
-import {SinglePollComponent} from './single-poll.component';
+import { Poll } from '../../../../app/shared/poll';
+import { SinglePollComponent } from '../../../../app/polls/single-poll.component';
 
 describe ('single-poll.component', () => {
    let testComponent:SinglePollComponent;

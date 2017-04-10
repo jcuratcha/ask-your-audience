@@ -10,6 +10,9 @@ describe('Voting on a poll', function() {
     element(by.id('option_1')).sendKeys('b');
     element(by.id('createPollButton')).click();
 
+    var until = protractor.ExpectedConditions;
+    browser.wait(until.presenceOf($('#poll_0')), 500, 'Poll 0 taking too long to appear in DOM');
+
     // enter voting dialog
     element(by.id('poll_0')).click();
     expect(element(by.id('displayPoll_0')).getText()).toEqual('a with 0 vote');

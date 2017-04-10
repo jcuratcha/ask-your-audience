@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { PollService } from '../services/poll.service'
 
-import { Poll } from './../poll';
+import { Poll } from '../shared/poll';
 
 @Component({
   selector: 'pop-up',
