@@ -20,6 +20,8 @@ web/src/**/*.map
 
 #exclude generated test js files
 web/src/spec/unit/**/*.spec.js
+web/e2e/*.js
+web/e2e/*.map
 
 **/*.log
 web/node_modules/

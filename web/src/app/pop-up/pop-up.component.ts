@@ -4,7 +4,7 @@ import { PollService } from '../services/poll.service'
 
 import { Poll } from '../shared/poll';
 
-import { ChartModule } from 'primeng/primeng';
+import { ChartModule, UIChart } from 'primeng/primeng';
 
 @Component({
   selector: 'pop-up',
@@ -50,9 +50,14 @@ export class PopupComponent {
       }
     };
   }
-  vote(index: number) {
-    this.poll.votes[index] = this.poll.votes[index] + 1;
-    this.pollService.addPollVote(this.poll.pollID, index);
+  vote(chart: UIChart, index: number) {
+    this.pollService.addPollVote(this.poll.pollID, index)
+    	.subscribe(poll => {
+        this.poll = poll
+        chart.data.datasets[0].data = this.poll.votes;
+        chart.reinit();
+        chart.refresh()
+      });
   }
 
   closeDialog() {

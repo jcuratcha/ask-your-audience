@@ -3,7 +3,7 @@
 <div style="margin-left: 16%">
     <div *ngIf="!polls.length">No polls...</div>
     <span *ngFor="let poll of polls; let i=index">
-        <single-poll id="poll_{{i}}" [poll]="poll">
+        <single-poll id="poll_{{i}}" [poll]="poll" (refresh)="handle_refresh($event)" >
         </single-poll>
     </span>
 </div>
