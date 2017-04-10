@@ -25,7 +25,9 @@ export class LoginComponent implements OnInit {
 
 	constructor(private router: Router,private page: Page,private userService: UserService) {
 		console.log("Current page: LoginComponent");
-		this.person = new Person();
+	//	this.person = new Person();
+
+    
 	}
 
 	ngOnInit() {
@@ -62,13 +64,13 @@ export class LoginComponent implements OnInit {
                 this.loggedIn = true;
                 this.userService.getLoggedInUser().subscribe((user: string) => {
                     console.log(user);
+                    this.router.navigate(["/home"]);
                 });
             } else {
                 alert("You have entered an incorrect username or password.");
+                return;
             }
         });
 
-//TODO: after the login in verified, we can navigate to home, otherwise, return.
-		this.router.navigate(["/home"]);
     }
 }
