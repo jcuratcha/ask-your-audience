@@ -13,7 +13,7 @@ export class SinglePollComponent implements OnChanges {
 
   active: boolean = false;
   shownText: string;
-  poll_list_refresh:boolean = true;
+  poll_list_refresh: boolean = true;
 
   ngOnInit() {
     this.shownText = this.poll.question;
@@ -26,9 +26,9 @@ export class SinglePollComponent implements OnChanges {
   closePoll($event: boolean) {
     this.active = false;
     this.refresh.emit(this.poll_list_refresh);
-    }
+  }
 
-  update_list($event:any){
+  update_list($event: any) {
     this.poll_list_refresh = true;
   }
   
