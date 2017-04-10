@@ -30,7 +30,6 @@ export class SinglePollComponent implements OnChanges {
 
   update_list($event:any){
     this.poll_list_refresh = true;
-    console.log("dddd");
   }
   
   ngOnChanges() {}

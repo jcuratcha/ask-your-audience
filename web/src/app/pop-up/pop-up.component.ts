@@ -51,7 +51,6 @@ export class PopupComponent {
     };
   }
   vote(index: number) {
-    this.poll.votes[index] = this.poll.votes[index] + 1;
     this.pollService.addPollVote(this.poll.pollID, index)
     	.subscribe(
         (poll) => this.poll = poll,
