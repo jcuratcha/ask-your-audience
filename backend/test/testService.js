@@ -194,7 +194,7 @@ describe('Service', function() {
             sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
             var id = 1, expectedProfileID = 1;
 
-            return service.getProfile(id).then(result => console.log(result));
+            return service.getProfile(id).then(result => expect(result.profiles[0].profileID).to.equal(expectedProfileID));
         });
     });
 });

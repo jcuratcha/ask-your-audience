@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
 import { Config } from "../shared/config";
+import { User } from "../shared/user";
 
 @Injectable()
 export class UserService {
@@ -11,10 +12,12 @@ export class UserService {
 
 	private postRegisterUrl = "/aya/api/register";
 	private postAuthenticateUrl = "/aya/api/authenticate";
+	private getUserUrl = "/aya/api/get-profiles/"
+	private user: User;
+	private userID: number;
 
 	private dbUrl = Config.getDbUrl();
 	public preventSending:boolean = false;
-	public userID: number;
 
 
 	//
@@ -41,11 +44,10 @@ export class UserService {
 					let userID: number = -1;
 					if(data['profileID'] !== null) {
 							userID = data['profileID'];
-							this.userID = userID;
 					} else {
 							console.log("Username is already in use.");
 					}
-					
+
 					return userID;
 			})
 			.catch(this.handleErrors);
@@ -73,13 +75,37 @@ export class UserService {
 			}, options)
 			.map(res => res.json())
       .map(data => {
-          let token: string = null;
-          if(data['success'])
-              token = data['token'];
-          else
+          let newUserID: number = null;
+          if (data['success']) {
+              newUserID = data['profileID'];
+							this.userID = newUserID;
+					} else {
               console.log(data['message']);
-          return token;
+					}
+          return newUserID;
       })
+			.catch(this.handleErrors);
+		}
+		else
+			return null;
+	}
+
+	//
+	// Calls server to get user details
+	//
+	getLoggedInUser() {
+		let headers = this.createRequestHeaders();
+		if (this.preventSending === false)
+		{
+			return this.http.get(this.dbUrl + this.getUserUrl + this.userID, {
+				headers : headers
+			})
+			.map(res => res.json()['profiles'][0])
+			.map(data => {
+					this.user = new User(data.profileID, data.username, data.displayName, data.votedPolls);
+					console.log(this.user);
+					return JSON.stringify(this.user);
+			})
 			.catch(this.handleErrors);
 		}
 		else

@@ -32,9 +32,13 @@ export class LoginComponent {
         }
 
         let result = "";
+        let user = "";
         this.userService.authenticate(username, password).subscribe((result: string) => {
             if(result){
                 this.loggedIn = true;
+                this.userService.getLoggedInUser().subscribe((user: string) => {
+                    console.log(user);
+                });
             } else {
                 this.errorMessage = "You have entered an incorrect username or password.";
             }

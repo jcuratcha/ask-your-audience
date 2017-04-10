@@ -231,7 +231,7 @@ describe("Server", function() {
             service.getProfile.restore();
         });
 
-        it('returns null when poll id does not exist', function() {
+        it('returns null when profile id does not exist', function() {
             var getProfileResult = null;
             sinon.stub(service, 'getProfile').returns(Promise.resolve(getProfileResult));
             var id = 0, expectedServiceResult = null;

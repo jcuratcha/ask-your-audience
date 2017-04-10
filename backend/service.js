@@ -73,12 +73,12 @@ exports.newProfile = function(user, pass, display) {
 //
 exports.authUser = function(user, pass) {
     return db.getProfiles({criteria : {username : user}, limit : 1})
-        .then(queryResult => (queryResult.length == 0) ? false : (queryResult[0].password === pass ? true : false));
+        .then(queryResult => (queryResult.length == 0) ? null : (queryResult[0].password === pass ? queryResult[0].profileID : null));
 }
 
 //
 // Gets the profile object from the corresponding id given
 //
 exports.getProfile = function(id) {
-    return db.getProfiles({criteria : {profileID : id}, limit : 1}).then(profiles => results(profiles, 'profiles'));
+    return db.getProfiles({criteria : {profileID : id}, limit : 1, select : 'profileID username displayName votedPolls'}).then(profiles => results(profiles, "profiles"));
 }

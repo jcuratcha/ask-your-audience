@@ -112,6 +112,10 @@ exports.getProfiles = function(options) {
         if (options.limit !== undefined) {
             query = query.limit(options.limit);
         }
+
+        if (options.select !== undefined) {
+            query = query.select(options.select);
+        }
     }
 
     return query.exec();
