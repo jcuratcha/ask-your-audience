@@ -28,4 +28,8 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.router.navigate(["/home"]);
 	}
+
+	register(){
+		this.router.navigate(["/register"]);
+	}
 }
