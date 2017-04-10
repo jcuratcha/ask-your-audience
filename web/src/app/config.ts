@@ -1,9 +1,6 @@
 export class Config {
-  // static dbPort = ":8080"
-  // static dbHostname = window.location.hostname;
-  // static httpPrefix = "http://";
-
   static dbPort = ":8080"
+  // static dbHostname = window.location.hostname;  
   static dbHostname = "ec2-54-213-112-197.us-west-2.compute.amazonaws.com";
   static httpPrefix = "http://";
 
