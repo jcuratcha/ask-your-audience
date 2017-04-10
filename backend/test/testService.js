@@ -176,6 +176,44 @@ describe('Service', function() {
         // });
     });
 
+    describe('authUser', function() {
+      afterEach(function() {
+          db.getProfiles.restore();
+      });
+
+      it('returns null when username does not exist', function() {
+          var getProfilesResult = [];
+          sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+          var username = "doesnotexist", password = "password", expectedValue = null;
+
+          return service.authUser(username, password).then(profileID => expect(profileID).to.equal(expectedValue));
+      });
+
+      it('returns null when password does not match what is on record', function() {
+          var getProfilesResult = [{profileID : 1, username: "bob1", password: "password", displayName: "Robert", votedPolls: []}];
+          sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+          var username = "bob1", password = "notcorrect", expectedValue = null;
+
+          return service.authUser(username, password).then(profileID => expect(profileID).to.equal(expectedValue));
+      });
+
+      it('returns null when username or password is empty', function() {
+          var getProfilesResult = [];
+          sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+          var username = "", password = "", expectedValue = null;
+
+          return service.authUser(username, password).then(profileID => expect(profileID).to.equal(expectedValue));
+      });
+
+      it('returns profile ID when credentials are correct', function() {
+          var getProfilesResult = [{profileID : 1, username: "bob1", password: "password", displayName: "Robert", votedPolls: []}];
+          sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+          var username = "bob1", password = "password", expectedValue = 1;
+
+          return service.authUser(username, password).then(profileID => expect(profileID).to.equal(expectedValue));
+      });
+    });
+
     describe('getProfile', function() {
         afterEach(function() {
             db.getProfiles.restore();

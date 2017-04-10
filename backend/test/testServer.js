@@ -226,6 +226,57 @@ describe("Server", function() {
         });
     });
 
+    describe('POST /aya/api/authenticate', function() {
+        var requestBody = {
+            username : "bob1",
+            password : "password",
+        }
+        var requestBody2 = {
+            username : "",
+            password : "",
+        }
+
+        afterEach(function() {
+            service.authUser.restore();
+        });
+
+        it('returns success with profileID after correctly authenticating', function() {
+            var expectedServiceResult = 1;
+            sinon.stub(service, 'authUser').returns(Promise.resolve(expectedServiceResult));
+            var expectedServerResult = {success: true, profileID: 1};
+
+            return request(server)
+                .post('/aya/api/authenticate')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body).to.deep.equal(expectedServerResult));
+        });
+
+        it('returns failure with error message after trying incorrect credentials', function() {
+            var expectedServiceResult = null;
+            sinon.stub(service, 'authUser').returns(Promise.resolve(expectedServiceResult));
+            var expectedServerResult = {success: false, message: "Authentication failed. Incorrect username or password."};
+
+            return request(server)
+                .post('/aya/api/authenticate')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body).to.deep.equal(expectedServerResult));
+        });
+
+        it('returns failure with error message after trying to enter empty credentials', function() {
+            var expectedServiceResult = null;
+            sinon.stub(service, 'authUser').returns(Promise.resolve(expectedServiceResult));
+            var expectedServerResult = {success: false, message: "Authentication failed. Incorrect username or password."};
+
+            return request(server)
+                .post('/aya/api/authenticate')
+                .type('application/json')
+                .send(requestBody2)
+                .then(res => expect(res.body).to.deep.equal(expectedServerResult));
+        });
+    });
+
     describe('GET /aya/api/get-profile/:id', function() {
         afterEach(function() {
             service.getProfile.restore();

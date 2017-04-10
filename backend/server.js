@@ -86,7 +86,7 @@ app.post('/aya/api/register', function(req, res) {
 });
 
 //
-// Calls the service that authenticates the user's credentials using the infromation inside the POST (JSON) body
+// Calls the service that authenticates the user's credentials using the information inside the POST (JSON) body
 //
 app.post('/aya/api/authenticate', function(req, res) {
     if (process.env.NODE_ENV !== 'test') {
