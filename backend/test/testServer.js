@@ -225,4 +225,30 @@ describe("Server", function() {
                 .then(res => expect(res.body.profileID).to.equal(expectedServerResult));
         });
     });
+
+    describe('GET /aya/api/get-profile/:id', function() {
+        afterEach(function() {
+            service.getProfile.restore();
+        });
+
+        it('returns null when poll id does not exist', function() {
+            var getProfileResult = null;
+            sinon.stub(service, 'getProfile').returns(Promise.resolve(getProfileResult));
+            var id = 0, expectedServiceResult = null;
+
+            return request(server)
+                .get(`/aya/api/get-profile/${id}`)
+                .then(res => expect(res.body).to.equal(expectedServiceResult));
+        });
+
+        it('returns profile with asked profile ID', function() {
+            var getProfilesResult = { "profiles" : [profileID : 1, username : "bob1", password : "password", displayName: "Robert", votedPolls: []]};
+            sinon.stub(service, 'getProfile').returns(Promise.resolve(getProfilesResult));
+            var id = 1, expectedProfileID = 1;
+
+            return request(server)
+                .get(`/aya/api/get-polls/${id}`)
+                .then(res => expect(res.body.polls.profileID).to.equal(expectedPollID));
+        });
+    });
 });

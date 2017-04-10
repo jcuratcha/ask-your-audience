@@ -156,7 +156,7 @@ describe('Service', function() {
 
             return service.newProfile(user, pass, display).then(profileID => expect(profileID).to.equal(expectedValue));
         });
-        
+
         // it('returns profileID 2 on second profile created', function() {
         //     var getProfilesResult = [{profileID : 1, username : "hpotter1", password : "urawizard", displayName : "Harry Potter", votes : []}];
         //     sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
@@ -174,5 +174,27 @@ describe('Service', function() {
         //
         //     return service.newProfile(user2, pass2, display2).then(profileID => expect(profileID).to.equal(expectedValue));
         // });
+    });
+
+    describe('getProfile', function() {
+        afterEach(function() {
+            db.getProfile.restore();
+        });
+
+        it('returns null when profile ID does not exist', function() {
+            var getProfileResult = [];
+            sinon.stub(db, 'getProfiles').returns(Promise.resolve(getPollsResult));
+            var id = 0, expectedValue = null;
+
+            return service.getPoll(id).then(poll => expect(poll).to.equal(expectedValue));
+        });
+
+        it('returns poll with asked poll ID', function() {
+            var getPollsResult = [{pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
+            var id = 1, expectedPollID = 1;
+
+            return service.getPoll(id).then(result => expect(result.polls[0].pollID).to.equal(expectedPollID));
+        });
     });
 });

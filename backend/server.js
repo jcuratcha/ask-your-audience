@@ -103,6 +103,16 @@ app.post('/aya/api/authenticate', function(req, res) {
         });
 });
 
+//
+//  Calls the service that retrieves a profile via profileID
+//
+app.get('/aya/api/get-profiles/:id', function(req, res) {
+    if (process.env.NODE_ENV !== 'test') {
+        console.log('/aya/api/get-profiles/%d called', req.params.id);
+    }
+    service.getProfile(req.params.id).then(profiles => res.json(profiles));
+});
+
 var port = 8080;
 
 //

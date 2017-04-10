@@ -14,6 +14,7 @@ export class UserService {
 
 	private dbUrl = Config.getDbUrl();
 	public preventSending:boolean = false;
+	public userID: number;
 
 
 	//
@@ -38,10 +39,13 @@ export class UserService {
 			.map(data => {
 			    console.log(data);
 					let userID: number = -1;
-					if(data['profileID'] !== null)
+					if(data['profileID'] !== null) {
 							userID = data['profileID'];
-					else
+							this.userID = userID;
+					} else {
 							console.log("Username is already in use.");
+					}
+					
 					return userID;
 			})
 			.catch(this.handleErrors);
