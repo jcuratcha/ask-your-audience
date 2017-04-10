@@ -51,7 +51,7 @@ export class LoginComponent {
 
         if (displayUser === null || displayUser === undefined || displayUser.trim() == "") {
             this.errorMessage2 = "Please enter a display name.";
-            return "ERROR: No username has been provided (or is blank space)";
+            return "ERROR: No display username has been provided (or is blank space)";
         }
 
         if (username === null || username === undefined || username.trim() == "") {

@@ -8,11 +8,11 @@
     <div id="userInfo">Currently logged in as {{username}}</div>
 </div>
 <p-dialog header="Add a new Poll" width="400" [(visible)]="this.addDialog" modal="modal" responsive="true">
-    <span>What is your question? <input id="question" [(ngModel)]='question' (keyup)="initOptions()"></span><br>
+    <span>What is your question? <input id="question" [(ngModel)]='question' (keyup)="initOptions()"></span><br><br>
     <span *ngIf='question != null'>
         <span class="spacing">Options: </span><br>
         <input *ngFor="let option of options; let i = index" #option (keyup)="addOptionValue(option.value, i)" class="spacing" #elem [id]="'option_'+i" >
-        <button id="addOptionButton" type="button" pButton icon="fa-check" width="50px" class="spacing" (click)="addOption()">+</button><br>
+        <button id="addOptionButton" type="button" pButton icon="fa-check" width="50px" class="spacing" (click)="addOption()">+</button><br><br>
     </span>
     <button id="createPollButton" type="button" pButton icon="fa-check" width="50px" (click)="verifyPoll()" class="spacing">Add Poll</button>
     <button id="cancelPollButton" type="button" pButton icon="fa-check" width="50px" (click)="close()" class="spacing">Cancel</button>
