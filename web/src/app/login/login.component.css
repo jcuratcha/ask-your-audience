@@ -2,20 +2,22 @@
     height: 100%;
     width: 100%;
     position: fixed;
-    background-color: #ccc;
+    background-color: white;
     top: 0px;
     left: 0px;
     z-index: 900;
-    padding-top: 100px;
+    padding-top: 20px;
+}
+
+.title-container {
+  width: 100%;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
 .form-container {
     width: 400px;
     margin: auto;
-}
-
-.title {
-    font-size:
 }
 
 .dialog{

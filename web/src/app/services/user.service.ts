@@ -60,7 +60,6 @@ export class UserService {
 		let options = new RequestOptions({ headers: headers });
 
 		console.log("	Authenticating username = " + username);
-		console.log(password);
 
 		if (this.preventSending === false)
 		{

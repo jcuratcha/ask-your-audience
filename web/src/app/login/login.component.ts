@@ -10,34 +10,63 @@ import { UserService } from '../services/user.service';
 
 export class LoginComponent {
     loggedIn: boolean = false;
-    username: string;
-    password: string;
-    displayUser: string;
-    registeruser: boolean = false;
+    registerUser: boolean = false;
+    errorMessage: string = '';
+    errorMessage2: string = '';
+    successMessage: string = '';
 
     constructor(private userService: UserService) {}
 
-    sendCredentials() {
-        if (this.username === null || this.username === undefined || this.username.trim() == "") {
-            alert("Please enter a username.");
+    sendCredentials(username: string, password: string) {
+        this.errorMessage = '';
+        this.successMessage = '';
+
+        if (username === null || username === undefined || username.trim() == "") {
+            this.errorMessage = "Please enter a username.";
             return "ERROR: No username has been provided (or is blank space)";
         }
 
-        if (this.password === null || this.password === undefined || this.password.trim() == "") {
-            alert("Please enter a password.");
+        if (password === null || password === undefined || password.trim() == "") {
+            this.errorMessage = "Please enter a password.";
             return "ERROR: No password has been provided (or is blank space)";
         }
 
         let result = "";
-        this.userService.authenticate(this.username, this.password).subscribe((result: string) => {
+        this.userService.authenticate(username, password).subscribe((result: string) => {
             if(result){
                 this.loggedIn = true;
+            } else {
+                this.errorMessage = "You have entered an incorrect username or password.";
             }
         });
     }
     sendRegistration(displayUser: string, username: string, password: string) {
+        this.errorMessage = '';
+        this.errorMessage2 = '';
+        this.successMessage = '';
+
+        if (displayUser === null || displayUser === undefined || displayUser.trim() == "") {
+            this.errorMessage2 = "Please enter a display name.";
+            return "ERROR: No username has been provided (or is blank space)";
+        }
+
+        if (username === null || username === undefined || username.trim() == "") {
+            this.errorMessage2 = "Please enter a username.";
+            return "ERROR: No username has been provided (or is blank space)";
+        }
+
+        if (password === null || password === undefined || password.trim() == "") {
+            this.errorMessage2 = "Please enter a password.";
+            return "ERROR: No password has been provided (or is blank space)";
+        }
+
         this.userService.register(username, password, displayUser).subscribe(data => {
-            console.log(data)
+            if(data != -1) {
+                this.successMessage = "Your profile has been created.";
+                this.registerUser = false;
+            } else {
+                this.errorMessage2 = "This username is already taken."
+            }
         });
     }
 
