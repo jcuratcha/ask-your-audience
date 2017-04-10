@@ -13,13 +13,15 @@ describe('Voting on a poll', function() {
     // get newest pollID
     let count = element(by.id('pollCount')).getAttribute('textContent');
     count.then(num => {
+      let expectedCount = '0';
       // enter voting dialog
       element(by.id('poll_'+num)).click();
-      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual('0');
+      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual(expectedCount);
 
       // vote then check if corresponding option increments
+      expectedCount = '1';
       element(by.id('vote_0')).click();
-      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual('1');
+      expect(element(by.id('count_0')).getAttribute('textContent')).toEqual(expectedCount);
     });
   });
 });

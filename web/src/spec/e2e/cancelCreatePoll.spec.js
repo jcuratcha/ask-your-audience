@@ -15,7 +15,7 @@ describe('Canceling a poll', function() {
 
       // the poll should not exist
       let expectedID = num+1;
-      expect(element(by.id("poll_"+expectedID)).isPresent()).toEqual(false);
+      expect(element(by.id('poll_'+expectedID)).isPresent()).toEqual(false);
     });
   });
 });
