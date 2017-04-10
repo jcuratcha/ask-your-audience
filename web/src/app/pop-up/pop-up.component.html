@@ -7,7 +7,7 @@
     (onAfterHide)="closeDialog()">
 
     <div *ngFor="let options of poll.options; let i=index" id="displayPoll_{{i}}">
-        Vote for: {{options}} <button id="vote_{{i}}" type="button" pButton icon="fa-check" width="50px" (click)="vote(chart, i)" 
+        {{options}} with {{poll.votes[i]}} <button id="vote_{{i}}" type="button" pButton icon="fa-check" width="50px" (click)="vote(chart, i)" 
         *ngIf="!poll.voted" class="spacing">vote</button>
     </div>
 
