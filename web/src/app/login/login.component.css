@@ -6,4 +6,14 @@
     top: 0px;
     left: 0px;
     z-index: 1000;
+    padding-top: 100px;
+}
+
+.form-container {
+    width: 400px;
+    margin: auto;
+}
+
+.title {
+    font-size:
 }

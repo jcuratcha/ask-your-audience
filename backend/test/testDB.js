@@ -12,7 +12,7 @@ describe('DB', function() {
 
         it('returns poll data on successful save', function() {
             var id = 1, q = 'question', o = ['a', 'b', 'c'], ip = "123.456.789.123";
-            var expectedResults = "Hello World";
+            var expectedResults = {pollID : id, question: q, options : o, votes : [0, 0, 0], owner : ip};
             sinon.stub(Poll.prototype, 'save').returns(Promise.resolve(expectedResults));
             
             return db.insert(id, q, o, ip).then(result => expect(result).to.equal(expectedResults));
