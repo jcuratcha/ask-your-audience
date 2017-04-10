@@ -15,6 +15,11 @@ export class RegisterComponent implements OnInit {
     errorMessage2: string = '';
     successMessage: string = '';
 	registerUser: boolean = false;
+	loggedIn: boolean = false;
+
+	userName:string='';
+	userPassword:string='';
+	displayName:string='';
 
 
 	constructor(private router: ActivatedRoute, private page: Page,private userService: UserService) {
@@ -25,20 +30,15 @@ export class RegisterComponent implements OnInit {
 	}
 
 	sendRegistration() {
-		console.log("resigter testing\n");
-           this.userService.register("frank","12345","tby").subscribe(data => {
+           this.userService.register(this.userName,this.userPassword,this.displayName).subscribe(data => {
            if(data != -1) {
                 this.successMessage = "Your profile has been created.";
                 this.registerUser = false;
-				console.log("good\n");
+
             } else {
                 this.errorMessage2 = "This username is already taken."
-				console.log("bad\n")
             }
         });
 
 	}
-
-	
-
 }	

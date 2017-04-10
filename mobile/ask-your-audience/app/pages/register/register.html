@@ -1,9 +1,9 @@
 <StackLayout>
     <Label text="Register" class="main-title"></Label>
 
-      <TextField hint="Display Name" keyboardType="d_name"></TextField>
-      <TextField hint="User Name" keyboardType="u_name"></TextField>
-      <TextField hint="Password" keyboardType="password"></TextField>
+      <TextField hint="Display Name" [(ngModel)]="displayName"></TextField>
+      <TextField hint="User Name" [(ngModel)]="userName"></TextField>
+      <TextField hint="Password" [(ngModel)]="userPassword" secure="true"></TextField>
 
 
       <Button text="Register" (tap)="sendRegistration()"></Button>

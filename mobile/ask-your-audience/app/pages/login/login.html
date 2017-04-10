@@ -2,10 +2,10 @@
     <Label text="Ask Your Audience" class="main-title"></Label>
 
 
-      <TextField hint="userName" keyboardType="name"></TextField>
-      <TextField hint="Password" ></TextField>
+      <TextField hint="userName" [(ngModel)]="userName"></TextField>
+      <TextField hint="Password" [(ngModel)]="Password" secure="true"></TextField>
 
-      <Button text="Login" class="submit-button" (tap)="login()"></Button>
+      <Button text="Login" class="submit-button" (tap)=" sendCredentials()"></Button>
       <Button text="Register" class="submit-button" (tap)="register()"></Button>
 
 </StackLayout>
