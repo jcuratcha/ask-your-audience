@@ -12,6 +12,8 @@ export class LoginComponent {
     loggedIn: boolean = false;
     username: string;
     password: string;
+    displayUser: string;
+    registeruser: boolean = false;
 
     constructor(private userService: UserService) {}
 
@@ -34,8 +36,10 @@ export class LoginComponent {
         });
     }
 
-    sendRegistration() {
-        this.userService.register("test", "test2", "Bobby Joe").subscribe();
+    sendRegistration(displayUser: string, username: string, password: string) {
+        this.userService.register(username, password, displayUser).subscribe(data => {
+            console.log(data)
+        });
     }
 
 
