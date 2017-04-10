@@ -3,8 +3,8 @@ import { Http, Headers, Response, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
-import { Config } from "../config";
-import { Poll } from "../poll";
+import { Config } from "../shared/config";
+import { Poll } from "../shared/poll";
 
 @Injectable()
 export class PollService {

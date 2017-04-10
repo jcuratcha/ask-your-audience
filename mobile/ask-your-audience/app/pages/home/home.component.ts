@@ -5,7 +5,7 @@ import { Page } from "ui/page";
 @Component({
 	selector: "home",
 	templateUrl: "pages/home/home.html",
-	styleUrls: ["pages/home/home-common.css", "pages/home/home.css"]
+	styleUrls: ["pages/home/home-common.css"]
 })
 
 export class HomeComponent {

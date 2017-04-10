@@ -1,4 +1,4 @@
-import {Config} from './config';
+import { Config } from '../../../../app/shared/config';
 
 describe ('Config: provides information about the platform being connected to |', () => {
    describe ('getDbUrl', () => {
@@ -6,6 +6,6 @@ describe ('Config: provides information about the platform being connected to |'
          let result = Config.getDbUrl();
          expect(result).toBe(Config.httpPrefix + Config.dbHostname + Config.dbPort);
       });
-   })
+   });
 
 })
