@@ -14,12 +14,6 @@ export class AppComponent implements OnInit, DoCheck {
   name = 'test';
   refresh_list = false;
 
-  onNotify($event: Poll) {
-    let newPoll: Poll = Object.assign({}, $event);
-    if ($event != null)
-      this.polls.unshift(newPoll);
-  }
-
   constructor(private pollListService: PollListService) { }
 
   ngOnInit() {
@@ -33,20 +27,24 @@ export class AppComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (this.refresh_list) {
-      let temp_poll = new Array<Poll>();
       let count = 1;
       this.pollListService.getAllPolls()
-        .subscribe(
-          (loadedPolls) => {
+        .subscribe(loadedPolls => {
             loadedPolls.forEach((poll: Poll) => {
             this.polls[this.polls.length - count] = poll;
             count++;
           });
-        },   
+        }
       );
       
       this.refresh_list = false;
     }
+  }
+
+  onNotify($event: Poll) {
+    let newPoll: Poll = Object.assign({}, $event);
+    if ($event != null)
+      this.polls.unshift(newPoll);
   }
 
   private handle_refresh($event: any) {
@@ -57,6 +55,4 @@ export class AppComponent implements OnInit, DoCheck {
   private updatePollList(p_id: number) {
 
   }
-
-
 }
