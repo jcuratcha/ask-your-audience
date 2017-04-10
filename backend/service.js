@@ -8,8 +8,11 @@ var db = require('./db.js');
 //
 // Helper function that returns null instead of an empty array if no results are found
 //
-function results(polls) {
-    return polls.length == 0 ? null : {"polls" : polls};
+function results(array, name) {
+    var object = {};
+    object[name] = array;
+
+    return array.length == 0 ? null : object;
 }
 
 //
@@ -25,14 +28,14 @@ exports.newPoll = function(q, o, ip) {
 // Gets the poll object from the corresponding id given
 //
 exports.getPoll = function(id) {
-    return db.getPolls({criteria : {pollID : id}, limit : 1}).then(polls => results(polls));
+    return db.getPolls({criteria : {pollID : id}, limit : 1}).then(polls => results(polls, 'polls'));
 }
 
 //
 // Gets all poll objects in database
 //
 exports.getPolls = function() {
-    return db.getPolls().then(polls => results(polls));
+    return db.getPolls().then(polls => results(polls, 'polls'));
 }
 
 //
@@ -74,8 +77,8 @@ exports.authUser = function(user, pass) {
 }
 
 //
-// Gets the poll object from the corresponding id given
+// Gets the profile object from the corresponding id given
 //
 exports.getProfile = function(id) {
-    return db.getProfiles({criteria : {profileID : id}, limit : 1}).then(profiles => results(profiles));
+    return db.getProfiles({criteria : {profileID : id}, limit : 1}).then(profiles => results(profiles, 'profiles'));
 }

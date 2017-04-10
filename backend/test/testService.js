@@ -178,23 +178,23 @@ describe('Service', function() {
 
     describe('getProfile', function() {
         afterEach(function() {
-            db.getProfile.restore();
+            db.getProfiles.restore();
         });
 
         it('returns null when profile ID does not exist', function() {
-            var getProfileResult = [];
-            sinon.stub(db, 'getProfiles').returns(Promise.resolve(getPollsResult));
+            var getProfilesResult = [];
+            sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
             var id = 0, expectedValue = null;
 
-            return service.getPoll(id).then(poll => expect(poll).to.equal(expectedValue));
+            return service.getProfile(id).then(profile => expect(profile).to.equal(expectedValue));
         });
 
-        it('returns poll with asked poll ID', function() {
-            var getPollsResult = [{pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
-            sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
-            var id = 1, expectedPollID = 1;
+        it('returns profile with asked profile ID', function() {
+            var getProfilesResult = [{profileID : 1, username: "bob1", password: "password", displayName: "Robert", votedPolls: []}];
+            sinon.stub(db, 'getProfiles').returns(Promise.resolve(getProfilesResult));
+            var id = 1, expectedProfileID = 1;
 
-            return service.getPoll(id).then(result => expect(result.polls[0].pollID).to.equal(expectedPollID));
+            return service.getProfile(id).then(result => console.log(result));
         });
     });
 });

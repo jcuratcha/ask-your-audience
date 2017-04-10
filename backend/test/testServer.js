@@ -237,18 +237,18 @@ describe("Server", function() {
             var id = 0, expectedServiceResult = null;
 
             return request(server)
-                .get(`/aya/api/get-profile/${id}`)
+                .get(`/aya/api/get-profiles/${id}`)
                 .then(res => expect(res.body).to.equal(expectedServiceResult));
         });
 
         it('returns profile with asked profile ID', function() {
-            var getProfilesResult = { "profiles" : [profileID : 1, username : "bob1", password : "password", displayName: "Robert", votedPolls: []]};
+            var getProfilesResult = { "profiles" : [{profileID : 1, username : "bob1", password : "password", displayName: "Robert", votedPolls: []}]};
             sinon.stub(service, 'getProfile').returns(Promise.resolve(getProfilesResult));
             var id = 1, expectedProfileID = 1;
 
             return request(server)
-                .get(`/aya/api/get-polls/${id}`)
-                .then(res => expect(res.body.polls.profileID).to.equal(expectedPollID));
+                .get(`/aya/api/get-profiles/${id}`)
+                .then(res => expect(res.body.profiles[0].profileID).to.equal(expectedProfileID));
         });
     });
 });
