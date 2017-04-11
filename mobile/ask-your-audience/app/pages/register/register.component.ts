@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { RouterExtensions } from "nativescript-angular/router"
 import { Page } from "ui/page";
 import { UserService } from "../../shared/person/user.service";
+
+import dialogs = require("ui/dialogs");
 
 @Component({
 	selector: "register",
@@ -21,8 +24,10 @@ export class RegisterComponent implements OnInit {
 	userPassword:string='';
 	displayName:string='';
 
-
-	constructor(private router: ActivatedRoute, private page: Page,private userService: UserService) {
+	constructor(private router: ActivatedRoute, 
+                private page: Page,
+                private userService: UserService, 
+                private routerExtensions: RouterExtensions) {
 		console.log("Current page: Register");
 	}
 
@@ -51,11 +56,20 @@ export class RegisterComponent implements OnInit {
 
          this.userService.register(username,password,displayUser).subscribe(data => {
            if(data != -1) {
-                this.successMessage = "Your profile has been created.";
+                this.successMessage = "Your profile has been successfully created!";
                 this.registerUser = false;
+                dialogs.alert({
+                    title: "Registration Complete",
+                    message: this.successMessage,
+                    okButtonText: "Take me back to Login!"
+                }).then(() => {
+                    console.log("Dialog displayed, returning to login");
+                    this.routerExtensions.back();
+                });
 
             } else {
-                this.errorMessage2 = "This username is already taken."
+                this.errorMessage2 = "This username is already taken, please choose another one!"
+                alert(this.errorMessage2);
             }
         });
 

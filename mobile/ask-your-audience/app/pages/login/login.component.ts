@@ -25,25 +25,17 @@ export class LoginComponent implements OnInit {
 
 	constructor(private router: Router,private page: Page,private userService: UserService) {
 		console.log("Current page: LoginComponent");
-	//	this.person = new Person();
-
-    
 	}
 
 	ngOnInit() {
 		this.page.actionBarHidden = true;
 	}
 
-	login() {
-		this.router.navigate(["/home"]);
-	}
-
 	register(){
 		this.router.navigate(["/register"]);
 	}
 
-	 sendCredentials() {
-		 
+	sendCredentials() {
         var username=this.userName;
 		var password=this.Password;
 
