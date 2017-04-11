@@ -1,16 +1,19 @@
 import { PopupComponent } from '../../../../app/pop-up/pop-up.component';
 import { Poll } from '../../../../app/shared/poll';
 import { PollService } from '../../../../app/services/poll.service';
+import { UserService } from '../../../../app/services/user.service';
 
 describe('Pop-up component: shows a dialog for a poll to be voted on |', () => {
    let testPollService:PollService;
    let testPoll:Poll;
    let testPopupComponent:PopupComponent;
+   let testUserService:UserService;
 
    beforeEach( () => {
       testPollService = new PollService(null);
+      testUserService = new UserService(null);
       testPoll = null;
-      testPopupComponent = new PopupComponent(testPollService);
+      testPopupComponent = new PopupComponent(testPollService, testUserService);
    });
 
    // cannot be unit tested due to the pollService object performing complex actions
