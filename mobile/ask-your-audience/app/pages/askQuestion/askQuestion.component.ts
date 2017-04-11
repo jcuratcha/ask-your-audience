@@ -56,6 +56,10 @@ export class AskQuestionComponent implements OnInit {
         this._dataItems = new ObservableArray<DataItem>();
     }
 
+    //
+	// Calls server to create a new poll
+	//
+
     submit() {
         if (this._dataItems.length < 2) {
             alert("You need at least two choices for your audience to choose from!");
@@ -83,6 +87,10 @@ export class AskQuestionComponent implements OnInit {
                     alert("Looks like there was a problem getting your question out, please try again later!");
                 });
     }
+
+    //
+	// UI methods for animations.
+	//
 
     public onAddItemClick() {
         this._dataItems.push(new DataItem(this._itemsCount,this.model.options));

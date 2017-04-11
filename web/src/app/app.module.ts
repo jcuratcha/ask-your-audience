@@ -8,11 +8,11 @@ import { SideNavigationComponent } from './navigation-panel/navigation-panel.com
 import { PopupComponent } from './pop-up/pop-up.component';
 import { PollService } from './services/poll.service';
 import { InputTextModule, DialogModule, ChartModule } from 'primeng/primeng';
-
+import { LoginComponent } from './login/login.component'
 
 
 @NgModule({
-  imports: [ 
+  imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -21,11 +21,12 @@ import { InputTextModule, DialogModule, ChartModule } from 'primeng/primeng';
     HttpModule,
     ChartModule
   ],
-  declarations: [ 
+  declarations: [
     AppComponent,
     SinglePollComponent,
     SideNavigationComponent,
-    PopupComponent
+    PopupComponent,
+    LoginComponent
   ],
   providers:[
     PollService,

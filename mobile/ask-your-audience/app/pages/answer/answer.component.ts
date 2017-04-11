@@ -33,10 +33,11 @@ export class AnswerComponent implements OnInit {
 			});
 	}
 
+
 	//
-	// Send vote request to server for tapped option and for current poll
-	// 
-	onVoteButtonTapped(eventData) {
+	// Calls server for vote.
+	//
+    onVoteButtonTapped(eventData) {
 		var button = eventData.object;
 		var votedOption = button.bindingContext;
 

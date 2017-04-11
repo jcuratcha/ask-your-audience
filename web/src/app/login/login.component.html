@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<div class="login" *ngIf="!loggedIn">
+    <div class="title-container">
+    </div>
+    <div class="form-container">
+        <h1>Welcome to Ask Your Audience!</h1>
+        <h2>Login</h2>
+        <div class="alert alert-danger" *ngIf="errorMessage != ''" id="login_error_message">{{errorMessage}}</div>
+        <div class="alert alert-success" *ngIf="successMessage != ''" id="login_success_message">{{successMessage}}</div>
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="login_username" class="form-control" #username />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="login_password" class="form-control" #password />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" id="login_button" (click)="sendCredentials(username.value, password.value)">Login</button>
+                <a class="btn btn-link" id="register_link" (click)="registerUser = true">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
+<p-dialog class="dialog" header="Register" width="400" [(visible)]="registerUser" modal="modal" responsive="true">
+    <form method="post">
+    <div class="alert alert-danger" *ngIf="errorMessage2 != ''" id="register_error_message">{{errorMessage2}}</div>
+        <div class="form-group">
+            <label for="displayUser">Displayed Name</label>
+            <input type="text" name="displayUser" id="register_displayUser" class="form-control" #displayUser />
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="register_username" class="form-control" #usernameR />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="register_password" class="form-control" #passwordR />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="register_button" (click)="sendRegistration(displayUser.value, usernameR.value, passwordR.value);">Register</button>
+        </div>
+    </form>
+</p-dialog>

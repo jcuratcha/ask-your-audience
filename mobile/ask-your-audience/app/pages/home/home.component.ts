@@ -15,15 +15,12 @@ export class HomeComponent {
 	}
 
 	goToQuestionCreation() {
-		console.log("Going to Question Creation page");
+	console.log("Going to Question Creation page");
 		this.router.navigate(["/askQuestion"]);
 	}
 
 	goToQuestionList() {
+	console.log("Going to Answer Question page");
 		this.router.navigate(["/list"]);
-	}
-
-	goToPersonActivity() {
-		console.log("Going to current user's Activity page");
 	}
 }

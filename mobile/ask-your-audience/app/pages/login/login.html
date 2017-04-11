@@ -1,5 +1,11 @@
 <StackLayout>
     <Label text="Ask Your Audience" class="main-title"></Label>
 
-    <Button text="Get Started!" class="submit-button" (tap)="login()"></Button>
+
+      <TextField hint="userName" [(ngModel)]="userName" autocapitalizationType="none"></TextField>
+      <TextField hint="Password" [(ngModel)]="Password" secure="true"></TextField>
+
+      <Button text="Login" class="submit-button" (tap)=" sendCredentials()"></Button>
+      <Button text="Register" class="submit-button" (tap)="register()"></Button>
+
 </StackLayout>

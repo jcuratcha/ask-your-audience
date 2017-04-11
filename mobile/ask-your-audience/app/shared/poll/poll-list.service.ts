@@ -10,6 +10,10 @@ import { Poll } from "./poll";
 export class PollListService {
 	constructor(private http: Http) {}
 
+	//
+	// Calls server to get all polls
+	//
+
 	getAllPolls() {
 		let headers = this.createRequestHeaders();
 

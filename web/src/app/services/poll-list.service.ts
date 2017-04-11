@@ -31,7 +31,7 @@ export class PollListService {
 		.map(data => {
 			let pollList: Array<Poll> = [];
 			data.forEach((poll: any) => {
-				let newPoll = new Poll (poll.pollID, poll.question, poll.options, poll.votes, poll.owner);
+				let newPoll = new Poll (poll.pollID, poll.question, poll.options, poll.votes, poll.owner, poll.active);
 				newPoll.voted = false;
 
 				pollList.push(newPoll);

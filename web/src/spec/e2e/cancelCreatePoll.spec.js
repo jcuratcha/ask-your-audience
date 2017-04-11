@@ -1,10 +1,16 @@
 describe('Canceling a poll', function() {
   it('should cancel a poll being created', function() {
     browser.get('http://localhost:3000');
-    // get number of polls existing already
-    let polls = element.all(by.tagName('single-poll')).count();
 
-    polls.then(num => {
+    // login
+    element(by.id('login_username')).sendKeys('Tester');
+    element(by.id('login_password')).sendKeys('123');
+    element(by.id('login_button')).click();
+
+    // get number of polls existing already
+    let count = element.all(by.id('pollCount')).getAttribute('textContent');
+
+    count.then(num => {
       // create a poll
       element(by.id('addAPollButton')).click();
       element(by.id('question')).sendKeys('a or b?');
@@ -14,7 +20,8 @@ describe('Canceling a poll', function() {
       element(by.id('cancelPollButton')).click();
 
       // the poll should not exist
-      expect(element(by.id("poll_"+num)).isPresent()).toEqual(false);
+      let expectedID = num+1;
+      expect(element(by.id('poll_'+expectedID)).isPresent()).toEqual(false);
     });
   });
 });
