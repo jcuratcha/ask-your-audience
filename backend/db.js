@@ -21,7 +21,7 @@ var Profile = require('./profile.js');
 //  ip : the ip address of the user who created the poll
 //
 exports.insert = function(id, q, o, ip) {
-    return new Poll({pollID : id, question : q, options : o, votes : new Array(o.length).fill(0), owner : ip}).save();
+    return new Poll({pollID : id, question : q, options : o, votes : new Array(o.length).fill(0), owner : ip, active : true}).save();
 }
 
 //
@@ -72,8 +72,14 @@ exports.findOneAndUpdate = function(conditions, update, options) {
 //
 // conditions : JavaScript object
 //      pollID : where pollID is id
-exports.findOneAndRemove = function(conditions) {
-    return Poll.findOneAndRemove(conditions).exec();
+//
+// update : JavaScript object, the update that we want to make
+//      active: the change in active status
+//
+// options : JavaScript object
+//      new : bool - return the modified document rather than the original
+exports.findOneAndRemove = function(conditions, update, options) {
+    return Poll.findOneAndUpdate(conditions, update, options).exec();
 };
 
 //

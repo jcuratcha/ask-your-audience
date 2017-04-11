@@ -51,7 +51,7 @@ exports.increaseVote = function(id,index) {
 // Remove the poll with pollID
 //
 exports.removePoll = function(id) {
-    return db.findOneAndRemove({pollID: id});
+    return db.findOneAndRemove({pollID: id},{active: false},{new : true});
 }
 
 //
