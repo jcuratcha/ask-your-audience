@@ -12,12 +12,35 @@ export class UserService {
 
 	private postRegisterUrl = "/aya/api/register";
 	private postAuthenticateUrl = "/aya/api/authenticate";
-	private getUserUrl = "/aya/api/get-profiles/"
+	private getUserUrl = "/aya/api/get-profiles/";
+	private getUserVotes = "/aya/api/user-vote/";
 
 	private dbUrl = Config.getDbUrl();
 	public preventSending:boolean = false;
 
+	//
+	// Calls server to add poll to users voted votedPolls
+	//
+	addVote(pollID: number){
+		let headers = this.createRequestHeaders();
+		headers.append('Content-Type', 'application/json');
+		let options = new RequestOptions({ headers: headers });
 
+		console.log("Adding votes to poll " + pollID + " for " + window.sessionStorage.getItem("id"));
+
+		if( this.preventSending === false){
+			return this.http.get(this.dbUrl + this.getUserVotes + window.sessionStorage.getItem("id") + "/" + pollID, {
+				headers: headers
+			})
+			.map(res => res.json())
+			.map(data =>{
+				console.log(data)
+			})
+			.catch(this.handleErrors);
+		}else{
+			return null;
+		}
+	}
 	//
 	// Calls server to register a new user.
 	//
