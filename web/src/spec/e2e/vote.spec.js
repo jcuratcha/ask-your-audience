@@ -2,6 +2,11 @@ describe('Voting on a poll', function() {
   it('should increment the selected option', function() {
     browser.get('http://localhost:3000');
 
+    // login
+    element(by.id('login_password')).sendKeys('Tester');
+    element(by.id('login_password')).sendKeys('123');
+    element(by.id('login_button')).click();
+
     // create a poll
     element(by.id('addAPollButton')).click();
     element(by.id('question')).sendKeys('a or b?');

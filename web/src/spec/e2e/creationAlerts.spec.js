@@ -2,6 +2,11 @@ describe('Creating a poll', function() {
   it('should throw an alert for no question and less than two options', function() {
     browser.get('http://localhost:3000');
 
+    // login
+    element(by.id('login_username')).sendKeys('Tester');
+    element(by.id('login_password')).sendKeys('123');
+    element(by.id('login_button')).click();
+
     // no question input
     element(by.id('addAPollButton')).click();
     element(by.id('createPollButton')).click();

@@ -2,6 +2,11 @@ describe('Creating polls', function() {
   it('should create multiple polls', function() {
     browser.get('http://localhost:3000');
 
+    // login
+    element(by.id('login_username')).sendKeys('Tester');
+    element(by.id('login_password')).sendKeys('123');
+    element(by.id('login_button')).click();
+
     // create poll 1
     element(by.id('addAPollButton')).click();
     element(by.id('question')).sendKeys('a or b?');
