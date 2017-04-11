@@ -175,4 +175,157 @@ describe("Server", function() {
                 .then(res => expect(res.body.pollID).to.equal(expectedPollID) && expect(res.body.active).to.equal(expectedStatus));
         });
     });
+
+    describe('POST /aya/api/register', function() {
+        var requestBody = {
+            username : "bob1",
+            password : "password",
+            displayName : "Bob"
+        }
+        var requestBody2 = {
+            username : "joe1",
+            password : "password",
+            displayName : "Jonathon"
+        }
+
+        afterEach(function() {
+            service.newProfile.restore();
+        });
+
+        it('sends profileID 1 on first profile created', function() {
+            var expectedServiceResult = expectedServerResult = 1;
+            sinon.stub(service, 'newProfile').returns(Promise.resolve(expectedServiceResult));
+
+            return request(server)
+                .post('/aya/api/register')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body.profileID).to.equal(expectedServerResult));
+        });
+
+        it('sends profileID 2 on second profile created', function() {
+            var expectedServiceResult = expectedServerResult = 2
+            sinon.stub(service, 'newProfile').returns(Promise.resolve(expectedServiceResult));
+
+            return request(server)
+                .post('/aya/api/register')
+                .type('application/json')
+                .send(requestBody2)
+                .then(res => expect(res.body.profileID).to.equal(expectedServerResult));
+        });
+
+        it('sends null profileID when username already exists', function() {
+            var expectedServiceResult = expectedServerResult = null;
+            sinon.stub(service, 'newProfile').returns(Promise.resolve(expectedServiceResult));
+
+            return request(server)
+                .post('/aya/api/register')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body.profileID).to.equal(expectedServerResult));
+        });
+    });
+
+    describe('POST /aya/api/authenticate', function() {
+        var requestBody = {
+            username : "bob1",
+            password : "password",
+        }
+        var requestBody2 = {
+            username : "",
+            password : "",
+        }
+
+        afterEach(function() {
+            service.authUser.restore();
+        });
+
+        it('returns success with profileID after correctly authenticating', function() {
+            var expectedServiceResult = 1;
+            sinon.stub(service, 'authUser').returns(Promise.resolve(expectedServiceResult));
+            var expectedServerResult = {success: true, profileID: 1};
+
+            return request(server)
+                .post('/aya/api/authenticate')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body).to.deep.equal(expectedServerResult));
+        });
+
+        it('returns failure with error message after trying incorrect credentials', function() {
+            var expectedServiceResult = null;
+            sinon.stub(service, 'authUser').returns(Promise.resolve(expectedServiceResult));
+            var expectedServerResult = {success: false, message: "Authentication failed. Incorrect username or password."};
+
+            return request(server)
+                .post('/aya/api/authenticate')
+                .type('application/json')
+                .send(requestBody)
+                .then(res => expect(res.body).to.deep.equal(expectedServerResult));
+        });
+
+        it('returns failure with error message after trying to enter empty credentials', function() {
+            var expectedServiceResult = null;
+            sinon.stub(service, 'authUser').returns(Promise.resolve(expectedServiceResult));
+            var expectedServerResult = {success: false, message: "Authentication failed. Incorrect username or password."};
+
+            return request(server)
+                .post('/aya/api/authenticate')
+                .type('application/json')
+                .send(requestBody2)
+                .then(res => expect(res.body).to.deep.equal(expectedServerResult));
+        });
+    });
+
+    describe('GET /aya/api/get-profile/:id', function() {
+        afterEach(function() {
+            service.getProfile.restore();
+        });
+
+        it('returns null when profile id does not exist', function() {
+            var getProfileResult = null;
+            sinon.stub(service, 'getProfile').returns(Promise.resolve(getProfileResult));
+            var id = 0, expectedServiceResult = null;
+
+            return request(server)
+                .get(`/aya/api/get-profiles/${id}`)
+                .then(res => expect(res.body).to.equal(expectedServiceResult));
+        });
+
+        it('returns profile with asked profile ID', function() {
+            var getProfilesResult = { "profiles" : [{profileID : 1, username : "bob1", password : "password", displayName: "Robert", votedPolls: []}]};
+            sinon.stub(service, 'getProfile').returns(Promise.resolve(getProfilesResult));
+            var id = 1, expectedProfileID = 1;
+
+            return request(server)
+                .get(`/aya/api/get-profiles/${id}`)
+                .then(res => expect(res.body.profiles[0].profileID).to.equal(expectedProfileID));
+        });
+    });
+
+    describe('GET /aya/api/user-vote/:profileID/:pollID', function() {
+        afterEach(function() {
+            service.updateUserVotes.restore();
+        });
+
+        it('returns null when profile ID does not exist', function() {
+            var updateUserVotesResult = null;
+            sinon.stub(service, 'updateUserVotes').returns(Promise.resolve(updateUserVotesResult));
+            var profileID = 0, pollID = 20, expectedServiceResult = null;
+
+            return request(server)
+                .get(`/aya/api/user-vote/${profileID}/${pollID}`)
+                .then(res => expect(res.body).to.equal(expectedServiceResult));
+        });
+
+        it('adds poll to the list of polls in profile with ID', function() {
+            var updateUserVotesResult = {profileID : 1, username: "bob1", password: "password", displayName: "Robert", votedPolls: [1, 5, 20]};
+            sinon.stub(service, 'updateUserVotes').returns(Promise.resolve(updateUserVotesResult));
+            var profileID = 1, pollID = 20, expectedVote = 20;
+
+            return request(server)
+                .get(`/aya/api/user-vote/${profileID}/${pollID}`)
+                .then(res => expect(res.body.votedPolls).to.contain(expectedVote));
+        });
+    });
 });

@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, DoCheck {
     if (this.refresh_list) {
       this.pollListService.getAllPolls()
         .subscribe(loadedPolls => {
-            loadedPolls.forEach((poll: Poll, index: number) => {
+            loadedPolls.reverse().forEach((poll: Poll, index: number) => {
             this.polls[index] = poll;
           });
         }

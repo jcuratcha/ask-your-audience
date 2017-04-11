@@ -57,3 +57,7 @@ h3{
 .spacing{
 	margin-top: 5px;
 }
+
+input.spacing {
+   margin-right: 10px;
+}
