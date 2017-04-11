@@ -4,16 +4,16 @@ describe('Invalid login page actions', function() {
 
     // no username
     element(by.id('login_button')).click();
-    expect(element(by.id('error_message')).getText()).toEqual('Please enter a username.');
+    expect(element(by.id('login_error_message')).getText()).toEqual('Please enter a username.');
 
     // no password
     element(by.id('login_username')).sendKeys('FAIL_TEST');
     element(by.id('login_button')).click();
-    expect(element(by.id('error_message')).getText()).toEqual('Please enter a password.');
+    expect(element(by.id('login_error_message')).getText()).toEqual('Please enter a password.');
 
     // invalid username password
     element(by.id('login_password')).sendKeys('FAIL_TEST');
     element(by.id('login_button')).click();
-    expect(element(by.id('error_message')).getText()).toEqual('You have entered an incorrect username or password.');
+    expect(element(by.id('login_error_message')).getText()).toEqual('You have entered an incorrect username or password.');
   });
 });
