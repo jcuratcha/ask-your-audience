@@ -10,14 +10,14 @@
         <form method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username" class="form-control" #username />
+                <input type="text" name="username" id="login_username" class="form-control" #username />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" #password />
+                <input type="password" name="password" id="login_password" class="form-control" #password />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" (click)="sendCredentials(username.value, password.value)">Login</button>
+                <button type="submit" class="btn btn-primary" id="login_button" (click)="sendCredentials(username.value, password.value)">Login</button>
                 <a class="btn btn-link" (click)="registerUser = true">Register</a>
             </div>
         </form>
@@ -28,18 +28,18 @@
     <div class="alert alert-danger" *ngIf="errorMessage2 != ''">{{errorMessage2}}</div>
         <div class="form-group">
             <label for="displayUser">Displayed Name</label>
-            <input type="text" name="displayUser" id="displayUser" class="form-control" #displayUser />
+            <input type="text" name="displayUser" id="register_displayUser" class="form-control" #displayUser />
         </div>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" class="form-control" #usernameR />
+            <input type="text" name="username" id="register_username" class="form-control" #usernameR />
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="form-control" #passwordR />
+            <input type="password" name="password" id="register_password" class="form-control" #passwordR />
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" (click)="sendRegistration(displayUser.value, usernameR.value, passwordR.value);">Register</button>
+            <button type="submit" class="btn btn-primary" id="register_button" (click)="sendRegistration(displayUser.value, usernameR.value, passwordR.value);">Register</button>
         </div>
     </form>
 </p-dialog>
