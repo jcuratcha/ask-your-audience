@@ -15,7 +15,7 @@ export class SideNavigationComponent {
   options: string[] = null; //an array for ng to help display options
   tempArray: string[] = [""];
   question: string;
-  name: string = window.sessionStorage['user'] ? JSON.parse(window.sessionStorage.getItem('user')).displayName : null);
+  name: string = window.sessionStorage['user'] ? JSON.parse(window.sessionStorage.getItem('user')).displayName : null;
 
   constructor(private pollService: PollService) {}
   addPoll() {

@@ -76,7 +76,7 @@ export class UserService {
           let newUserID: number = null;
           if (data['success']) {
               newUserID = data['profileID'];
-							window.sessionStorage.setItem("id": newUserID);
+							window.sessionStorage.setItem("id", String(newUserID));
 					} else {
               console.log(data['message']);
 					}
