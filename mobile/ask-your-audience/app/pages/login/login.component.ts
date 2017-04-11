@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Person } from "../../shared/person/person";
 import { Router } from "@angular/router";
 import { UserService } from "../../shared/person/user.service";
 
@@ -13,8 +12,8 @@ import { Page } from "ui/page";
 })
 
 export class LoginComponent implements OnInit {
-  person: Person;
-  isLoggingIn = true;
+
+    isLoggingIn = true;
 
     loggedIn: boolean = false;
     registerUser: boolean = false;

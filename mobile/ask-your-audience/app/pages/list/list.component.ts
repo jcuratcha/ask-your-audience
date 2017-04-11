@@ -28,9 +28,7 @@ export class ListComponent implements OnInit {
 		});
 	}	
 
-	//
-	// Called when a list item is tapped
-	//
+
 	public onItemTap(args) {
 		var tappedItem = args.view;
 		var poll = tappedItem.bindingContext;
