@@ -220,4 +220,34 @@ describe('DB', function() {
             sinon.assert.calledOnce(query.select);
         });
     });
+
+    describe('findProfileAndUpdate', function(){
+        afterEach(function() {
+            Profile.findOneAndUpdate.restore();
+        });
+
+        it('returns null when profile does not exist', function() {
+            var findOneAndUpdateResult = {
+                exec : function(exec) {
+                    return Promise.resolve(null);
+                }
+            };
+            sinon.stub(Profile, 'findOneAndUpdate').returns(findOneAndUpdateResult);
+            var id = 0, pollID = 20, expectedValue = null;
+
+            return db.findProfileAndUpdate(id, pollID).then(result => expect(result).to.equal(expectedValue));
+        });
+
+        it ('returns profile with updated poll list', function() {
+            var findOneAndUpdateResult = {
+                exec : function(exec) {
+                    return Promise.resolve([{profileID : 1, username : "Bob", password : "password", displayName: "Robert", votedPolls: [1, 5, 20]}]);
+                }
+            };
+            sinon.stub(Profile, 'findOneAndUpdate').returns(findOneAndUpdateResult);
+            var id = 1, pollID = 20, expectedPoll = 20;
+
+            return db.findProfileAndUpdate(id, pollID).then(result => expect(result[0].votedPolls).to.contain(expectedPoll));
+        });
+    });
 });

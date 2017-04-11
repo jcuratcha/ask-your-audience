@@ -113,6 +113,16 @@ app.get('/aya/api/get-profiles/:id', function(req, res) {
     service.getProfile(req.params.id).then(profiles => res.json(profiles));
 });
 
+//
+// Calls the service that finds and modifies the list of votes for a user with a given profileID
+//
+app.get('/aya/api/user-vote/:profileID/:pollID', function(req, res) {
+    if (process.env.NODE_ENV !== 'test') {
+        console.log('/aya/api/user-vote/%d/%d called', req.params.profileID, req.params.pollID);
+    }
+    service.updateUserVotes(req.params.profileID, req.params.pollID).then(profiles => res.json(profiles));
+});
+
 var port = 8080;
 
 //

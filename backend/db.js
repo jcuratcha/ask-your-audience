@@ -120,3 +120,18 @@ exports.getProfiles = function(options) {
 
     return query.exec();
 }
+
+//
+// Generic function for finding and updating the list of polls for a given profile
+//
+// conditions : JavaScript object
+//      profileID : where profileID is id
+//
+// update : JavaScript object, the update that we want to make
+//      pollID: the poll that the user voted on
+//
+// options : JavaScript object
+//      new : bool - return the modified document rather than the original
+exports.findProfileAndUpdate = function(conditions, update, options) {
+    return Profile.findOneAndUpdate(conditions, update, options).exec();
+};

@@ -235,4 +235,26 @@ describe('Service', function() {
             return service.getProfile(id).then(result => expect(result.profiles[0].profileID).to.equal(expectedProfileID));
         });
     });
+
+    describe('updateUserVotes', function(){
+        afterEach(function() {
+            db.findProfileAndUpdate.restore();
+        });
+
+        it('returns null when profile does not exist', function() {
+            var updateUserVotesResult = null;
+            sinon.stub(db, 'findProfileAndUpdate').returns(Promise.resolve(updateUserVotesResult));
+            var id = 0, pollID = 20, expectedValue = null;
+
+            return service.updateUserVotes(id, pollID).then(result => expect(result).to.equal(expectedValue));
+        });
+
+        it ('returns profile with updated list of polls', function() {
+            var updateUserVotesResult = [{profileID : 1, username: "bob1", password: "password", displayName: "Robert", votedPolls: [1, 5, 20]}];
+            sinon.stub(db, 'findProfileAndUpdate').returns(Promise.resolve(updateUserVotesResult));
+            var id = 1, pollID = 20, expectedVote = 20;
+
+            return service.updateUserVotes(id, pollID).then(result => expect(result[0].votedPolls).to.contain(expectedVote));
+        });
+    });
 });

@@ -82,3 +82,10 @@ exports.authUser = function(user, pass) {
 exports.getProfile = function(id) {
     return db.getProfiles({criteria : {profileID : id}, limit : 1, select : 'profileID username displayName votedPolls'}).then(profiles => results(profiles, "profiles"));
 }
+
+//
+//  Finds the profile with a given id and adds a pollID to their list of votedPolls
+//
+exports.updateUserVotes = function(id, pollID) {
+    return db.findProfileAndUpdate({profileID: id},{$push: {votedPolls: pollID}},{new: true});
+}

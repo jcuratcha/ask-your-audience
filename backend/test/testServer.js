@@ -302,4 +302,30 @@ describe("Server", function() {
                 .then(res => expect(res.body.profiles[0].profileID).to.equal(expectedProfileID));
         });
     });
+
+    describe('GET /aya/api/user-vote/:profileID/:pollID', function() {
+        afterEach(function() {
+            service.updateUserVotes.restore();
+        });
+
+        it('returns null when profile ID does not exist', function() {
+            var updateUserVotesResult = null;
+            sinon.stub(service, 'updateUserVotes').returns(Promise.resolve(updateUserVotesResult));
+            var profileID = 0, pollID = 20, expectedServiceResult = null;
+
+            return request(server)
+                .get(`/aya/api/user-vote/${profileID}/${pollID}`)
+                .then(res => expect(res.body).to.equal(expectedServiceResult));
+        });
+
+        it('adds poll to the list of polls in profile with ID', function() {
+            var updateUserVotesResult = {profileID : 1, username: "bob1", password: "password", displayName: "Robert", votedPolls: [1, 5, 20]};
+            sinon.stub(service, 'updateUserVotes').returns(Promise.resolve(updateUserVotesResult));
+            var profileID = 1, pollID = 20, expectedVote = 20;
+
+            return request(server)
+                .get(`/aya/api/user-vote/${profileID}/${pollID}`)
+                .then(res => expect(res.body.votedPolls).to.contain(expectedVote));
+        });
+    });
 });
