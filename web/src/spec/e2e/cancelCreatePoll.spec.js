@@ -1,6 +1,12 @@
 describe('Canceling a poll', function() {
   it('should cancel a poll being created', function() {
     browser.get('http://localhost:3000');
+
+    // login
+    element(by.id('login_username')).sendKeys('Tester');
+    element(by.id('login_password')).sendKeys('123');
+    element(by.id('login_button')).click();
+
     // get number of polls existing already
     let count = element.all(by.id('pollCount')).getAttribute('textContent');
 
