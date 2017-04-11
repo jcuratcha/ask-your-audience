@@ -34,7 +34,11 @@ export class RegisterComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	sendRegistration() {
+    //
+	// Calls server to register a new user.
+	//
+    
+    sendRegistration() {
        var displayUser=this.displayName;
 	   var username=this.userName;
 	   var password=this.userPassword;

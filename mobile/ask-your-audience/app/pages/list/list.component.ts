@@ -29,6 +29,9 @@ export class ListComponent implements OnInit {
 	}	
 
 
+	//
+	// Calls server for information(options) for the clicked poll
+	//
 	public onItemTap(args) {
 		var tappedItem = args.view;
 		var poll = tappedItem.bindingContext;

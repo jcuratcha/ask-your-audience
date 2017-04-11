@@ -34,6 +34,10 @@ export class LoginComponent implements OnInit {
 		this.router.navigate(["/register"]);
 	}
 
+
+    // Send user information to server(name,password)
+	// Calls server for credential check
+	//if checked, go to home page,if not, keep trying
 	sendCredentials() {
         var username=this.userName;
 		var password=this.Password;
