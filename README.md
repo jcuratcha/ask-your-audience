@@ -25,9 +25,20 @@ The web client is built and run independent from the backend API, but they must 
 
 ### Steps to run:
 
-- change directory into `ask-your-audience/web`
-- run `npm install`
-- run `npm run start` to build then start serving the webapp on port :3000
+- Change directory into `ask-your-audience/web`
+- Run `npm install`
+- Run `npm run start` to build then start serving the webapp on port :3000
+
+### How to run unit tests
+- Change directory into `ask-your-audience/web`
+- Run `npm install`
+- Run `npm run test`
+
+
+### How to run e2e tests
+- Change directory into `ask-your-audience/web`
+- Run `npm install`
+- Run `npm run e2e`
 
 ## Backend API Server Setup
 

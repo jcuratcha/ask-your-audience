@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Person } from "../../shared/person/person";
 import { Router } from "@angular/router";
 import { UserService } from "../../shared/person/user.service";
 
@@ -13,8 +12,8 @@ import { Page } from "ui/page";
 })
 
 export class LoginComponent implements OnInit {
-  person: Person;
-  isLoggingIn = true;
+
+    isLoggingIn = true;
 
     loggedIn: boolean = false;
     registerUser: boolean = false;
@@ -25,23 +24,21 @@ export class LoginComponent implements OnInit {
 
 	constructor(private router: Router,private page: Page,private userService: UserService) {
 		console.log("Current page: LoginComponent");
-		this.person = new Person();
 	}
 
 	ngOnInit() {
 		this.page.actionBarHidden = true;
 	}
 
-	login() {
-		this.router.navigate(["/home"]);
-	}
-
 	register(){
 		this.router.navigate(["/register"]);
 	}
 
-	 sendCredentials() {
-		 
+
+    // Send user information to server(name,password)
+	// Calls server for credential check
+	//if checked, go to home page,if not, keep trying
+	sendCredentials() {
         var username=this.userName;
 		var password=this.Password;
 
@@ -62,13 +59,13 @@ export class LoginComponent implements OnInit {
                 this.loggedIn = true;
                 this.userService.getLoggedInUser().subscribe((user: string) => {
                     console.log(user);
+                    this.router.navigate(["/home"]);
                 });
             } else {
                 alert("You have entered an incorrect username or password.");
+                return;
             }
         });
 
-//TODO: after the login in verified, we can navigate to home, otherwise, return.
-		this.router.navigate(["/home"]);
     }
 }

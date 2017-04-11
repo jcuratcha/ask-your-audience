@@ -1,3 +1,7 @@
+	//
+	// basic User object 
+	//
+
 export class User {
 	constructor(
 		public userID?: number,

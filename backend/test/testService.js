@@ -22,7 +22,7 @@ describe('Service', function() {
         });
 
         it('returns poll ID 2 on second poll created', function() {
-            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123", active : true}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var insertResults = {pollID : 2, question: q, options : o, votes : [0, 0, 0], owner : ip}, expectedValue = 2;
             sinon.stub(db, 'insert').returns(Promise.resolve(insertResults));
@@ -32,7 +32,7 @@ describe('Service', function() {
         });
 
         it('increments poll ID on additional polls', function() {
-            var getPollsResult = [{pollID : 10, question: "question 10", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollsResult = [{pollID : 10, question: "question 10", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123", active : true}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var insertResults = {pollID : 11, question: q, options : o, votes : [0, 0, 0], owner : ip}, expectedValue = 11;
             sinon.stub(db, 'insert').returns(Promise.resolve(insertResults));
@@ -55,7 +55,7 @@ describe('Service', function() {
         });
 
         it('returns poll with asked poll ID', function() {
-            var getPollsResult = [{pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollsResult = [{pollID : 1, question: "question", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123", active : true}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var id = 1, expectedPollID = 1;
 
@@ -77,7 +77,7 @@ describe('Service', function() {
         });
 
         it('returns single poll', function() {
-            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123", active : true}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var expectedNumPolls = 1;
 
@@ -85,8 +85,8 @@ describe('Service', function() {
         });
 
         it('returns multiple polls', function() {
-            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123"},
-                                  {pollID : 2, question: "question 2", options : ["d", "e", "f"], votes : [0, 0, 0], owner : "123.456.789.123"}];
+            var getPollsResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 0, 0], owner : "123.456.789.123", active : true},
+                                  {pollID : 2, question: "question 2", options : ["d", "e", "f"], votes : [0, 0, 0], owner : "123.456.789.123", active : true}];
             sinon.stub(db, 'getPolls').returns(Promise.resolve(getPollsResult));
             var expectedNumPolls = 2;
 
@@ -108,7 +108,7 @@ describe('Service', function() {
         });
 
         it ('returns poll with updated vote count', function() {
-            var increaseVoteResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}];
+            var increaseVoteResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123", active : true}];
             sinon.stub(db, 'findOneAndUpdate').returns(Promise.resolve(increaseVoteResult));
             var id = 1, index = 1, expectedNumVotes = 1;
 
@@ -129,12 +129,12 @@ describe('Service', function() {
             return service.removePoll(id).then(result => expect(result).to.equal(expectedValue));
         });
 
-        it ('returns poll when poll does exist', function() {
-            var removePollResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123"}];
+        it ('returns poll with poll ID and non-active status', function() {
+            var removePollResult = [{pollID : 1, question: "question 1", options : ["a", "b", "c"], votes : [0, 1, 0], owner : "123.456.789.123", active : false}];
             sinon.stub(db, 'findOneAndRemove').returns(Promise.resolve(removePollResult));
-            var id = 1, expectedPollID = 1;
+            var id = 1, expectedPollID = 1, expectedStatus = false;
 
-            return service.removePoll(id).then(result => expect(result[0].pollID).to.equal(expectedPollID));
+            return service.removePoll(id).then(result => expect(result[0].pollID).to.equal(expectedPollID) && expect(result[0].active).to.equal(expectedStatus));
         });
     });
 

@@ -31,8 +31,8 @@ export class UserService {
 
 		console.log("Registering username = " + username);
 
-		//if (this.preventSending === false)
-		//{
+		if (this.preventSending === false)
+		{
 			return this.http.post(Config.apiUrl + this.postRegisterUrl, {
 				"username": username,
 				"password": password,
@@ -52,9 +52,9 @@ export class UserService {
 					return userID;
 			})
 			.catch(this.handleErrors);
-	//	}
-		//else
-		//	return null;
+		}
+		else
+			return null;
 	}
 
 	//
